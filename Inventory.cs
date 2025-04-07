@@ -41,7 +41,7 @@ namespace KGA_OOPConsoleProject
             {
                 Console.WriteLine("{0}. {1}", i + 1, items[i].name);
             }
-            Console.WriteLine("===============");
+            Console.WriteLine("=====================");
         }
     }
 }

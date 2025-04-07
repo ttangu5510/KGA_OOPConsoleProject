@@ -18,7 +18,6 @@ namespace KGA_OOPConsoleProject
             Start();
             while (gameOver == false)
             {
-                Console.Clear();
                 // 게임 화면 그리기
                 curScene.Render();
                 // 사용자 입력

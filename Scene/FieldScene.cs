@@ -1,10 +1,8 @@
-﻿using KGA_OOPConsoleProject.GameObjects;
-using KGA_OOPConsoleProject.Items;
-
-namespace KGA_OOPConsoleProject.Scene
+﻿namespace KGA_OOPConsoleProject.Scene
 {
     public class FieldScene : BaseScene
     {
+        public event Action InventoryPrint;
         protected ConsoleKey input;
         protected string[] mapData;
         protected bool[,] map;
@@ -12,7 +10,8 @@ namespace KGA_OOPConsoleProject.Scene
         protected List<GameObject> gameObjects;
         public FieldScene()
         {
-
+            InventoryPrint += () => Console.SetCursorPosition(0, map.GetLength(0) + 2);
+            InventoryPrint += () => GameManager.Player.inventory.PrintAll();
         }
         public override void Render()
         {
@@ -23,7 +22,11 @@ namespace KGA_OOPConsoleProject.Scene
             }
 
             GameManager.Player.PrintPlayer();
-            Console.SetCursorPosition(0, map.GetLength(0) + 2);
+            if (InventoryPrint != null)
+            {
+                InventoryPrint.Invoke();
+                InventoryPrint = null;
+            }
         }
         public override void Input()
         {
@@ -43,6 +46,13 @@ namespace KGA_OOPConsoleProject.Scene
                 if (GameManager.Player.position == go.position)
                 {
                     go.Interact(GameManager.Player);
+                    if (go.isOnce == true)
+                    {
+                        gameObjects.Remove(go);
+                        InventoryPrint += () => Console.SetCursorPosition(0, map.GetLength(0) + 2);
+                        InventoryPrint += () => GameManager.Player.inventory.PrintAll();
+                    }
+                    break;
                 }
             }
         }
@@ -54,7 +64,7 @@ namespace KGA_OOPConsoleProject.Scene
             {
                 for (int x = 0; x < map.GetLength(1); x++)
                 {
-                    if (map[y,x]==false)
+                    if (map[y, x] == false)
                     {
                         Console.Write('#');
                     }

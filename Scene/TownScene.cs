@@ -9,6 +9,7 @@
         private ConsoleKey input;
         public override void Render()
         {
+            Console.Clear();
             Console.WriteLine("장소 : 초보자의 마을");
             Console.WriteLine("활기찬 마을이다");
             Console.WriteLine();
@@ -25,14 +26,16 @@
             switch (input)
             {
                 case ConsoleKey.D1:
-                    GameManager.ChangeScene("NormalField");
+                    Console.WriteLine("필드로 나갑니다\n 계속하려면 아무키나 눌러주세요");
+                    Console.ReadKey(true);
                     break;
             }
         }
 
         public override void Result()
         {
-            Console.WriteLine("필드로 나갑니다");
+            Console.Clear();
+            GameManager.ChangeScene("NormalField");
         }
 
     }

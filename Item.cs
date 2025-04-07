@@ -10,7 +10,7 @@ namespace KGA_OOPConsoleProject
     {
         public string name;
         public string description;
-        public Item(ConsoleColor color, char symbol, Vector2 position, bool isOnce) : base(color, symbol, position, isOnce)
+        public Item(ConsoleColor color, char symbol, Vector2 position, bool isOnce) : base(color, symbol, position, true)
         {
         }
         public override void Interact(Player player)

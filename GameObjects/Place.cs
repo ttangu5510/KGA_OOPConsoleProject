@@ -11,7 +11,7 @@ namespace KGA_OOPConsoleProject.GameObjects
         private string scene;
 
         public Place(string scene, char symbol, Vector2 position)
-            : base(ConsoleColor.Blue, symbol, position, isOnce:false)
+            : base(ConsoleColor.Blue, symbol, position, false)
         {
             this.scene = scene;
         }

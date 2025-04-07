@@ -1,4 +1,5 @@
 ﻿using KGA_OOPConsoleProject.GameObjects;
+using KGA_OOPConsoleProject.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace KGA_OOPConsoleProject.Scene
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Place("Town", 'T', new Vector2(1, 2)));
             gameObjects.Add(new Place("Forest", 'F', new Vector2(11, 1)));
-
+            gameObjects.Add(new Potion(new Vector2(1, 4)));
 
         }
         public override void SetByPrevScene()
