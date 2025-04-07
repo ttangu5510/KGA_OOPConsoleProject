@@ -15,7 +15,7 @@ namespace KGA_OOPConsoleProject
         }
         public override void Interact(Player player)
         {
-            player.inventory.Add(this);
+            player.Inventory.Add(this);
         }
         public abstract void Use();
     }

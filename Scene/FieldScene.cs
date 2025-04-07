@@ -10,8 +10,9 @@
         protected List<GameObject> gameObjects;
         public FieldScene()
         {
+            //첫 인벤토리 출력을 위한 이벤트 추가
             InventoryPrint += () => Console.SetCursorPosition(0, map.GetLength(0) + 2);
-            InventoryPrint += () => GameManager.Player.inventory.PrintAll();
+            InventoryPrint += () => GameManager.Player.Inventory.PrintAll();
         }
         public override void Render()
         {
@@ -49,8 +50,9 @@
                     if (go.isOnce == true)
                     {
                         gameObjects.Remove(go);
+                        // 이벤트 추가
                         InventoryPrint += () => Console.SetCursorPosition(0, map.GetLength(0) + 2);
-                        InventoryPrint += () => GameManager.Player.inventory.PrintAll();
+                        InventoryPrint += () => GameManager.Player.Inventory.PrintAll();
                     }
                     break;
                 }

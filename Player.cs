@@ -10,8 +10,8 @@ namespace KGA_OOPConsoleProject
     {
         public Vector2 position;
         public bool[,] map;
-        public Inventory inventory;
-
+        private Inventory inventory;
+        public Inventory Inventory { get {  return inventory; } }
         private int curHP;
         private int maxHP;
         public int CurHP { get { return curHP; } }

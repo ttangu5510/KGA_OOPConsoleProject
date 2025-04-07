@@ -11,7 +11,7 @@
         {
             Console.Clear();
             Console.WriteLine("장소 : 초보자의 마을");
-            Console.WriteLine("활기찬 마을이다");
+            Util.PrintText("활기찬 마을이다");
             Console.WriteLine();
             Console.WriteLine("어디로 가시겠습니까?");
             Console.WriteLine("1. 필드로 나간다");
@@ -26,7 +26,8 @@
             switch (input)
             {
                 case ConsoleKey.D1:
-                    Console.WriteLine("필드로 나갑니다\n 계속하려면 아무키나 눌러주세요");
+                    Util.PrintText("필드로 나갑니다");
+                    Util.PrintText("계속하려면 아무키나 눌러주세요");
                     Console.ReadKey(true);
                     break;
             }

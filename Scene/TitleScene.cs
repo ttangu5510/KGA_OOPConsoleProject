@@ -27,7 +27,7 @@
             }
             Console.WriteLine();
             // TODO : 게임 완성 시 해제 Thread.Sleep(300);
-            Console.WriteLine("아무 키나 눌러 시작하세요...");
+            Util.PressAnyKey("게임이 시작됩니다.");
         }
         public override void Input()
         {
