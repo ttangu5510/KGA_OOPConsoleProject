@@ -1,4 +1,5 @@
 ﻿using KGA_OOPConsoleProject.GameObjects;
+using KGA_OOPConsoleProject.Items;
 
 namespace KGA_OOPConsoleProject.Scene
 {
@@ -32,6 +33,7 @@ namespace KGA_OOPConsoleProject.Scene
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Place("Town", 'T', new Vector2(3, 1)));
             gameObjects.Add(new Place("NormalField", 'N', new Vector2(12, 1)));
+            gameObjects.Add(new Potion(new Vector2(1, 4)));
 
             GameManager.Player.position = new Vector2(1, 1);
             GameManager.Player.map = map;
@@ -46,6 +48,7 @@ namespace KGA_OOPConsoleProject.Scene
             }
 
             GameManager.Player.PrintPlayer();
+            Console.SetCursorPosition(0, map.GetLength(0) + 2);
         }
         public override void Input()
         {

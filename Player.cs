@@ -10,7 +10,26 @@ namespace KGA_OOPConsoleProject
     {
         public Vector2 position;
         public bool[,] map;
+        public Inventory inventory;
 
+        private int curHP;
+        private int maxHP;
+        public int CurHP { get { return curHP; } }
+        public int MaxHP { get { return maxHP; } }
+        public Player()
+        {
+            inventory = new Inventory();
+            maxHP = 100;
+            curHP = maxHP;
+        }
+        public void Heal(int amount)
+        {
+            curHP += amount;
+            if(curHP >maxHP)
+            {
+                curHP = maxHP;
+            }
+        }
         public void PrintPlayer()
         {
             Console.SetCursorPosition(position.x, position.y);
@@ -28,7 +47,7 @@ namespace KGA_OOPConsoleProject
                     tarPos.y--;
                     break;
                 case ConsoleKey.DownArrow:
-                    case ConsoleKey.S:
+                case ConsoleKey.S:
                     tarPos.y++;
                     break;
                 case ConsoleKey.LeftArrow:
@@ -41,7 +60,7 @@ namespace KGA_OOPConsoleProject
                     break;
             }
 
-            if (map[tarPos.y,tarPos.x]==true)
+            if (map[tarPos.y, tarPos.x] == true)
             {
                 position = tarPos;
             }
