@@ -3,10 +3,11 @@
     public static class Util
     {
         // 매개변수 초기화를 진행해, 간편하게 사용
-        public static void PrintText(string text, int x = 1, int y = 1, ConsoleColor color = ConsoleColor.White, int delay = 25, int delay2 = 150)
+        public static void PrintText(string text, ConsoleColor color = ConsoleColor.White, int delay = 25, int delay2 = 150)
         {
             Console.ForegroundColor = color;
-            (x, y) = Console.GetCursorPosition();
+            // TODO : 추후에 포지션 고정을 찾으면 위치 고정 작업
+            (int x, int y) = Console.GetCursorPosition();
             Console.WriteLine("┌--------------------------------┐");
             Console.WriteLine("|                                |");
             Console.WriteLine("|                              ▼ |");
@@ -17,12 +18,12 @@
             {
                 if (i % 10 == 0&&i!=0)
                 {
-                    
+                    Console.SetCursorPosition(x + 1, y + 2);
                 }
                 Console.Write(text[i]);
-                Thread.Sleep(delay);
+                // TODO : 완성 시 활성화 Thread.Sleep(delay);
             }
-            Thread.Sleep(delay2);
+            // TODO : 완성시 활성화 Thread.Sleep(delay2);
             Console.ResetColor();
             Console.SetCursorPosition(nextX,nextY);
         }

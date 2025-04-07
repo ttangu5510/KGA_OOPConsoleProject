@@ -27,7 +27,6 @@
             {
                 case ConsoleKey.D1:
                     Util.PrintText("필드로 나갑니다");
-                    Util.PrintText("계속하려면 아무키나 눌러주세요");
                     Console.ReadKey(true);
                     break;
             }
