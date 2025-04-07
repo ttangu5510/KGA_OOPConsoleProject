@@ -35,7 +35,12 @@
         public override void Result()
         {
             Console.Clear();
-            GameManager.ChangeScene("NormalField");
+            switch (input)
+            {
+                case ConsoleKey.D1:
+                    GameManager.ChangeScene("NormalField");
+                    break;
+            }
         }
 
     }

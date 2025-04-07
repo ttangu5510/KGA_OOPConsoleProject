@@ -12,6 +12,7 @@ namespace KGA_OOPConsoleProject
         public bool[,] map;
         private Inventory inventory;
         public Inventory Inventory { get {  return inventory; } }
+        
         private int curHP;
         private int maxHP;
         public int CurHP { get { return curHP; } }
@@ -37,25 +38,36 @@ namespace KGA_OOPConsoleProject
             Console.Write('P');
             Console.ResetColor();
         }
+        public void PlayerAction(ConsoleKey input)
+        {
+            switch (input)
+            {
+                case ConsoleKey.UpArrow:
+                case ConsoleKey.DownArrow:
+                case ConsoleKey.LeftArrow:
+                case ConsoleKey.RightArrow:
+                    Move(input);
+                    break;
+                case ConsoleKey.Enter:
+                    Inventory.OpenInven();
+                    break;
+            }
+        }
         public void Move(ConsoleKey input)
         {
             Vector2 tarPos = position;
             switch (input)
             {
                 case ConsoleKey.UpArrow:
-                case ConsoleKey.W:
                     tarPos.y--;
                     break;
                 case ConsoleKey.DownArrow:
-                case ConsoleKey.S:
                     tarPos.y++;
                     break;
                 case ConsoleKey.LeftArrow:
-                case ConsoleKey.A:
                     tarPos.x--;
                     break;
                 case ConsoleKey.RightArrow:
-                case ConsoleKey.D:
                     tarPos.x++;
                     break;
             }

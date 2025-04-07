@@ -6,7 +6,7 @@
         public static void PrintText(string text, ConsoleColor color = ConsoleColor.White, int delay = 25, int delay2 = 150)
         {
             Console.ForegroundColor = color;
-            // TODO : 추후에 포지션 고정을 찾으면 위치 고정 작업
+            // TODO : 추후에 화면 포지션 고정작업이 되면, 위치 고정 작업
             (int x, int y) = Console.GetCursorPosition();
             Console.WriteLine("┌--------------------------------┐");
             Console.WriteLine("|                                |");

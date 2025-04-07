@@ -37,7 +37,7 @@
 
         public override void Update()
         {
-            GameManager.Player.Move(input);
+            GameManager.Player.PlayerAction(input);
         }
 
         public override void Result()
