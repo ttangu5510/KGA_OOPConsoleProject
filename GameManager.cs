@@ -32,6 +32,7 @@ namespace KGA_OOPConsoleProject
             // 게임 타이틀 설정
             Console.Title = "용사가 약하다";
             // 게임 시작 초기세팅
+            Console.CursorVisible = false;
             gameOver = false;
             sceneDic = new Dictionary<string, BaseScene>();
             // 씬설정
@@ -42,7 +43,8 @@ namespace KGA_OOPConsoleProject
             sceneDic.Add("TestScene1", new TestScene1());
             sceneDic.Add("TestScene2", new TestScene2());
             sceneDic.Add("TestScene3", new TestScene3());
-
+            sceneDic.Add("TownScene", new TownScene());
+            sceneDic.Add("FieldScene", new FieldScene());
         }
         private static void End()
         {
