@@ -30,10 +30,15 @@ namespace KGA_OOPConsoleProject.Scene
                 }
             }
             gameObjects = new List<GameObject>();
-            gameObjects.Add(new Place("NormalField", 'N', new Vector2(4, 0)));
-
-            GameManager.Player.position = new Vector2(1, 1);
-            GameManager.Player.map = map;
+            gameObjects.Add(new Place("NormalField", 'N', new Vector2(1, 4)));
         }
+        public override void SetByPrevScene()
+        {
+            if (GameManager.prevSceneName == "NormalField")
+            {
+                GameManager.Player.position = new Vector2(1, 3);
+            }
+        }
+
     }
 }

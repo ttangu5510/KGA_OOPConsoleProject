@@ -30,11 +30,22 @@ namespace KGA_OOPConsoleProject.Scene
                 }
             }
             gameObjects = new List<GameObject>();
-            gameObjects.Add(new Place("Field", 'B', new Vector2(0, 1)));
-            gameObjects.Add(new Place("Forest", 'F', new Vector2(12, 1)));
+            gameObjects.Add(new Place("Town", 'T', new Vector2(1, 2)));
+            gameObjects.Add(new Place("Forest", 'F', new Vector2(11, 1)));
 
-            GameManager.Player.position = new Vector2(1, 1);
-            GameManager.Player.map = map;
+
+        }
+        public override void SetByPrevScene()
+        {
+            if(GameManager.prevSceneName == "Town")
+            {
+                GameManager.Player.position = new Vector2(2, 2);
+
+            }
+            else if (GameManager.prevSceneName == "Forest")
+            {
+                GameManager.Player.position = new Vector2(10, 1);
+            }
         }
     }
 }

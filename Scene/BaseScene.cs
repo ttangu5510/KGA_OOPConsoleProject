@@ -13,7 +13,11 @@ namespace KGA_OOPConsoleProject.Scene
         public abstract void Input();
         public abstract void Update();
         public abstract void Result();
-        public virtual void Enter() { }
-        public virtual void Exit() { }
+        public virtual void Enter() { }        
+        public virtual void SetByPrevScene() { }
+        public virtual void Exit() 
+        {
+            GameManager.prevSceneName = name;
+        }
     }
 }

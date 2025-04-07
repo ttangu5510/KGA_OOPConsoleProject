@@ -6,6 +6,7 @@ namespace KGA_OOPConsoleProject
     {
         private static Dictionary<string, BaseScene> sceneDic;
         private static BaseScene curScene;
+        public static string prevSceneName;
         private static bool gameOver;
 
         private static Player player;

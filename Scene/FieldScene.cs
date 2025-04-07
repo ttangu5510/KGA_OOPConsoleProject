@@ -12,33 +12,8 @@ namespace KGA_OOPConsoleProject.Scene
         protected List<GameObject> gameObjects;
         public FieldScene()
         {
-            name = "Field";
-            mapData = new string[]
-                {
-                    "#############",
-                    "#      ##   #",
-                    "#      #    #",
-                    "#           #",
-                    "#        ####",
-                    "#############",
-                };
-            map = new bool[mapData.Length, mapData[0].Length];
-            for(int y = 0;y<map.GetLength(0);y++)
-            {
-                for(int x= 0;x<map.GetLength(1);x++)
-                {
-                    map[y, x] = mapData[y][x] == '#' ? false : true;
-                }
-            }
-            gameObjects = new List<GameObject>();
-            gameObjects.Add(new Place("Town", 'T', new Vector2(3, 1)));
-            gameObjects.Add(new Place("NormalField", 'N', new Vector2(12, 1)));
-            gameObjects.Add(new Potion(new Vector2(1, 4)));
 
-            GameManager.Player.position = new Vector2(1, 1);
-            GameManager.Player.map = map;
         }
-
         public override void Render()
         {
             PrintMap();
@@ -90,6 +65,11 @@ namespace KGA_OOPConsoleProject.Scene
                 }
                 Console.WriteLine();
             }
+        }
+        public override void Enter()
+        {
+            GameManager.Player.map = map;
+            SetByPrevScene();
         }
     }
 }

@@ -59,7 +59,6 @@ namespace KGA_OOPConsoleProject
                     tarPos.x++;
                     break;
             }
-
             if (map[tarPos.y, tarPos.x] == true)
             {
                 position = tarPos;

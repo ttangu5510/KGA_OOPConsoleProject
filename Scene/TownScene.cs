@@ -25,7 +25,7 @@
             switch (input)
             {
                 case ConsoleKey.D1:
-                    GameManager.ChangeScene("Field");
+                    GameManager.ChangeScene("NormalField");
                     break;
             }
         }
@@ -36,4 +36,5 @@
         }
 
     }
+
 }
