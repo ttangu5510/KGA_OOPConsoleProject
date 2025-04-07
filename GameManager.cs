@@ -34,13 +34,23 @@ namespace KGA_OOPConsoleProject
             // 게임 시작 초기세팅
             gameOver = false;
             sceneDic = new Dictionary<string, BaseScene>();
+            // 씬설정
             // 타이틀 씬 추가 : 업캐스팅
             sceneDic.Add("Title", new TitleScene());
             curScene = sceneDic["Title"];
+            // 테스트 씬 추가
+            sceneDic.Add("TestScene1", new TestScene1());
+            sceneDic.Add("TestScene2", new TestScene2());
+            sceneDic.Add("TestScene3", new TestScene3());
+
         }
         private static void End()
         {
             gameOver = false;
+        }
+        public static void ChangeScene(string scene)
+        {
+            curScene = sceneDic[scene];
         }
     }
 }

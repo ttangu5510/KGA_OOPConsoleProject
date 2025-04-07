@@ -40,7 +40,7 @@
 
         public override void Result()
         {
-
+            GameManager.ChangeScene("TestScene1");
         }
 
     }
