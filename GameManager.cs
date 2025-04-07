@@ -7,11 +7,15 @@ namespace KGA_OOPConsoleProject
         private static Dictionary<string, BaseScene> sceneDic;
         private static BaseScene curScene;
         private static bool gameOver;
+
+        private static Player player;
+        public static Player Player { get { return player; } }
+
         public static void Run()
         {
             // 게임 초기설정
             Start();
-            while (gameOver==false)
+            while (gameOver == false)
             {
                 Console.Clear();
                 // 게임 화면 그리기
@@ -21,7 +25,7 @@ namespace KGA_OOPConsoleProject
                 // 입력에 따른 게임 상황 업데이트
                 curScene.Update();
                 // 업데이트 이후의 결과
-                curScene.Result();                
+                curScene.Result();
             }
             // 게임 오버
             End();
@@ -35,24 +39,31 @@ namespace KGA_OOPConsoleProject
             Console.CursorVisible = false;
             gameOver = false;
             sceneDic = new Dictionary<string, BaseScene>();
+            // 플레이어
+            player = new Player();
+
             // 씬설정
             // 타이틀 씬 추가 : 업캐스팅
             sceneDic.Add("Title", new TitleScene());
             curScene = sceneDic["Title"];
-            // 테스트 씬 추가
-            sceneDic.Add("TestScene1", new TestScene1());
-            sceneDic.Add("TestScene2", new TestScene2());
-            sceneDic.Add("TestScene3", new TestScene3());
-            sceneDic.Add("TownScene", new TownScene());
-            sceneDic.Add("FieldScene", new FieldScene());
+            
+            // 씬 추가
+            sceneDic.Add("Town", new TownScene());
+            sceneDic.Add("Field", new FieldScene());
+            sceneDic.Add("NormalField", new NormalFieldScene());
+            sceneDic.Add("Forest", new ForestScene());
         }
+        // 게임 끝
         private static void End()
         {
             gameOver = false;
         }
+        // 씬 전환
         public static void ChangeScene(string scene)
         {
+            curScene.Exit();
             curScene = sceneDic[scene];
+            curScene.Enter();
         }
     }
 }

@@ -2,6 +2,10 @@
 {
     public class TitleScene : BaseScene
     {
+        public TitleScene()
+        {
+            name = "Title";
+        }
         public override void Render()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -36,7 +40,7 @@
 
         public override void Result()
         {
-            GameManager.ChangeScene("TownScene");
+            GameManager.ChangeScene("Town");
         }
 
     }

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KGA_OOPConsoleProject.Scene
+﻿namespace KGA_OOPConsoleProject.Scene
 {
     internal class TownScene : BaseScene
     {
+        public TownScene()
+        {
+            name = "Town";
+        }
         private ConsoleKey input;
         public override void Render()
         {
@@ -24,10 +22,10 @@ namespace KGA_OOPConsoleProject.Scene
 
         public override void Update()
         {
-            switch(input)
+            switch (input)
             {
                 case ConsoleKey.D1:
-                    GameManager.ChangeScene("FieldScene");
+                    GameManager.ChangeScene("Field");
                     break;
             }
         }
