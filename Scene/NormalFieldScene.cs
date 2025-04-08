@@ -34,6 +34,8 @@ namespace KGA_OOPConsoleProject.Scene
             gameObjects.Add(new Place("Town", 'T', new Vector2(1, 2)));
             gameObjects.Add(new Place("Forest", 'F', new Vector2(11, 1)));
             gameObjects.Add(new Potion(new Vector2(1, 4)));
+            gameObjects.Add(new Potion(new Vector2(2, 4)));
+            gameObjects.Add(new Potion(new Vector2(3, 4)));
 
         }
         public override void SetByPrevScene()

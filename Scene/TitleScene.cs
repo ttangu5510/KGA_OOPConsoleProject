@@ -31,7 +31,6 @@
         }
         public override void Input()
         {
-            Console.ReadKey(true);
         }
         public override void Update()
         {

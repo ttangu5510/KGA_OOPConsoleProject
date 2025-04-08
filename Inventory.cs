@@ -35,7 +35,6 @@
             stack.Push("InvenList");
             while (stack.Count > 0)
             {
-                Console.Clear();
                 switch (stack.Peek())
                 {
                     case "InvenList":
@@ -59,6 +58,7 @@
         }
         private void InvenList()
         {
+            Console.Clear();
             PrintAll();
             // 초이스를 위한 화살표 생성
             // 초이스에는 인덱스 정보가 담김
@@ -97,17 +97,20 @@
         }
         private void ItemMenu()
         {
+            Console.Clear();
             PrintAll();
             Item selectItem = items[selectIndex];
-            Console.SetCursorPosition(15, selectIndex);
+            Util.PrintChoice(selectIndex);
+
+            Console.SetCursorPosition(15, 0);
             Console.WriteLine("┌------------┐");
-            Console.SetCursorPosition(15, selectIndex + 1);
+            Console.SetCursorPosition(15, 1);
             Console.WriteLine("|  사용하기  |");
-            Console.SetCursorPosition(15, selectIndex + 2);
+            Console.SetCursorPosition(15, 2);
             Console.WriteLine("|  설명      |");
-            Console.SetCursorPosition(15, selectIndex + 3);
+            Console.SetCursorPosition(15, 3);
             Console.WriteLine("|  버리기    |");
-            Console.SetCursorPosition(15, selectIndex + 4);
+            Console.SetCursorPosition(15, 4);
             Console.WriteLine("└------------┘");
             Util.PrintChoice(choiceIndex, 16);
             ConsoleKey input = Console.ReadKey(true).Key;
@@ -184,6 +187,7 @@
         private void ItemInfo()
         {
             Item selectItem = items[selectIndex];
+            Console.SetCursorPosition(20, selectIndex);           
             Util.PrintText(selectItem.description);
             Console.ReadKey(true);
             stack.Pop();
