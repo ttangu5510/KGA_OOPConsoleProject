@@ -71,7 +71,7 @@
             Console.SetCursorPosition(x, y);
             Console.Write("  공격      방어      아이템    도망간다 ");
             // 선택 커서 출력
-            Util.PrintChoice(choiceIndexY,choiceIndexX);
+            Util.PrintChoice(choiceIndexY, choiceIndexX);
             // 캐릭터 출력
             int pX = 3, pY = 2;
             int mX = 35, mY = 5;
@@ -141,6 +141,7 @@
             }
             Result();
         }
+        // 배틀 시작 시, 스피드에 따른 큐 순서 저장
         public void StartBattle()
         {
             if (monster.speed > player.Speed)
@@ -168,22 +169,25 @@
                     case "전투 선택":
                         ChoiceMove();
                         break;
-                    case "공격선택":
+                    case "공격 선택":
                         ChoiceAttack();
                         stack.Pop();
                         break;
-                    case "방어선택":
-                        player.PlayerGuard();
+                    case "방어 선택":
+                        ChoiceGuard();
                         stack.Pop();
                         break;
-                    case "도망선택":
-                        player.PlayerRun();
+                    case "아이템 선택":
+                        ChoiceItem();
+                        stack.Pop();
+                        break;
+                    case "도망 선택":
+                        ChoiceRun();
                         stack.Pop();
                         break;
                 }
 
             }
-            Console.ReadKey();
         }
         // 플레이어 행동 선택
         public void ChoiceMove()
@@ -205,9 +209,24 @@
                     }
                     break;
                 case ConsoleKey.A:
-                    if (choiceIndexX == 24)
+                    switch (choiceIndexX)
                     {
-
+                        case 1:
+                            stack.Push("공격 선택");
+                            choiceIndexX = 1;
+                            break;
+                        case 11:
+                            stack.Push("방어 선택");
+                            choiceIndexX = 1;
+                            break;
+                        case 21:
+                            stack.Push("아이템 선택");
+                            choiceIndexX = 1;
+                            break;
+                        case 31:
+                            stack.Push("도망 선택");
+                            choiceIndexX = 1;
+                            break;
                     }
                     break;
                 case ConsoleKey.S:
@@ -221,9 +240,28 @@
         // 플레이어 공격 선택
         public void ChoiceAttack()
         {
-            Console.Write("공격하기");
-
+            Console.WriteLine("공격");
+            Console.ReadKey(true);
         }
+        // 플레이어 가드
+        public void ChoiceGuard()
+        {
+            Console.WriteLine("방어");
+            Console.ReadKey(true);
+        }
+        // 플레이어 아이템 선택
+        public void ChoiceItem()
+        {
+            Console.WriteLine("아이템");
+            Console.ReadKey(true);
+        }
+        // 플레이어 도망 선택
+        public void ChoiceRun()
+        {
+            Console.WriteLine("도망");
+            Console.ReadKey(true);
+        }
+
         // 몬스터 행동 - 랜덤으로 행동한다
         public void MonsterMove()
         {
