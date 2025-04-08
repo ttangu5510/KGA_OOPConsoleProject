@@ -43,9 +43,6 @@
                     case "ItemMenu":
                         ItemMenu();
                         break;
-                    case "UseConfirm":
-                        UseConfirm();
-                        break;
                     case "DropConfirm":
                         DropConfirm();
                         break;
@@ -84,12 +81,14 @@
                     }
                     break;
                 case ConsoleKey.A:
-                    selectIndex = choiceIndex;
-                    choiceIndex = 0;
-                    stack.Push("ItemMenu");
+                    if(items.Count>0)
+                    {
+                        selectIndex = choiceIndex;
+                        choiceIndex = 0;
+                        stack.Push("ItemMenu");
+                    }                    
                     break;
                 case ConsoleKey.S:
-                    choiceIndex = 0;
                     stack.Pop();
                     break;
             }
@@ -131,7 +130,11 @@
                 case ConsoleKey.A:
                     if (choiceIndex == 0)
                     {
-                        stack.Push("UseConfirm");
+                        selectItem.Use();
+                        Util.PrintText(selectItem.useDescription);
+                        Remove(selectItem);
+                        choiceIndex = 0;
+                        stack.Pop();
                     }
                     else if (choiceIndex == 1)
                     {
@@ -144,54 +147,39 @@
                     break;
                 case ConsoleKey.S:
                     stack.Pop();
-                    choiceIndex = 0;
-                    break;
-            }
-        }
-        private void UseConfirm()
-        {
-            Item selectItem = items[selectIndex];
-            Console.WriteLine($"{selectItem.name}을/를 사용 하시겠습니까?");
-            ConsoleKey input = Console.ReadKey(true).Key;
-            switch (input)
-            {
-                case ConsoleKey.A:
-                    selectItem.Use();
-                    Util.PressAnyKey($"{selectItem.name}을/를 사용 했습니다");
-                    Remove(selectItem);
-                    stack.Pop();
-                    stack.Pop();
-                    break;
-                case ConsoleKey.S:
-                    stack.Pop();
                     break;
             }
         }
         private void DropConfirm()
         {
             Item selectItem = items[selectIndex];
-            Console.WriteLine($"{selectItem.name}을/를 버리시겠습니까?");
+            Util.PrintText($"{selectItem.name}을/를 버리시겠습니까?");
             ConsoleKey input = Console.ReadKey(true).Key;
             switch (input)
             {
                 case ConsoleKey.A:
-                    Util.PressAnyKey($"{selectItem.name}을/를 버렸습니다");
+                    Util.PrintText($"{selectItem.name}을/를 버렸습니다");
                     Remove(selectItem);
                     stack.Pop();
+                    stack.Pop();
+                    choiceIndex = 0;
                     break;
                 case ConsoleKey.S:
-                    stack.Pop();
+                    stack.Pop();                    
                     break;
             }
         }
+
+        //아이템 정보 출력
         private void ItemInfo()
         {
             Item selectItem = items[selectIndex];
             Console.SetCursorPosition(20, selectIndex);           
             Util.PrintText(selectItem.description);
-            Console.ReadKey(true);
             stack.Pop();
         }
+
+        // 인벤토리 출력
         public void PrintAll()
         {
             Console.WriteLine("┌------ 인벤토리 ------┐");

@@ -13,6 +13,10 @@
             this.position = position;
             this.isOnce = isOnce;
         }
+        public GameObject()
+        {
+            
+        }
         public void Print()
         {
             Console.SetCursorPosition(position.x, position.y);

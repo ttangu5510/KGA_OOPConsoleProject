@@ -76,11 +76,14 @@
             Console.ResetColor();
             Console.SetCursorPosition(x, y);
         }
+        // 입력 시 다음 진행
         public static void PressAnyKey(string text)
         {
             Console.WriteLine(text);
             Util.PrintText("계속하려면 아무키나 누르세요...");
         }
+
+        // 선택 커서 출력
         public static void PrintChoice(int index, int x = 1)
         {
             Console.SetCursorPosition(x, index + 1);

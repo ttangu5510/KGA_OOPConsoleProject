@@ -12,6 +12,13 @@ namespace KGA_OOPConsoleProject.Items
         {
             name = "포션";
             description = "소량의 체력을 회복 시키는 아이템";
+            useDescription = "체력을 30 회복했다";
+        }
+        public Potion()
+        {
+            name = "포션";
+            description = "소량의 체력을 회복 시키는 아이템";
+            useDescription = "체력을 30 회복했다";
         }
         public override void Use()
         {

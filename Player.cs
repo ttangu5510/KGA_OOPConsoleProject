@@ -11,6 +11,8 @@ namespace KGA_OOPConsoleProject
         public Vector2 position;
         public bool[,] map;
         private Inventory inventory;
+        private Menu menu;
+        public Menu Menu { get {  return menu; } }
         public Inventory Inventory { get {  return inventory; } }
         
         private int curHP;
@@ -22,6 +24,7 @@ namespace KGA_OOPConsoleProject
             inventory = new Inventory();
             maxHP = 100;
             curHP = maxHP;
+            menu = new Menu();
         }
         public void Heal(int amount)
         {
@@ -49,7 +52,7 @@ namespace KGA_OOPConsoleProject
                     Move(input);
                     break;
                 case ConsoleKey.Enter:
-                    Inventory.OpenInven();
+                    menu.OpenMenu();
                     break;
             }
         }

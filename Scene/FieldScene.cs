@@ -81,7 +81,7 @@
         public override void Enter()
         {
             GameManager.Player.map = map;
-            SetByPrevScene();
+            SetByPrevScene();            
         }
     }
 }
