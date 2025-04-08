@@ -14,8 +14,9 @@ namespace KGA_OOPConsoleProject
         public string attack;
         public bool isRun;
         public string[] sprite;
-        //플레이스 할 몬스터
-        public Monster(string name, int level, int exp, int damage, int hp, List<Item> mItems, int gold, char symbol, Vector2 position, string attack, string[] sprite) : base(ConsoleColor.Red, symbol, position, true, false)
+        public int speed;
+        //플레이스로 설치 할 몬스터
+        public Monster(string name, int level, int exp, int damage, int hp, List<Item> mItems, int gold, char symbol, Vector2 position, string attack, string[] sprite,int speed) : base(ConsoleColor.Red, symbol, position, true, false)
         {
             this.name = name;
             this.level = level;
@@ -27,25 +28,26 @@ namespace KGA_OOPConsoleProject
             this.attack = attack;
             isRun = false;
             this.sprite = sprite;
+            this.speed = speed;
         }
 
 
         public int MonsterAttack()
         {
-            Util.PrintText($"{attack}공격!");
+            Util.PrintText($"{attack}의 공격!");
             return damage;
         }
         public void MonsterDefence()
         {
-            Util.PrintText($"{name}은 방어했다!");
+            Util.PrintText($"{name}은/는 방어했다!");
         }
         public void MonsterRun()
         {
-            Util.PrintText($"{name}은 도망쳤다!");
+            Util.PrintText($"{name}은/는 도망쳤다!");
         }
         public void MonsterHit(int damage)
         {
-            Util.PrintText($"{name}은 {damage}의 피해를 입었다!");
+            Util.PrintText($"{name}은/는 {damage}의 피해를 입었다!");
             hp -= damage;
             if (hp < 0)
             {
@@ -79,7 +81,7 @@ namespace KGA_OOPConsoleProject
             {
                 case "슬라임":
                     List<Item> sItems = [potion];
-                    monster = new Monster("슬라임", 3, 3, 2, 15, sItems, 10, 'S', position, "튀어오르기", slimeSprite);
+                    monster = new Monster("슬라임", 3, 3, 2, 15, sItems, 10, 'S', position, "튀어오르기", slimeSprite,2);
                     break;
                 default:
                     Console.WriteLine("몬스터 이름이 없습니다");

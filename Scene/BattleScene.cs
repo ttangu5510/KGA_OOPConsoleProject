@@ -18,10 +18,18 @@
         ConsoleKey input;
         private Player player;
         private Monster monster;
+        private int choiceIndexX;
+        private int choiceIndexY;
+        public Stack<string> stack;
+        public Queue<string> que;
         public BattleScene(Player player, Monster monster)
         {
             this.player = player;
             this.monster = monster;
+            choiceIndexX = 0;
+            choiceIndexY = 10;
+            stack = new Stack<string>();
+            que = new Queue<string>();
         }
         public override void Render()
         {
@@ -53,8 +61,9 @@
             Console.WriteLine("└-------------------------------------------------┘");
             int x = 1, y = 11;
             Console.SetCursorPosition(x, y);
-            Console.Write("  공격   방어   아이템    도망간다 ");
-            
+            Console.Write("  공격     방어     아이템     도망간다 ");
+            // 선택 커서 출력
+            Util.PrintChoice(choiceIndexY);
             // 캐릭터 출력
             int pX = 3, pY = 2;
             int mX = 35, mY = 5;
@@ -71,8 +80,19 @@
 
         public override void Update()
         {
+            que.Enqueue("StartBattle");
             Console.WriteLine("배틀씬 업데이트");
-            input = Console.ReadKey(true).Key;
+            while(que.Count > 0)
+            {
+                switch (que.Peek())
+                {
+                    case "StartBattle":
+                        StartBattle();
+                        break;
+                }
+            }
+    
+
         }
 
         public override void Result()
@@ -95,10 +115,23 @@
                 Result();
                 if (monster.isDead)
                 {
-                    Console.WriteLine("반복종료");
+                    Console.WriteLine("전투 종료");
                     Console.ReadKey(true);
                 }
                 isBattle = !monster.isDead && !monster.isRun && !player.IsRun;
+            }
+        }
+        public void StartBattle()
+        {
+            if (monster.speed > player.Speed)
+            {
+                que.Enqueue("MonsterMove");
+                que.Enqueue("PlayerMove");
+            }
+            else
+            {
+                que.Enqueue("PlayerMove");
+                que.Enqueue("MonsterMove");
             }
         }
     }

@@ -22,7 +22,7 @@ namespace KGA_OOPConsoleProject.Items
         }
         public override void Use()
         {
-            GameManager.Player.Heal(30);            
+            GameManager.Player.HPHeal(30);            
         }
     }
 }

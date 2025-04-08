@@ -22,6 +22,13 @@
         private int maxHP;
         public int CurHP { get { return curHP; } }
         public int MaxHP { get { return maxHP; } }
+        private int mp;
+        public int MP { get { return mp; } }
+        private int maxMP;
+        public int MaxMP { get { return maxMP; } }
+
+        // 상태
+        public bool isBattle;
         private bool isRun;
         public bool IsRun { get { return isRun; } }
         private bool isDead;
@@ -42,19 +49,30 @@
             menu = new Menu();
             isRun = false;
             isDead = false;
+            isBattle = false;
 
             maxHP = 100;
             curHP = maxHP;
+            mp = 100;
+            maxMP = 100;
             power = 1;
             defence = 0;
             speed = 10;
         }
-        public void Heal(int amount)
+        public void HPHeal(int amount)
         {
             curHP += amount;
             if (curHP > maxHP)
             {
                 curHP = maxHP;
+            }
+        }
+        public void MPHeal(int amount)
+        {
+            mp += amount;
+            if (mp > maxMP)
+            {
+                mp = maxMP;
             }
         }
         public void PrintPlayer()
@@ -101,6 +119,10 @@
             {
                 position = tarPos;
             }
+        }
+        public void PlayerAttack()
+        {
+
         }
         public void PlayerSprite(int pX, int pY)
         {
