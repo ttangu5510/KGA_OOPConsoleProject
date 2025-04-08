@@ -2,31 +2,22 @@
 {
     public class FieldScene : BaseScene
     {
-        public event Action InventoryPrint;
         protected ConsoleKey input;
         protected string[] mapData;
         protected bool[,] map;
-
+        protected BattleScene battleScene;
         protected List<GameObject> gameObjects;
+        protected Vector2 monsterPosition;
         public FieldScene()
         {
-            //첫 인벤토리 출력을 위한 이벤트 추가
-            InventoryPrint += () => Console.SetCursorPosition(0, map.GetLength(0) + 2);
-            InventoryPrint += () => GameManager.Player.Inventory.PrintAll();
         }
         public override void Render()
         {
             PrintMap();
+            GameManager.Player.PrintPlayer();
             foreach (GameObject go in gameObjects)
             {
                 go.Print();
-            }
-
-            GameManager.Player.PrintPlayer();
-            if (InventoryPrint != null)
-            {
-                InventoryPrint.Invoke();
-                InventoryPrint = null;
             }
         }
         public override void Input()
@@ -46,13 +37,15 @@
             {
                 if (GameManager.Player.position == go.position)
                 {
+                    if(go.isDead==false)
+                    {
+                        battleScene = new BattleScene();
+                        battleScene.Battle(GameManager.Player,(Monster)go);                 
+                    }
                     go.Interact(GameManager.Player);
-                    if (go.isOnce == true)
+                    if (go.isOnce == true && go.isDead == true)
                     {
                         gameObjects.Remove(go);
-                        // 이벤트 추가
-                        InventoryPrint += () => Console.SetCursorPosition(0, map.GetLength(0) + 2);
-                        InventoryPrint += () => GameManager.Player.Inventory.PrintAll();
                     }
                     break;
                 }

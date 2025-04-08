@@ -19,12 +19,18 @@ namespace KGA_OOPConsoleProject
         private int maxHP;
         public int CurHP { get { return curHP; } }
         public int MaxHP { get { return maxHP; } }
+        private bool isRun;
+        public bool IsRun { get { return isRun; } }
+        private bool isDead;
+        public bool IsDead {  get { return isDead; } }
         public Player()
         {
             inventory = new Inventory();
             maxHP = 100;
             curHP = maxHP;
             menu = new Menu();
+            isRun = false;
+            isDead = false;
         }
         public void Heal(int amount)
         {

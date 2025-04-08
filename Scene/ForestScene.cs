@@ -30,7 +30,10 @@ namespace KGA_OOPConsoleProject.Scene
                 }
             }
             gameObjects = new List<GameObject>();
+            MonsterFactory slimeFactory = new MonsterFactory();
+            Monster slime0 = slimeFactory.MonsterCreate("슬라임", new Vector2(5, 1));
             gameObjects.Add(new Place("NormalField", 'N', new Vector2(1, 4)));
+            gameObjects.Add(slime0);
         }
         public override void SetByPrevScene()
         {
