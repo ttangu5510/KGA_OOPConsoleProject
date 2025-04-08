@@ -1,4 +1,7 @@
-﻿namespace KGA_OOPConsoleProject
+﻿using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
+
+namespace KGA_OOPConsoleProject
 {
     public class Player
     {
@@ -53,11 +56,11 @@
 
             maxHP = 100;
             curHP = maxHP;
-            mp = 100;
             maxMP = 100;
+            mp = maxMP;
             power = 1;
             defence = 0;
-            speed = 10;
+            speed = 1;
         }
         public void HPHeal(int amount)
         {
@@ -120,10 +123,47 @@
                 position = tarPos;
             }
         }
-        public void PlayerAttack()
+        // 플레이어 공격
+        public int PlayerAttack()
         {
-
+            Console.SetCursorPosition(0, 7);
+            Util.PrintText("플레이어의 공격!", ConsoleColor.White, 25, 150, false);
+            return power;
         }
+        // 플레이어 스킬 사용 TODO
+        public int PlayerSkill()
+        {
+            Console.SetCursorPosition(0, 7);
+            Util.PrintText("플레이어의 공격!", ConsoleColor.White, 25, 150, false);
+            return power;
+        }
+        // 플레이어 가드
+        public void PlayerGuard()
+        {
+            Console.SetCursorPosition(0, 7);
+            Util.PrintText("방어 자세를 했다!", ConsoleColor.Blue, 25, 150, false);
+        }
+        // 플레이어 피격
+        public void PlayerHit(int damage)
+        {
+            Console.SetCursorPosition(0, 7);
+            Util.PrintText($"{damage}만큼 피해를 입었다!", ConsoleColor.Blue, 25, 150, false);
+            curHP -= damage;
+        }
+        // 플레이어가 도망칠 경우
+        public void PlayerRun()
+        {
+            isRun = true;
+        }
+        // 체력이 다 닳을 경우
+        public void PlayerDead()
+        {
+            if (curHP<=0)
+            {
+                GameManager.IsGameOver();
+            }
+        }
+        // 전투 씬에서 플레이어 그리기
         public void PlayerSprite(int pX, int pY)
         {
             for (int i = 0; i < playerSprite.Length; i++)

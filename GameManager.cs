@@ -8,6 +8,7 @@ namespace KGA_OOPConsoleProject
         private static BaseScene curScene;
         public static string prevSceneName;
         private static bool gameOver;
+        public static bool GameOver {  get { return gameOver; } }
 
         private static Player player;
         public static Player Player { get { return player; } }
@@ -56,7 +57,8 @@ namespace KGA_OOPConsoleProject
         // 게임 끝
         private static void End()
         {
-            gameOver = false;
+            Console.Clear();
+            Console.WriteLine("게임 오버...");
         }
         // 씬 전환
         public static void ChangeScene(string scene)
@@ -64,6 +66,10 @@ namespace KGA_OOPConsoleProject
             curScene.Exit();
             curScene = sceneDic[scene];
             curScene.Enter();
+        }
+        public static void IsGameOver()
+        {
+            gameOver = true;            
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using KGA_OOPConsoleProject.Items;
+using KGA_OOPConsoleProject.Scene;
 
 namespace KGA_OOPConsoleProject
 {
@@ -15,8 +16,9 @@ namespace KGA_OOPConsoleProject
         public bool isRun;
         public string[] sprite;
         public int speed;
+        public int defence;
         //플레이스로 설치 할 몬스터
-        public Monster(string name, int level, int exp, int damage, int hp, List<Item> mItems, int gold, char symbol, Vector2 position, string attack, string[] sprite,int speed) : base(ConsoleColor.Red, symbol, position, true, false)
+        public Monster(string name, int level, int exp, int damage, int hp, List<Item> mItems, int gold, char symbol, Vector2 position, string attack, string[] sprite,int speed,int defence) : base(ConsoleColor.Red, symbol, position, true, false)
         {
             this.name = name;
             this.level = level;
@@ -29,25 +31,28 @@ namespace KGA_OOPConsoleProject
             isRun = false;
             this.sprite = sprite;
             this.speed = speed;
+            this.defence = defence;
         }
 
 
         public int MonsterAttack()
         {
-            Util.PrintText($"{attack}의 공격!");
+            Console.SetCursorPosition(0,7);
+            Util.PrintText($"{attack}의 공격!", ConsoleColor.White, 25, 150,false);
             return damage;
         }
-        public void MonsterDefence()
+        public void MonsterGuard()
         {
-            Util.PrintText($"{name}은/는 방어했다!");
+           defence += defence;
         }
         public void MonsterRun()
         {
-            Util.PrintText($"{name}은/는 도망쳤다!");
+            Console.SetCursorPosition(0, 7);
+            Util.PrintText($"{name}은/는 도망쳤다!", ConsoleColor.Yellow, 25, 150, false);
         }
         public void MonsterHit(int damage)
         {
-            Util.PrintText($"{name}은/는 {damage}의 피해를 입었다!");
+            Util.PrintText($"{name}은/는 {damage}의 피해를 입었다!", ConsoleColor.White, 25, 150, false);
             hp -= damage;
             if (hp < 0)
             {
@@ -55,6 +60,10 @@ namespace KGA_OOPConsoleProject
                 isDead = true;
             }
 
+        }
+        public void MonsterUnguard()
+        {
+            defence -= defence;
         }
         public override void Interact(Player player)
         {
@@ -81,7 +90,7 @@ namespace KGA_OOPConsoleProject
             {
                 case "슬라임":
                     List<Item> sItems = [potion];
-                    monster = new Monster("슬라임", 3, 3, 2, 15, sItems, 10, 'S', position, "튀어오르기", slimeSprite,2);
+                    monster = new Monster("슬라임", 3, 3, 5, 15, sItems, 10, 'S', position, "튀어오르기", slimeSprite,2,1);
                     break;
                 default:
                     Console.WriteLine("몬스터 이름이 없습니다");
