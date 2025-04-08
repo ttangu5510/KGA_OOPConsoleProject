@@ -33,5 +33,10 @@
             Util.PrintText("계속하려면 아무키나 누르세요...");
             Console.ReadKey(true);
         }
+        public static void PrintChoice(int index)
+        {
+            Console.SetCursorPosition(1,index+1);
+            Console.Write("▶");
+        }
     }
 }

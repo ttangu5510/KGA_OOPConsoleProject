@@ -12,7 +12,15 @@ namespace KGA_OOPConsoleProject
         public enum MenuState { Menu, InvenWindow, IsUse, UsConfirm, DropConfirm }        
         public static void OpenMenu()
         {
-            Console.WriteLine("---- 메뉴 ---");
+            Console.WriteLine("---- 키 조작법 -----");
+            Console.WriteLine("------ 방향키 ------");
+            Console.WriteLine("       ┌-----┐ ");
+            Console.WriteLine("       |  ↑  | ");
+            Console.WriteLine("       └-----┘ ");
+            Console.WriteLine("┌-----┐┌-----┐┌-----┐ ");
+            Console.WriteLine("|  ←  ||  ↓  ||  →  | ");
+            Console.WriteLine("└-----┘└-----┘└-----┘ ");
+            Console.WriteLine("| - 인벤토리 ");
             Console.WriteLine("| - 인벤토리 ");
             Console.WriteLine("-------------");
         }

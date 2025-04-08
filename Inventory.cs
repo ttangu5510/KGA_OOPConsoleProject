@@ -1,15 +1,15 @@
-﻿using KGA_OOPConsoleProject.Scene;
-
-namespace KGA_OOPConsoleProject
+﻿namespace KGA_OOPConsoleProject
 {
     public class Inventory
     {
         private List<Item> items;
         private int selectIndex;
+        private int choiceIndex;
         public Inventory()
         {
             items = new List<Item>();
             stack = new Stack<string>();
+            choiceIndex = 0;
         }
         private Stack<string> stack;
 
@@ -32,20 +32,14 @@ namespace KGA_OOPConsoleProject
         }
         public void OpenInven()
         {
-            stack.Push("Menu");
+            stack.Push("InvenList");
             while (stack.Count > 0)
             {
                 Console.Clear();
                 switch (stack.Peek())
                 {
-                    case "Menu":
-                        Menu();
-                        break;
-                    case "UseMenu":
-                        UseMenu();
-                        break;
-                    case "DropMenu":
-                        DropMenu();
+                    case "InvenList":
+                        InvenList();
                         break;
                     case "UseConfirm":
                         UseConfirm();
@@ -57,94 +51,58 @@ namespace KGA_OOPConsoleProject
             }
             Console.Clear();
         }
-        private void Menu()
+        private void InvenList()
         {
             PrintAll();
-
-            Console.WriteLine("1. 사용하기");
-            Console.WriteLine("2. 버리기");
-            Console.WriteLine("0. 뒤로가기");
-
+            // 초이스를 위한 화살표 생성
+            // 초이스에는 인덱스 정보가 담김
+            // 위아래 화살표 입력시, 초이스 인덱스 달라짐
+            // 인덱스에 따라 화살표도 달라짐
+            // 아이템들 인덱스 == 초이스 인덱스
+            // 아이템 선택 = stack push
+            // 취소 = stack pop
+            Util.PrintChoice(choiceIndex);
             ConsoleKey input = Console.ReadKey(true).Key;
-            switch (input)
+            switch(input)
             {
-                case ConsoleKey.D1:
-                    stack.Push("UseMenu");
+                case ConsoleKey.UpArrow:
+                    if(choiceIndex > 0)
+                    {
+                        choiceIndex--;
+                    }
                     break;
-                case ConsoleKey.D2:
-                    stack.Push("DropMenu");
+                case ConsoleKey.DownArrow:
+                    if (choiceIndex < items.Count-1)
+                    {
+                        choiceIndex++;
+                    }
                     break;
-                case ConsoleKey.D0:
+                case ConsoleKey.A:
+                    selectIndex = choiceIndex;
+                    choiceIndex = 0;
+                    stack.Push("UseConfirm");
+                    break;
+                case ConsoleKey.S:
+                    choiceIndex = 0;
                     stack.Pop();
                     break;
             }
-        }
-        private void UseMenu()
-        {
-            PrintAll();
 
-            Console.WriteLine("사용할 아이템을 선택 해주세요");
-            Console.WriteLine("0. 뒤로가기");
-
-            ConsoleKey input = Console.ReadKey(true).Key;
-            if (input == ConsoleKey.D0)
-            {
-                stack.Pop();
-            }
-            else
-            {
-                int select = (int)input - (int)ConsoleKey.D1;
-                if (select < 0 || select >= items.Count)
-                {
-                    Util.PressAnyKey("범위 내의 키를 다시 입력하세요");
-                }
-                else
-                {
-                    selectIndex = select;
-                    stack.Push("UseConfirm");
-                }
-            } 
-        }
-        private void DropMenu()
-        {
-            PrintAll();
-
-            Console.WriteLine("버릴 아이템을 선택 해주세요");
-            Console.WriteLine("0. 뒤로가기");
-
-            ConsoleKey input = Console.ReadKey(true).Key;
-            if (input == ConsoleKey.D0)
-            {
-                stack.Pop();
-            }
-            else
-            {
-                int select = (int)input - (int)ConsoleKey.D1;
-                if (select < 0 || select >= items.Count)
-                {
-                    Util.PressAnyKey("범위 내의 키를 다시 입력하세요");
-                }
-                else
-                {
-                    selectIndex = select;
-                    stack.Push("DropConfirm");
-                }
-            }
         }
         private void UseConfirm()
         {
             Item selectItem = items[selectIndex];
             Console.WriteLine($"{selectItem.name}을/를 사용 하시겠습니까?");
             ConsoleKey input = Console.ReadKey(true).Key;
-            switch(input)
+            switch (input)
             {
-                case ConsoleKey.Y:
-                    selectItem.Use();                    
+                case ConsoleKey.A:
+                    selectItem.Use();
                     Util.PressAnyKey($"{selectItem.name}을/를 사용 했습니다");
                     Remove(selectItem);
                     stack.Pop();
                     break;
-                case ConsoleKey.N:
+                case ConsoleKey.S:
                     stack.Pop();
                     break;
             }
@@ -156,28 +114,35 @@ namespace KGA_OOPConsoleProject
             ConsoleKey input = Console.ReadKey(true).Key;
             switch (input)
             {
-                case ConsoleKey.Y:
+                case ConsoleKey.A:
                     Util.PressAnyKey($"{selectItem.name}을/를 버렸습니다");
                     Remove(selectItem);
                     stack.Pop();
                     break;
-                case ConsoleKey.N:
+                case ConsoleKey.S:
                     stack.Pop();
                     break;
             }
         }
         public void PrintAll()
         {
-            Console.WriteLine("=== 소유한 아이템 ===");
+            Console.WriteLine("┌------ 인벤토리 ------┐");
             if (items.Count == 0)
             {
-                Console.WriteLine(" 없음 ");
+                Console.WriteLine("    없음 ");
             }
+
+            (int x, int y) = Console.GetCursorPosition();
             for (int i = 0; i < items.Count; i++)
             {
-                Console.WriteLine("{0}. {1}", i + 1, items[i].name);
+                Console.WriteLine("|                      |");
             }
-            Console.WriteLine("=====================");
+            Console.WriteLine("└----------------------┘");
+            Console.SetCursorPosition(x + 2, y);
+            for (int i = 0; i < items.Count; i++)
+            {
+                Console.WriteLine("  {0}", items[i].name);
+            }            
         }
     }
 }
