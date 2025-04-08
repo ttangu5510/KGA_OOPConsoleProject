@@ -180,6 +180,7 @@
                     choiceIndex = 0;
                     break;
                 case ConsoleKey.S:
+                    choiceIndex = 0;
                     stack.Pop();
                     break;
             }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KGA_OOPConsoleProject
+﻿namespace KGA_OOPConsoleProject
 {
     public class Player
     {
@@ -13,16 +7,16 @@ namespace KGA_OOPConsoleProject
         public bool[,] map;
         private Inventory inventory;
         private Menu menu;
-        public Menu Menu { get {  return menu; } }
-        public Inventory Inventory { get {  return inventory; } }
+        public Menu Menu { get { return menu; } }
+        public Inventory Inventory { get { return inventory; } }
 
         // 플레이어 스탯
         private int power;
         public int Power { get { return power; } }
         private int defence;
-        public int Defence {  get { return defence; } }
+        public int Defence { get { return defence; } }
         private int speed;
-        public int Speed {  get { return speed; } }
+        public int Speed { get { return speed; } }
 
         private int curHP;
         private int maxHP;
@@ -31,14 +25,24 @@ namespace KGA_OOPConsoleProject
         private bool isRun;
         public bool IsRun { get { return isRun; } }
         private bool isDead;
-        public bool IsDead {  get { return isDead; } }
+        public bool IsDead { get { return isDead; } }
+        public string[] playerSprite =
+{
+                     "   ____    _   ",
+                     "  | ◑ ◑|  / /  "  ,
+                     "  └  ^ / / /   "  ,
+                     "  |\\  _|/ /_   " ,
+                     "  | \\=  /      " ,
+                     " /  / \\  \\     ",
+                     "/__ /  \\___\\   "
+            };
         public Player()
         {
             inventory = new Inventory();
             menu = new Menu();
             isRun = false;
             isDead = false;
-            
+
             maxHP = 100;
             curHP = maxHP;
             power = 1;
@@ -48,7 +52,7 @@ namespace KGA_OOPConsoleProject
         public void Heal(int amount)
         {
             curHP += amount;
-            if(curHP >maxHP)
+            if (curHP > maxHP)
             {
                 curHP = maxHP;
             }
@@ -96,6 +100,14 @@ namespace KGA_OOPConsoleProject
             if (map[tarPos.y, tarPos.x] == true)
             {
                 position = tarPos;
+            }
+        }
+        public void PlayerSprite(int pX, int pY)
+        {
+            for (int i = 0; i < playerSprite.Length; i++)
+            {
+                Console.SetCursorPosition(pX, pY + i);
+                Console.Write(playerSprite[i]);
             }
         }
     }

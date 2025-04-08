@@ -36,7 +36,10 @@ namespace KGA_OOPConsoleProject.Scene
             gameObjects.Add(new Potion(new Vector2(1, 4)));
             gameObjects.Add(new Potion(new Vector2(2, 4)));
             gameObjects.Add(new Potion(new Vector2(3, 4)));
-
+            //몬스터 생성
+            MonsterFactory slimeFactory = new MonsterFactory();
+            Monster slime0 = slimeFactory.MonsterCreate("슬라임", new Vector2(4, 2));
+            gameObjects.Add(slime0);
         }
         public override void SetByPrevScene()
         {
@@ -48,6 +51,10 @@ namespace KGA_OOPConsoleProject.Scene
             else if (GameManager.prevSceneName == "Forest")
             {
                 GameManager.Player.position = new Vector2(10, 1);
+            }
+            else 
+            {
+                GameManager.Player.position = new Vector2(2, 1);
             }
         }
     }

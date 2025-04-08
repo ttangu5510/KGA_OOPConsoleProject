@@ -46,14 +46,20 @@
             Console.WriteLine("|                                                 |");
             Console.WriteLine("└-------------------------------------------------┘");
 
+
             //Console.WriteLine("배틀씬 UI 입력");
             Console.WriteLine("┌-------------------------------------------------┐");
-            Console.WriteLine("|                                                 |");
             Console.WriteLine("|                                                 |");
             Console.WriteLine("└-------------------------------------------------┘");
             int x = 1, y = 11;
             Console.SetCursorPosition(x, y);
-            Console.Write(" ");
+            Console.Write("  공격   방어   아이템    도망간다 ");
+            
+            // 캐릭터 출력
+            int pX = 3, pY = 2;
+            int mX = 35, mY = 5;
+            player.PlayerSprite(pX,pY);
+            monster.MonsterSprite(mX, mY);
         }
 
 
@@ -77,7 +83,7 @@
 
         public void Battle()
         {
-            
+
 
             bool isBattle = !monster.isDead && !monster.isRun && !player.IsRun;
 
@@ -87,7 +93,7 @@
                 Input();
                 Update();
                 Result();
-                if(monster.isDead)
+                if (monster.isDead)
                 {
                     Console.WriteLine("반복종료");
                     Console.ReadKey(true);

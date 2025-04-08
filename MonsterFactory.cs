@@ -13,8 +13,9 @@ namespace KGA_OOPConsoleProject
         public int gold;
         public string attack;
         public bool isRun;
+        public string[] sprite;
         //플레이스 할 몬스터
-        public Monster(string name, int level, int exp, int damage, int hp, List<Item> mItems, int gold, char symbol, Vector2 position, string attack) : base(ConsoleColor.Red, symbol, position, true, false)
+        public Monster(string name, int level, int exp, int damage, int hp, List<Item> mItems, int gold, char symbol, Vector2 position, string attack, string[] sprite) : base(ConsoleColor.Red, symbol, position, true, false)
         {
             this.name = name;
             this.level = level;
@@ -25,7 +26,10 @@ namespace KGA_OOPConsoleProject
             this.gold = gold;
             this.attack = attack;
             isRun = false;
+            this.sprite = sprite;
         }
+
+
         public int MonsterAttack()
         {
             Util.PrintText($"{attack}공격!");
@@ -48,11 +52,19 @@ namespace KGA_OOPConsoleProject
                 hp = 0;
                 isDead = true;
             }
-            
+
         }
         public override void Interact(Player player)
         {
             Console.WriteLine("전투 시작");
+        }
+        public void MonsterSprite(int mX,int mY)
+        {
+            for(int i = 0;i<sprite.Length;i++)
+            {
+                Console.SetCursorPosition(mX, mY + i);
+                Console.Write(sprite[i]);
+            }
         }
     }
     public class MonsterFactory
@@ -67,7 +79,7 @@ namespace KGA_OOPConsoleProject
             {
                 case "슬라임":
                     List<Item> sItems = [potion];
-                    monster = new Monster("슬라임", 3, 3, 2, 15, sItems, 10, 'S', position, "튀어오르기");
+                    monster = new Monster("슬라임", 3, 3, 2, 15, sItems, 10, 'S', position, "튀어오르기", slimeSprite);
                     break;
                 default:
                     Console.WriteLine("몬스터 이름이 없습니다");
@@ -75,5 +87,10 @@ namespace KGA_OOPConsoleProject
             }
             return monster;
         }
+        public string[] slimeSprite =
+            { "    ___    ",
+              "  /Ο Ο  \\ ",
+              " (w ∇ w  ) ",
+              "           "};
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace KGA_OOPConsoleProject
 {
-    internal class Status
+    public class Status : Player
     {
+
     }
 }
