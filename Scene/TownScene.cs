@@ -9,12 +9,13 @@
         private ConsoleKey input;
         public override void Render()
         {
+            string[] text = { "활기찬 마을이다.", "어디로 갈까?" };
             Console.Clear();
-            Console.WriteLine("장소 : 초보자의 마을");
-            Util.PrintText("활기찬 마을이다");
-            Console.WriteLine();
-            Console.WriteLine("어디로 가시겠습니까?");
-            Console.WriteLine("1. 필드로 나간다");
+            Util.PrintText("장소 : 초보자의 마을");
+            //Util.PrintText("활기찬 마을이다.");
+            //Util.PrintText("어디로 가시겠습니까?");
+            Util.PrintText(text);
+            Util.PrintText("1. 필드로 나간다");
         }
         public override void Input()
         {

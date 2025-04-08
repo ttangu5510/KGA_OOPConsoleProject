@@ -41,11 +41,17 @@
                     case "InvenList":
                         InvenList();
                         break;
+                    case "ItemMenu":
+                        ItemMenu();
+                        break;
                     case "UseConfirm":
                         UseConfirm();
                         break;
                     case "DropConfirm":
                         DropConfirm();
+                        break;
+                    case "ItemInfo":
+                        ItemInfo();
                         break;
                 }
             }
@@ -63,16 +69,16 @@
             // 취소 = stack pop
             Util.PrintChoice(choiceIndex);
             ConsoleKey input = Console.ReadKey(true).Key;
-            switch(input)
+            switch (input)
             {
                 case ConsoleKey.UpArrow:
-                    if(choiceIndex > 0)
+                    if (choiceIndex > 0)
                     {
                         choiceIndex--;
                     }
                     break;
                 case ConsoleKey.DownArrow:
-                    if (choiceIndex < items.Count-1)
+                    if (choiceIndex < items.Count - 1)
                     {
                         choiceIndex++;
                     }
@@ -80,7 +86,7 @@
                 case ConsoleKey.A:
                     selectIndex = choiceIndex;
                     choiceIndex = 0;
-                    stack.Push("UseConfirm");
+                    stack.Push("ItemMenu");
                     break;
                 case ConsoleKey.S:
                     choiceIndex = 0;
@@ -88,6 +94,56 @@
                     break;
             }
 
+        }
+        private void ItemMenu()
+        {
+            PrintAll();
+            Item selectItem = items[selectIndex];
+            Console.SetCursorPosition(15, selectIndex);
+            Console.WriteLine("┌------------┐");
+            Console.SetCursorPosition(15, selectIndex + 1);
+            Console.WriteLine("|  사용하기  |");
+            Console.SetCursorPosition(15, selectIndex + 2);
+            Console.WriteLine("|  설명      |");
+            Console.SetCursorPosition(15, selectIndex + 3);
+            Console.WriteLine("|  버리기    |");
+            Console.SetCursorPosition(15, selectIndex + 4);
+            Console.WriteLine("└------------┘");
+            Util.PrintChoice(choiceIndex, 16);
+            ConsoleKey input = Console.ReadKey(true).Key;
+            switch (input)
+            {
+                case ConsoleKey.UpArrow:
+                    if (choiceIndex > 0)
+                    {
+                        choiceIndex--;
+                    }
+                    break;
+                case ConsoleKey.DownArrow:
+                    if (choiceIndex < 2)
+                    {
+                        choiceIndex++;
+                    }
+                    break;
+                case ConsoleKey.A:
+                    if (choiceIndex == 0)
+                    {
+                        stack.Push("UseConfirm");
+                    }
+                    else if (choiceIndex == 1)
+                    {
+                        stack.Push("ItemInfo");
+                    }
+                    else if (choiceIndex == 2)
+                    {
+                        stack.Push("DropConfirm");
+                    }
+                    break;
+                case ConsoleKey.S:
+                    stack.Pop();
+                    choiceIndex = 0;
+                    break;
+            }
         }
         private void UseConfirm()
         {
@@ -100,6 +156,7 @@
                     selectItem.Use();
                     Util.PressAnyKey($"{selectItem.name}을/를 사용 했습니다");
                     Remove(selectItem);
+                    stack.Pop();
                     stack.Pop();
                     break;
                 case ConsoleKey.S:
@@ -124,6 +181,13 @@
                     break;
             }
         }
+        private void ItemInfo()
+        {
+            Item selectItem = items[selectIndex];
+            Util.PrintText(selectItem.description);
+            Console.ReadKey(true);
+            stack.Pop();
+        }
         public void PrintAll()
         {
             Console.WriteLine("┌------ 인벤토리 ------┐");
@@ -142,7 +206,7 @@
             for (int i = 0; i < items.Count; i++)
             {
                 Console.WriteLine("  {0}", items[i].name);
-            }            
+            }
         }
     }
 }
