@@ -39,8 +39,8 @@
                 {
                     if(go.isDead==false)
                     {
-                        battleScene = new BattleScene();
-                        battleScene.Battle(GameManager.Player,(Monster)go);                 
+                        battleScene = new BattleScene(GameManager.Player,(Monster)go);
+                        battleScene.Battle();                 
                     }
                     go.Interact(GameManager.Player);
                     if (go.isOnce == true && go.isDead == true)

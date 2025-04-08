@@ -8,6 +8,7 @@ namespace KGA_OOPConsoleProject
 {
     public class Player
     {
+        // 플레이어 세팅
         public Vector2 position;
         public bool[,] map;
         private Inventory inventory;
@@ -15,6 +16,7 @@ namespace KGA_OOPConsoleProject
         public Menu Menu { get {  return menu; } }
         public Inventory Inventory { get {  return inventory; } }
         
+        // 플레이어 스탯
         private int curHP;
         private int maxHP;
         public int CurHP { get { return curHP; } }

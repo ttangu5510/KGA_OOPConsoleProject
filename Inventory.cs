@@ -3,6 +3,7 @@
     public class Inventory
     {
         private List<Item> items;
+        private List<int> itemNum;
         private int selectIndex;
         private int choiceIndex;
         public Inventory()
@@ -10,13 +11,21 @@
             items = new List<Item>();
             stack = new Stack<string>();
             choiceIndex = 0;
+            itemNum = new List<int>();
         }
         private Stack<string> stack;
 
 
         public void Add(Item item)
         {
-            items.Add(item);
+            if(items.Contains(item))
+            {
+                itemNum[items.IndexOf(item)]++;
+            }
+            else
+            {
+                items.Add(item);
+            }
         }
         public void Remove(Item item)
         {
@@ -197,7 +206,7 @@
             Console.SetCursorPosition(x + 2, y);
             for (int i = 0; i < items.Count; i++)
             {
-                Console.WriteLine("  {0}", items[i].name);
+                Console.WriteLine("  {0}   {1}", items[i].name, itemNum[i]);
             }
         }
     }
