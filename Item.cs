@@ -11,12 +11,14 @@ namespace KGA_OOPConsoleProject
         public string name;
         public string description;
         public string useDescription;
+        public int itemNum;
         public Item(ConsoleColor color, char symbol, Vector2 position, bool isOnce) : base(color, symbol, position, true,true)
         {
+            itemNum = 1;
         }
         public Item()
         {
-
+            itemNum = 1;
         }
         public override void Interact(Player player)
         {

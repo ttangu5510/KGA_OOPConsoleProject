@@ -51,6 +51,9 @@
             Console.WriteLine("|                                                 |");
             Console.WriteLine("|                                                 |");
             Console.WriteLine("└-------------------------------------------------┘");
+            int x = 1, y = 11;
+            Console.SetCursorPosition(x, y);
+            Console.Write(" ");
         }
 
 

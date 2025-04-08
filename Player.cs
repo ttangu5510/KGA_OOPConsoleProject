@@ -15,8 +15,15 @@ namespace KGA_OOPConsoleProject
         private Menu menu;
         public Menu Menu { get {  return menu; } }
         public Inventory Inventory { get {  return inventory; } }
-        
+
         // 플레이어 스탯
+        private int power;
+        public int Power { get { return power; } }
+        private int defence;
+        public int Defence {  get { return defence; } }
+        private int speed;
+        public int Speed {  get { return speed; } }
+
         private int curHP;
         private int maxHP;
         public int CurHP { get { return curHP; } }
@@ -28,11 +35,15 @@ namespace KGA_OOPConsoleProject
         public Player()
         {
             inventory = new Inventory();
-            maxHP = 100;
-            curHP = maxHP;
             menu = new Menu();
             isRun = false;
             isDead = false;
+            
+            maxHP = 100;
+            curHP = maxHP;
+            power = 1;
+            defence = 0;
+            speed = 10;
         }
         public void Heal(int amount)
         {

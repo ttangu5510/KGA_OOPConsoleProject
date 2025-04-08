@@ -3,7 +3,6 @@
     public class Inventory
     {
         private List<Item> items;
-        private List<int> itemNum;
         private int selectIndex;
         private int choiceIndex;
         public Inventory()
@@ -11,24 +10,31 @@
             items = new List<Item>();
             stack = new Stack<string>();
             choiceIndex = 0;
-            itemNum = new List<int>();
         }
         private Stack<string> stack;
 
-
         public void Add(Item item)
         {
-            if(items.Contains(item))
+            for (int i = 0; i < items.Count; i++)
             {
-                itemNum[items.IndexOf(item)]++;
+                if (items[i].name == item.name)
+                {
+                    items[i].itemNum++;
+                    return;
+                }
             }
-            else
-            {
-                items.Add(item);
-            }
+            items.Add(item);
         }
         public void Remove(Item item)
         {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].name == item.name && items[i].itemNum != 1)
+                {
+                    items[i].itemNum--;
+                    return;
+                }
+            }
             items.Remove(item);
         }
         public void RemoveAt(int index)
@@ -90,12 +96,12 @@
                     }
                     break;
                 case ConsoleKey.A:
-                    if(items.Count>0)
+                    if (items.Count > 0)
                     {
                         selectIndex = choiceIndex;
                         choiceIndex = 0;
                         stack.Push("ItemMenu");
-                    }                    
+                    }
                     break;
                 case ConsoleKey.S:
                     stack.Pop();
@@ -162,7 +168,7 @@
         private void DropConfirm()
         {
             Item selectItem = items[selectIndex];
-            Util.PrintText($"{selectItem.name}을/를 버리시겠습니까?");
+            Util.PrintText($"{selectItem.name}을/를 버리시겠습니까?", ConsoleColor.White, 25, 150, false);
             ConsoleKey input = Console.ReadKey(true).Key;
             switch (input)
             {
@@ -174,7 +180,7 @@
                     choiceIndex = 0;
                     break;
                 case ConsoleKey.S:
-                    stack.Pop();                    
+                    stack.Pop();
                     break;
             }
         }
@@ -183,7 +189,7 @@
         private void ItemInfo()
         {
             Item selectItem = items[selectIndex];
-            Console.SetCursorPosition(20, selectIndex);           
+            Console.SetCursorPosition(20, selectIndex);
             Util.PrintText(selectItem.description);
             stack.Pop();
         }
@@ -206,7 +212,8 @@
             Console.SetCursorPosition(x + 2, y);
             for (int i = 0; i < items.Count; i++)
             {
-                Console.WriteLine("  {0}   {1}", items[i].name, itemNum[i]);
+                Console.SetCursorPosition(x + 2, y + i);
+                Console.Write("  {0}  {1}개", items[i].name, items[i].itemNum);
             }
         }
     }

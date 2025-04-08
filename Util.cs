@@ -4,7 +4,7 @@
     {
         // 일반 창
         // 매개변수 초기화를 진행해, 간편하게 사용
-        public static void PrintText(string text, ConsoleColor color = ConsoleColor.White, int delay = 25, int delay2 = 150)
+        public static void PrintText(string text, ConsoleColor color = ConsoleColor.White, int delay = 25, int delay2 = 150, bool inputOn=true)
         {
             Console.ForegroundColor = color;
             // TODO : 추후에 화면 포지션 고정작업이 되면, 위치 고정 작업
@@ -34,8 +34,11 @@
             // TODO : 완성시 활성화 Thread.Sleep(delay2);
             Console.ResetColor();
             Console.SetCursorPosition(x, y);
-            Console.ReadKey(true);
-            Console.Clear();
+            if(inputOn)
+            {
+                Console.ReadKey(true);
+                Console.Clear();
+            }
         }
 
         // 대화창
