@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Items\MonsterDrop\" />
+    <Folder Include="NPC\" />
   </ItemGroup>
 
 </Project>

@@ -53,7 +53,7 @@
             }
         }
 
-        private void PrintMap()
+        protected virtual void PrintMap()
         {
             Console.SetCursorPosition(0, 0);
             for (int y = 0; y < map.GetLength(0); y++)

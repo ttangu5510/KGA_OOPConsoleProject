@@ -26,7 +26,7 @@ namespace KGA_OOPConsoleProject.Scene
             {
                 for (int x = 0; x < map.GetLength(1); x++)
                 {
-                    map[y, x] = mapData[y][x] == '#' ? false : true;
+                    map[y, x] = mapData[y][x] == ' ' ? true : false;
                 }
             }
             gameObjects = new List<GameObject>();

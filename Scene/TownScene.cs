@@ -1,29 +1,44 @@
-﻿namespace KGA_OOPConsoleProject.Scene
+﻿using KGA_OOPConsoleProject.GameObjects;
+using KGA_OOPConsoleProject.Items;
+
+namespace KGA_OOPConsoleProject.Scene
 {
     internal class TownScene : FieldScene
     {
         public TownScene()
         {
             name = "Town";
-        }
-        private ConsoleKey input;
-        public override void Render()
-        {
             mapData = new string[]
                {
-            "###################################################",
-            "#                                                 #",
-            "#                                                 #",
-            "#                                                 #",
-            "#                                                 #",
-            "#                                                 #",
-            "#                                                 #",
-            "#                                                 #",
-            "#                                                 #",
-            "###################################################"
+            "┌-------------------------------------------------┐",
+            "|▧▧▧▧▧▧▧▧            ▤▤▤▤SHOP▤▤▤       ▤▤DOC▤▤▧▧▧▧|",
+            "|▤▤HOME▤▤            ▤▤▤▤▤ ▤▤▤▤▤  #    ▤□▤▤▤□▤▧□□▧|",
+            "|▤▨□▤▤▨□▤                              ▤▤▤ ▤▤▤▧▧▧▧|",
+            "|▤▤▤ ▤▤▤▤               ●●●                       |",
+            "|                     ●●●●●●●          #           ",
+            "|               #       ●●●                       |",
+            "|▧▧▧▧▧▧▧                      #           ▧▧▧▧▧▧▧ |",
+            "|▤▤▤▤▨□▤                                  ▤▤▤▤□□▤ |",
+            "└-------------------------------------------------┘"
                };
-            Console.Clear();
-            // TODO : 게임 스크린 크기 결정 후, 픽스 작업
+            map = new bool[mapData.Length, mapData[0].Length];
+            for (int y = 0; y < map.GetLength(0); y++)
+            {
+                for (int x = 0; x < map.GetLength(1); x++)
+                {
+                    map[y, x] = mapData[y][x] == ' ' ? true : false;
+                }
+            }
+            gameObjects = new List<GameObject>();
+            gameObjects.Add(new Place("NormalField", '▶', new Vector2(49, 5)));
+            gameObjects.Add(new Place("Home", '▲', new Vector2(4, 4)));
+            //gameObjects.Add(new RedPotion(new Vector2(1, 4)));
+
+            //몬스터 생성
+            MonsterFactory slimeFactory = new MonsterFactory();
+            Monster slime0 = slimeFactory.MonsterCreate("슬라임", new Vector2(4, 2));
+            gameObjects.Add(slime0);
+
             Console.WriteLine("┌-------------------------------------------------┐");
             Console.WriteLine("|                                                 |");
             Console.WriteLine("|                                                 |");
@@ -35,29 +50,76 @@
             Console.WriteLine("|                                                 |");
             Console.WriteLine("└-------------------------------------------------┘");
         }
-        public override void Input()
+        protected override void PrintMap()
         {
-            input = Console.ReadKey(true).Key;
-        }
-
-        public override void Update()
-        {
-            switch (input)
+            Console.SetCursorPosition(0, 0);
+            for (int y = 0; y < mapData.Length; y++)
             {
-                case ConsoleKey.D1:
-                    Util.PrintText("필드로 나갑니다");
-                    break;
+                for (int x = 0; x < mapData[y].Length; x++)
+                {
+                    if (mapData[y][x] == ' ')
+                    {
+                        Console.BackgroundColor = ConsoleColor.DarkYellow;
+                        Console.Write(mapData[y][x]);
+                        Console.ResetColor();
+                    }
+                    else if (mapData[y][x]== '▤')
+                    {
+                        Console.BackgroundColor = ConsoleColor.Gray;
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.Write(mapData[y][x]);
+                        Console.ResetColor();
+                    }
+                    else if (mapData[y][x] == '▨')
+                    {
+                        Console.BackgroundColor = ConsoleColor.DarkBlue;
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write(mapData[y][x]);
+                        Console.ResetColor();
+                    }
+                    else if (mapData[y][x] == '□')
+                    {
+                        Console.BackgroundColor = ConsoleColor.DarkBlue;
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write(mapData[y][x]);
+                        Console.ResetColor();
+                    }
+                    else if (mapData[y][x] == '▧')
+                    {
+                        Console.BackgroundColor = ConsoleColor.DarkRed;
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(mapData[y][x]);
+                        Console.ResetColor();
+                    }
+                    else if (mapData[y][x] == '●')
+                    {
+                        Console.BackgroundColor = ConsoleColor.DarkBlue;
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write(mapData[y][x]);
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.Write(mapData[y][x]);
+                    }
+                }
+                Console.WriteLine();
             }
         }
-
-        public override void Result()
+        public override void SetByPrevScene()
         {
-            Console.Clear();
-            switch (input)
+            if (GameManager.prevSceneName == "NormalField")
             {
-                case ConsoleKey.D1:
-                    GameManager.ChangeScene("NormalField");
-                    break;
+                GameManager.Player.position = new Vector2(48, 5);
+
+            }
+            else if (GameManager.prevSceneName == "Home")
+            {
+                GameManager.Player.position = new Vector2(4, 5);
+            }
+            else
+            {
+                GameManager.Player.position = new Vector2(6, 6);
             }
         }
 
