@@ -53,6 +53,7 @@ namespace KGA_OOPConsoleProject
             sceneDic.Add("Field", new FieldScene());
             sceneDic.Add("NormalField", new NormalFieldScene());
             sceneDic.Add("Forest", new ForestScene());
+            sceneDic.Add("Home", new HomeScene());
         }
         // 게임 끝
         private static void End()

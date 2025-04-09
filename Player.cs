@@ -40,6 +40,7 @@ namespace KGA_OOPConsoleProject
         private bool isDead;
         public bool IsDead { get { return isDead; } }
 
+
         //스프라이트
         public string[] playerSprite =
 {
@@ -57,6 +58,7 @@ namespace KGA_OOPConsoleProject
             menu = new Menu();
             isRun = false;
             isDead = false;
+            isShop = false;
 
             maxHP = 100;
             curHP = maxHP;
@@ -88,7 +90,7 @@ namespace KGA_OOPConsoleProject
         {
             Console.SetCursorPosition(position.x, position.y);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write('P');
+            Console.Write('ℓ');
             Console.ResetColor();
         }
         public void PlayerAction(ConsoleKey input)
@@ -148,6 +150,10 @@ namespace KGA_OOPConsoleProject
             if (map[tarPos.y, tarPos.x] == true)
             {
                 position = tarPos;
+            }
+            else
+            {
+                nextObj = tarPos;
             }
         }
         // 플레이어 공격

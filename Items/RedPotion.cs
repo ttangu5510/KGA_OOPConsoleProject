@@ -13,12 +13,16 @@ namespace KGA_OOPConsoleProject.Items
             name = "빨간 포션";
             description = "소량의 체력을 회복 시키는 아이템";
             useDescription = "체력을 30 회복했다";
+            buyGold = 50;
+            sellGold = 25;
         }
         public RedPotion()
         {
             name = "빨간 포션";
             description = "소량의 체력을 회복 시키는 아이템";
             useDescription = "체력을 30 회복했다";
+            buyGold = 50;
+            sellGold = 25;
         }
         public override void Use()
         {

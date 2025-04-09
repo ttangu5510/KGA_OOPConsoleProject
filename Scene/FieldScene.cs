@@ -49,6 +49,10 @@
                 else if (GameManager.Player.nextObj == go.position && input == ConsoleKey.A)
                 {
                     go.Interact(GameManager.Player);
+                    if (go.isOnce == true && go.isDead == true)
+                    {
+                        gameObjects.Remove(go);
+                    }
                 }
             }
         }

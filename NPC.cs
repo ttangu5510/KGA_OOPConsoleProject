@@ -11,15 +11,17 @@ namespace KGA_OOPConsoleProject
     {
         public NPC()
         {
+
         }
 
-        public NPC(ConsoleColor color, char symbol, Vector2 position, bool isOnce, bool isDead) : base(color, symbol, position, isOnce, isDead)
+        public NPC(Vector2 position) : base(ConsoleColor.Cyan, '§', position, false, false)
         {
+
         }
 
         public override void Interact(Player player)
         {
-            throw new NotImplementedException();
+            Util.PrintText("요즘 잘 지내?");
         }
     }
 }

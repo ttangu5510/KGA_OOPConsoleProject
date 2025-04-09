@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace KGA_OOPConsoleProject.Scene
 {
-    public class Home : FieldScene
+    public class DoctorScene :FieldScene
     {
-        // TODO 집구현
     }
 }

@@ -1,9 +1,8 @@
 ﻿using KGA_OOPConsoleProject.GameObjects;
-using KGA_OOPConsoleProject.Items;
 
 namespace KGA_OOPConsoleProject.Scene
 {
-    public class TownScene : FieldScene
+    public class ShopScene : FieldScene
     {
         public TownScene()
         {
@@ -50,7 +49,7 @@ namespace KGA_OOPConsoleProject.Scene
                         Console.Write(mapData[y][x]);
                         Console.ResetColor();
                     }
-                    else if (mapData[y][x]== '▤')
+                    else if (mapData[y][x] == '▤')
                     {
                         Console.BackgroundColor = ConsoleColor.Gray;
                         Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -95,21 +94,7 @@ namespace KGA_OOPConsoleProject.Scene
         }
         public override void SetByPrevScene()
         {
-            if (GameManager.prevSceneName == "NormalField")
-            {
-                GameManager.Player.position = new Vector2(48, 5);
-
-            }
-            else if (GameManager.prevSceneName == "Home")
-            {
-                GameManager.Player.position = new Vector2(4, 5);
-            }
-            else
-            {
-                GameManager.Player.position = new Vector2(6, 6);
-            }
+            GameManager.Player.position = new Vector2(6, 6);
         }
-
     }
-
 }
