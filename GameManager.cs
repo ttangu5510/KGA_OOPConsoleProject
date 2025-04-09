@@ -54,6 +54,8 @@ namespace KGA_OOPConsoleProject
             sceneDic.Add("NormalField", new NormalFieldScene());
             sceneDic.Add("Forest", new ForestScene());
             sceneDic.Add("Home", new HomeScene());
+            sceneDic.Add("Doctor", new DoctorScene());
+            sceneDic.Add("Shop", new ShopScene());
         }
         // 게임 끝
         private static void End()

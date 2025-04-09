@@ -10,7 +10,7 @@
 
             //(int x, int y) = Console.GetCursorPosition();
             int x = 0;
-            int y = 7;
+            int y = 6;
             int LineNum = text.Length / 20;
             Console.SetCursorPosition(x, y);
             Console.WriteLine("┌-------------------------------------------------┐");

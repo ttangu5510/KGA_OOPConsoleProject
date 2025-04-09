@@ -32,6 +32,7 @@ namespace KGA_OOPConsoleProject.Scene
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Place("NormalField", '▶', new Vector2(49, 5)));
             gameObjects.Add(new Place("Home", '▲', new Vector2(4, 4)));
+            gameObjects.Add(new Place("Doctor", '▲', new Vector2(42, 3)));
             gameObjects.Add(new TownNPC(new Vector2(16, 6), 1));
             gameObjects.Add(new TownNPC(new Vector2(34, 2), 2));
             gameObjects.Add(new TownNPC(new Vector2(30, 7), 3));
@@ -103,6 +104,11 @@ namespace KGA_OOPConsoleProject.Scene
             else if (GameManager.prevSceneName == "Home")
             {
                 GameManager.Player.position = new Vector2(4, 5);
+            }
+            else if(GameManager.prevSceneName == "Doctor")
+            {
+                GameManager.Player.position = new Vector2(42, 4);
+
             }
             else
             {

@@ -19,15 +19,19 @@ namespace KGA_OOPConsoleProject
             switch(chatLog)
             {
                 case ChatLog.처음:
-                    Util.PrintText("잘 잤니? 아침은 먹고 나가거라");
+                    Util.PrintText("엄마: 잘 잤니? 아침은 먹고 나가거라");
+                    Util.PrintText("엄마: 아 맞다! 이걸 챙겨가렴");
+                    player.GetGold(100);
+                    Util.PrintText("100 골드를 얻었다!");
+                    Util.PrintText("엄마: 아껴써야 한단다~");
                     chatLog = ChatLog.다음;
                     break;
                 case ChatLog.다음:
-                    Util.PrintText("요즘 마을 밖이 뒤숭숭하네...");
-                    Util.PrintText("나갈 때는 조심해야된다?");
+                    Util.PrintText("엄마: 요즘 마을 밖이 뒤숭숭하네...");
+                    Util.PrintText("엄마: 나갈 때는 조심해야된다?");
                     break;
                 case ChatLog.첫던전후:
-                    Util.PrintText("여행하느라 많이 힘들지? 푹 쉬다 가렴");
+                    Util.PrintText("엄마: 여행하느라 많이 힘들지? 푹 쉬다 가렴");
                     break;
 
 

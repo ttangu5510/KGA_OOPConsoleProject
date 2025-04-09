@@ -1,23 +1,24 @@
 ﻿using KGA_OOPConsoleProject.GameObjects;
+using KGA_OOPConsoleProject.NPCs;
 
 namespace KGA_OOPConsoleProject.Scene
 {
     public class ShopScene : FieldScene
     {
-        public TownScene()
+        public ShopScene()
         {
-            name = "Town";
+            name = "Shop";
             mapData = new string[]
                {
             "┌-------------------------------------------------┐",
-            "|▧▧▧▧▧▧▧▧            ▤▤▤▤SHOP▤▤▤       ▤▤DOC▤▤▧▧▧▧|",
-            "|▤▤HOME▤▤            ▤▤▤▤▤ ▤▤▤▤▤  #    ▤□▤▤▤□▤▧□□▧|",
-            "|▤▨□▤▤▨□▤                              ▤▤▤ ▤▤▤▧▧▧▧|",
-            "|▤▤▤ ▤▤▤▤               ●●●                       |",
-            "|                     ●●●●●●●          #           ",
-            "|               #       ●●●                       |",
-            "|▧▧▧▧▧▧▧                      #           ▧▧▧▧▧▧▧ |",
-            "|▤▤▤▤▨□▤                                  ▤▤▤▤□□▤ |",
+            "|1111111111111111 ■■■■■■■■■■■■■■■■■■■1111111111111|",
+            "|1111111111111111 ■▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤■1111111111111|",
+            "|1111111111111111 ■        §        ■1111111111111|",
+            "|1111111111111111 ■▤▤▤▤▤▤▤   ▤▤▤▤▤▤▤■1111111111111|",
+            "|1111111111111111 ■                 ■1111111111111|",
+            "|1111111111111111 ■   §             ■1111111111111|",
+            "|1111111111111111 ■                 ■1111111111111|",
+            "|1111111111111111 ■■■■■■■■■ ■■■■■■■■■1111111111111|",
             "└-------------------------------------------------┘"
                };
             map = new bool[mapData.Length, mapData[0].Length];
@@ -29,12 +30,9 @@ namespace KGA_OOPConsoleProject.Scene
                 }
             }
             gameObjects = new List<GameObject>();
-            gameObjects.Add(new Place("NormalField", '▶', new Vector2(49, 5)));
-            gameObjects.Add(new Place("Home", '▲', new Vector2(4, 4)));
-            gameObjects.Add(new TownNPC(new Vector2(16, 6), 1));
-            gameObjects.Add(new TownNPC(new Vector2(34, 2), 2));
-            gameObjects.Add(new TownNPC(new Vector2(30, 7), 3));
-            gameObjects.Add(new TownNPC(new Vector2(39, 5), 4));
+            gameObjects.Add(new Place("Town", '▼', new Vector2(27, 8)));
+            gameObjects.Add(new ShopNPC(new Vector2(27, 3)));
+            gameObjects.Add(new TownNPC(new Vector2(22, 6), 2));
         }
         protected override void PrintMap()
         {
@@ -45,42 +43,28 @@ namespace KGA_OOPConsoleProject.Scene
                 {
                     if (mapData[y][x] == ' ')
                     {
+                        Console.BackgroundColor = ConsoleColor.DarkGray;
+                        Console.Write(mapData[y][x]);
+                        Console.ResetColor();
+                    }
+                    else if (mapData[y][x] == '1')
+                    {
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.Write(mapData[y][x]);
+                        Console.ResetColor();
+                    }
+                    else if (mapData[y][x] == '■')
+                    {
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         Console.Write(mapData[y][x]);
                         Console.ResetColor();
                     }
                     else if (mapData[y][x] == '▤')
                     {
-                        Console.BackgroundColor = ConsoleColor.Gray;
-                        Console.ForegroundColor = ConsoleColor.DarkGray;
-                        Console.Write(mapData[y][x]);
-                        Console.ResetColor();
-                    }
-                    else if (mapData[y][x] == '▨')
-                    {
-                        Console.BackgroundColor = ConsoleColor.DarkBlue;
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.Write(mapData[y][x]);
-                        Console.ResetColor();
-                    }
-                    else if (mapData[y][x] == '□')
-                    {
-                        Console.BackgroundColor = ConsoleColor.DarkBlue;
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.Write(mapData[y][x]);
-                        Console.ResetColor();
-                    }
-                    else if (mapData[y][x] == '▧')
-                    {
-                        Console.BackgroundColor = ConsoleColor.DarkRed;
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(mapData[y][x]);
-                        Console.ResetColor();
-                    }
-                    else if (mapData[y][x] == '●')
-                    {
-                        Console.BackgroundColor = ConsoleColor.DarkBlue;
-                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.BackgroundColor = ConsoleColor.DarkYellow;
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.Write(mapData[y][x]);
                         Console.ResetColor();
                     }
@@ -94,7 +78,7 @@ namespace KGA_OOPConsoleProject.Scene
         }
         public override void SetByPrevScene()
         {
-            GameManager.Player.position = new Vector2(6, 6);
+            GameManager.Player.position = new Vector2(27, 7);
         }
     }
 }

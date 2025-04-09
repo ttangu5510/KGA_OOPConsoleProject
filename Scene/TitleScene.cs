@@ -39,7 +39,7 @@
 
         public override void Result()
         {   // TODO 테스트를 위해 생략
-            GameManager.ChangeScene("Town");
+            GameManager.ChangeScene("Shop");
             
             // TODO 테스트를 위해 추가
             Console.Clear();

@@ -201,56 +201,115 @@
             // 비전투 인벤토리
             else
             {
-                Console.SetCursorPosition(15, 0);
-                Console.WriteLine("┌------------┐");
-                Console.SetCursorPosition(15, 1);
-                Console.WriteLine("|  사용하기  |");
-                Console.SetCursorPosition(15, 2);
-                Console.WriteLine("|  설명      |");
-                Console.SetCursorPosition(15, 3);
-                Console.WriteLine("|  버리기    |");
-                Console.SetCursorPosition(15, 4);
-                Console.WriteLine("└------------┘");
-                Util.PrintChoice(choiceIndex, 16);
-                ConsoleKey input = Console.ReadKey(true).Key;
-                switch (input)
+                // 상점에 팔기
+                if (GameManager.Player.IsShop == true)
                 {
-                    case ConsoleKey.UpArrow:
-                        if (choiceIndex > 0)
-                        {
-                            choiceIndex--;
-                        }
-                        break;
-                    case ConsoleKey.DownArrow:
-                        if (choiceIndex < 2)
-                        {
-                            choiceIndex++;
-                        }
-                        break;
-                    case ConsoleKey.A:
-                        if (choiceIndex == 0)
-                        {
-                            selectItem.Use();
-                            Util.PrintText(selectItem.useDescription);
-                            Remove(selectItem);
+                    Console.SetCursorPosition(15, 0);
+                    Console.WriteLine("┌------------┐");
+                    Console.SetCursorPosition(15, 1);
+                    Console.WriteLine("|  팔기      |");
+                    Console.SetCursorPosition(15, 2);
+                    Console.WriteLine("|  설명      |");
+                    Console.SetCursorPosition(15, 3);
+                    Console.WriteLine("|  취소      |");
+                    Console.SetCursorPosition(15, 4);
+                    Console.WriteLine("└------------┘");
+                    Util.PrintChoice(choiceIndex, 16);
+                    ConsoleKey input = Console.ReadKey(true).Key;
+                    switch (input)
+                    {
+                        case ConsoleKey.UpArrow:
+                            if (choiceIndex > 0)
+                            {
+                                choiceIndex--;
+                            }
+                            break;
+                        case ConsoleKey.DownArrow:
+                            if (choiceIndex < 2)
+                            {
+                                choiceIndex++;
+                            }
+                            break;
+                        case ConsoleKey.A:
+                            if (choiceIndex == 0)
+                            {
+                                Util.PrintText($"{selectItem.name}을 팔았습니다");
+                                GameManager.Player.GetGold(selectItem.sellGold);
+                                Remove(selectItem);
+                                choiceIndex = 0;
+                                stack.Pop();
+                            }
+                            else if (choiceIndex == 1)
+                            {
+                                stack.Push("ItemInfo");
+                            }
+                            else if (choiceIndex == 2)
+                            {
+                                stack.Pop();
+                            }
+                            break;
+                        case ConsoleKey.S:
                             choiceIndex = 0;
                             stack.Pop();
-                            stack.Pop();
-                        }
-                        else if (choiceIndex == 1)
-                        {
-                            stack.Push("ItemInfo");
-                        }
-                        else if (choiceIndex == 2)
-                        {
-                            stack.Push("DropConfirm");
-                        }
-                        break;
-                    case ConsoleKey.S:
-                        choiceIndex = 0;
-                        stack.Pop();
-                        break;
+                            break;
+                    }
                 }
+
+                // 비상점
+                else
+                {
+                    Console.SetCursorPosition(15, 0);
+                    Console.WriteLine("┌------------┐");
+                    Console.SetCursorPosition(15, 1);
+                    Console.WriteLine("|  사용하기  |");
+                    Console.SetCursorPosition(15, 2);
+                    Console.WriteLine("|  설명      |");
+                    Console.SetCursorPosition(15, 3);
+                    Console.WriteLine("|  버리기    |");
+                    Console.SetCursorPosition(15, 4);
+                    Console.WriteLine("└------------┘");
+                    Util.PrintChoice(choiceIndex, 16);
+                    ConsoleKey input = Console.ReadKey(true).Key;
+                    switch (input)
+                    {
+                        case ConsoleKey.UpArrow:
+                            if (choiceIndex > 0)
+                            {
+                                choiceIndex--;
+                            }
+                            break;
+                        case ConsoleKey.DownArrow:
+                            if (choiceIndex < 2)
+                            {
+                                choiceIndex++;
+                            }
+                            break;
+                        case ConsoleKey.A:
+                            if (choiceIndex == 0)
+                            {
+                                selectItem.Use();
+                                Util.PrintText(selectItem.useDescription);
+                                Remove(selectItem);
+                                choiceIndex = 0;
+                                stack.Pop();
+                                stack.Pop();
+                            }
+                            else if (choiceIndex == 1)
+                            {
+                                stack.Push("ItemInfo");
+                            }
+                            else if (choiceIndex == 2)
+                            {
+                                stack.Push("DropConfirm");
+                            }
+                            break;
+                        case ConsoleKey.S:
+                            choiceIndex = 0;
+                            stack.Pop();
+                            break;
+                    }
+                }
+
             }
 
         }
@@ -287,7 +346,19 @@
         // 인벤토리 출력
         public void PrintAll()
         {
+            // 페이지 설정
             maxPage = items.Count / 10;
+
+            //소지금 출력
+            Console.SetCursorPosition(26, 0);
+            Console.WriteLine("┌----------------------┐");
+            Console.SetCursorPosition(26, 1);
+            Console.WriteLine("|                      |");
+            Console.SetCursorPosition(26, 2);
+            Console.WriteLine("└----------------------┘");
+            Console.SetCursorPosition(27, 1);
+            Console.WriteLine($" 소지금: {GameManager.Player.Gold}");
+            Console.SetCursorPosition(0, 0);
 
             // 전투 출력
             if (isBattle == true)
@@ -306,7 +377,7 @@
                 Console.WriteLine("┌------ 인벤토리 ------┐");
                 if (items.Count == 0)
                 {
-                    Console.WriteLine("    없음 ");
+                    Console.WriteLine("|  없음                |");
                 }
 
                 (int x, int y) = Console.GetCursorPosition();
@@ -328,6 +399,7 @@
                 }
 
                 Console.WriteLine("└----------------------┘");
+
                 Console.SetCursorPosition(x + 2, y);
 
                 // 현재 페이지의 아이템 갯수만큼  아이템 출력
@@ -359,7 +431,7 @@
                 Console.WriteLine("┌------ 인벤토리 ------┐");
                 if (items.Count == 0)
                 {
-                    Console.WriteLine("    없음 ");
+                    Console.WriteLine("|  없음                |");
                 }
 
                 (int x, int y) = Console.GetCursorPosition();

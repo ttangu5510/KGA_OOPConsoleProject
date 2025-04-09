@@ -24,7 +24,7 @@ namespace KGA_OOPConsoleProject
                     Util.PrintText("상점에 새로운 물건이 들어왔대!");
                     break;
                 case 3:
-                    Util.PrintText("다쳤으면 의사를 만나거라");
+                    Util.PrintText("다쳤으면 힐러를 찾아가!");
                     break;
                 case 4:
                     Util.PrintText("마물들이 요즘들어 이상해..");

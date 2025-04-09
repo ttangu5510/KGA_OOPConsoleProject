@@ -1,7 +1,4 @@
-﻿using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace KGA_OOPConsoleProject
+﻿namespace KGA_OOPConsoleProject
 {
     public class Player
     {
@@ -9,6 +6,8 @@ namespace KGA_OOPConsoleProject
         public Vector2 position;
         public bool[,] map;
         private Inventory inventory;
+        private int gold;
+        public int Gold { get { return gold; } }
         private Menu menu;
         public Menu Menu { get { return menu; } }
         public Inventory Inventory { get { return inventory; } }
@@ -39,6 +38,8 @@ namespace KGA_OOPConsoleProject
         public bool IsRun { get { return isRun; } set { isRun = value; } }
         private bool isDead;
         public bool IsDead { get { return isDead; } }
+        private bool isShop;
+        public bool IsShop { get { return isShop; } }
 
 
         //스프라이트
@@ -58,7 +59,6 @@ namespace KGA_OOPConsoleProject
             menu = new Menu();
             isRun = false;
             isDead = false;
-            isShop = false;
 
             maxHP = 100;
             curHP = maxHP;
@@ -67,9 +67,12 @@ namespace KGA_OOPConsoleProject
             power = 1;
             defence = 0;
             speed = 5;
-            nextObj.x= 0;
-            nextObj.y= 0;
+            gold = 0;
+            nextObj.x = 0;
+            nextObj.y = 0;
         }
+
+        //체력회복
         public void HPHeal(int amount)
         {
             curHP += amount;
@@ -78,6 +81,8 @@ namespace KGA_OOPConsoleProject
                 curHP = maxHP;
             }
         }
+
+        //마나회복
         public void MPHeal(int amount)
         {
             mp += amount;
@@ -86,6 +91,37 @@ namespace KGA_OOPConsoleProject
                 mp = maxMP;
             }
         }
+
+        //골드획득
+        public void GetGold(int amount)
+        {
+            gold += amount;
+        }
+
+        //골드잃기
+        public void LoseGold(int amount)
+        {
+            gold -= amount;
+            if (gold < 0)
+            {
+                gold = 0;
+            }
+        }
+
+        //상점에 파는 전용 인벤토리 들어가기
+        public void ShopIn()
+        {
+            isShop = true;
+            inventory.OpenInven();
+        }
+
+        //상점 팔기 나가기
+        public void ShopOut()
+        {
+            isShop = false;
+        }
+
+        //플레이어 아이콘 출력
         public void PrintPlayer()
         {
             Console.SetCursorPosition(position.x, position.y);
@@ -93,6 +129,8 @@ namespace KGA_OOPConsoleProject
             Console.Write('ℓ');
             Console.ResetColor();
         }
+
+        //플레이어 입력
         public void PlayerAction(ConsoleKey input)
         {
             switch (input)
@@ -108,6 +146,8 @@ namespace KGA_OOPConsoleProject
                     break;
             }
         }
+
+        //플레이어 이동
         public void Move(ConsoleKey input)
         {
             Vector2 tarPos = position;
@@ -117,7 +157,7 @@ namespace KGA_OOPConsoleProject
                 case ConsoleKey.UpArrow:
                     tarPos.y--;
                     nextObj.y -= 2;
-                    if(nextObj.y < 1)
+                    if (nextObj.y < 1)
                     {
                         nextObj.y = 1;
                     }
@@ -125,15 +165,15 @@ namespace KGA_OOPConsoleProject
                 case ConsoleKey.DownArrow:
                     tarPos.y++;
                     nextObj.y += 2;
-                    if(nextObj.y > 8 )
-                    { 
-                        nextObj.y = 8; 
+                    if (nextObj.y > 8)
+                    {
+                        nextObj.y = 8;
                     }
                     break;
                 case ConsoleKey.LeftArrow:
                     tarPos.x--;
                     nextObj.x -= 2;
-                    if(nextObj.x < 1)
+                    if (nextObj.x < 1)
                     {
                         nextObj.x = 1;
                     }
@@ -141,7 +181,7 @@ namespace KGA_OOPConsoleProject
                 case ConsoleKey.RightArrow:
                     tarPos.x++;
                     nextObj.x += 2;
-                    if(nextObj.x > 49 )
+                    if (nextObj.x > 49)
                     {
                         nextObj.x = 49;
                     }
@@ -156,28 +196,33 @@ namespace KGA_OOPConsoleProject
                 nextObj = tarPos;
             }
         }
+
         // 플레이어 공격
         public int PlayerAttack()
         {
             Util.PrintText("플레이어의 공격!!");
             return power;
         }
+
         // 플레이어 스킬 사용 TODO
         public int PlayerSkill()
         {
             Util.PrintText("플레이어의 스킬!");
             return power;
         }
+
         // 플레이어 가드
         public void PlayerGuard()
         {
             defence += defence;
         }
+
         //플레이어 가드 해제
         public void PlayerUnGuard()
         {
             defence -= defence;
         }
+
         // 플레이어 피격
         public void PlayerHit(int damage)
         {
@@ -195,11 +240,12 @@ namespace KGA_OOPConsoleProject
         // 체력이 다 닳을 경우
         public void PlayerDead()
         {
-            if (curHP<=0)
+            if (curHP <= 0)
             {
                 isDead = true;
             }
         }
+
         // 전투 씬에서 플레이어 그리기
         public void PlayerSprite(int pX, int pY)
         {
