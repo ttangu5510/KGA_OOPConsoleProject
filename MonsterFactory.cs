@@ -17,6 +17,8 @@ namespace KGA_OOPConsoleProject
         public int speed;
         public int defence;
         public int curHP;
+        protected BattleScene battleScene;
+
         //플레이스로 설치 할 몬스터
         public Monster(string name, int level, int exp, int damage, int maxHP, List<Item> mItems, int gold, char symbol, Vector2 position, string attack, string[] sprite,int speed,int defence) : base(ConsoleColor.Red, symbol, position, true, false)
         {
@@ -61,9 +63,11 @@ namespace KGA_OOPConsoleProject
         {
             defence -= defence;
         }
+
         public override void Interact(Player player)
         {
-            Util.PrintText("전투 시작");
+            battleScene = new BattleScene(player, this);
+            battleScene.Battle();
         }
         public void MonsterSprite(int mX,int mY)
         {

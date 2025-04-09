@@ -133,6 +133,7 @@
             else if (player.IsRun)
             {
                 Util.PrintText("성공적으로 도망쳤다");
+                player.IsRun = false;
             }
             else if (player.IsDead)
             {
@@ -254,13 +255,13 @@
         {
             Render();
             Console.SetCursorPosition(0, 7);
-            Console.WriteLine("┌--------┐");
+            Console.Write("┌--------┐");
             Console.SetCursorPosition(0, 8);
-            Console.WriteLine("|  공격  |");
+            Console.Write("|  공격  |");
             Console.SetCursorPosition(0, 9);
-            Console.WriteLine("|  스킬  |");
+            Console.Write("|  스킬  |");
             Console.SetCursorPosition(0, 10);
-            Console.WriteLine("└--------┘");
+            Console.Write("└--------┘");
             Util.PrintChoice(choiceAttackY);
             ConsoleKey input = Console.ReadKey(true).Key;
             switch (input)
@@ -288,6 +289,7 @@
 
                         case 8:
                             stack.Push("스킬 선택");
+                            choiceAttackY = 7;
                             break;
                     }
                     break;
@@ -300,36 +302,61 @@
         // 플레이어 스킬 선택
         public void ChoiceSkill()
         {
+            //레이아웃 출력
             Console.SetCursorPosition(11, 7);
-            Console.WriteLine("┌-----------┐");
+            Console.Write("┌---------------------┐");
             Console.SetCursorPosition(11, 8);
-            Console.WriteLine("|  스킬1 소비MP|");
+            Console.Write("|                     |");
             Console.SetCursorPosition(11, 9);
-            Console.WriteLine("|  스킬2 소비MP|");
+            Console.Write("|                     |");
             Console.SetCursorPosition(11, 10);
-            Console.WriteLine("└-----------┘");
+            Console.Write("|                     |");
+            Console.SetCursorPosition(11, 11);
+            Console.Write("|                     |");
+            Console.SetCursorPosition(11, 12);
+            Console.Write("└---------------------┘");
+
+            // 스킬목록 출력
+
             Util.PrintChoice(choiceAttackY, 12);
             ConsoleKey input = Console.ReadKey(true).Key;
             switch (input)
             {
                 case ConsoleKey.UpArrow:
-                    choiceAttackY--;
+                    if (choiceAttackY > 7)
+                    {
+                        choiceAttackY--;
+                    }
                     break;
                 case ConsoleKey.DownArrow:
-                    choiceAttackY++;
+                    if (choiceAttackY < 10)
+                    {
+                        choiceAttackY++;
+                    }
                     break;
                 case ConsoleKey.A:
-                    if (choiceAttackY == 7)
+                    switch (choiceAttackY)
                     {
-                        player.PlayerAttack();
-                        stack.Pop();
-                        stack.Pop();
-                    }
-                    else if (choiceAttackY == 8)
-                    {
-                        player.PlayerSkill();
-                        stack.Pop();
-                        stack.Pop();
+                        case 7:
+                            //player.PlayerAttack1();
+                            stack.Pop();
+                            stack.Pop();
+                            break;
+                        case 8:
+                            //player.PlayerSkill2();
+                            stack.Pop();
+                            stack.Pop();
+                            break;
+                        case 9:
+                            //player.PlayerSkill3();
+                            stack.Pop();
+                            stack.Pop();
+                            break;
+                        case 10:
+                            //player.PlayerSkill4();
+                            stack.Pop();
+                            stack.Pop();
+                            break;
                     }
                     break;
                 case ConsoleKey.S:
@@ -350,11 +377,12 @@
             stack.Pop();
             stack.Pop();
         }
-        // TODO : 전투 중 아이템의 기능 제한필요
         // 플레이어 아이템 선택
         public void ChoiceItem()
         {
+            player.Inventory.isBattle = true;
             player.Inventory.OpenInven();
+            player.Inventory.isBattle = false;
             if (player.Inventory.isUse == true)
             {
                 player.Inventory.isUse = false;
@@ -373,7 +401,11 @@
         public void ChangeHPBar(int curHP, int maxHP)
         {
             int hpPercent = curHP * 100 / maxHP;
-            if (hpPercent > 90 && hpPercent < 100)
+            if (hpPercent > 99)
+            {
+                playerHPBar = "■■■■■■■■■■";
+            }
+            else if (hpPercent > 90 && hpPercent < 100)
             {
                 playerHPBar = "■■■■■■■■■□";
             }

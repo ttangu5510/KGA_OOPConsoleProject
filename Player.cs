@@ -12,6 +12,7 @@ namespace KGA_OOPConsoleProject
         private Menu menu;
         public Menu Menu { get { return menu; } }
         public Inventory Inventory { get { return inventory; } }
+        private Skill[] skills;
 
         // 플레이어 스탯
         private int power;
@@ -20,7 +21,6 @@ namespace KGA_OOPConsoleProject
         public int Defence { get { return defence; } }
         private int speed;
         public int Speed { get { return speed; } }
-
         private int curHP;
         private int maxHP;
         public int CurHP { get { return curHP; } }
@@ -30,12 +30,17 @@ namespace KGA_OOPConsoleProject
         private int maxMP;
         public int MaxMP { get { return maxMP; } }
 
+        // 필드 상호작용
+        public Vector2 nextObj;
+
         // 상태
         public bool isBattle;
         private bool isRun;
-        public bool IsRun { get { return isRun; } }
+        public bool IsRun { get { return isRun; } set { isRun = value; } }
         private bool isDead;
         public bool IsDead { get { return isDead; } }
+
+        //스프라이트
         public string[] playerSprite =
 {
                      "   ____    _   ",
@@ -59,7 +64,9 @@ namespace KGA_OOPConsoleProject
             mp = maxMP;
             power = 1;
             defence = 0;
-            speed = 1;
+            speed = 5;
+            nextObj.x= 0;
+            nextObj.y= 0;
         }
         public void HPHeal(int amount)
         {
@@ -102,19 +109,40 @@ namespace KGA_OOPConsoleProject
         public void Move(ConsoleKey input)
         {
             Vector2 tarPos = position;
+            nextObj = tarPos;
             switch (input)
             {
                 case ConsoleKey.UpArrow:
                     tarPos.y--;
+                    nextObj.y -= 2;
+                    if(nextObj.y < 1)
+                    {
+                        nextObj.y = 1;
+                    }
                     break;
                 case ConsoleKey.DownArrow:
                     tarPos.y++;
+                    nextObj.y += 2;
+                    if(nextObj.y > 8 )
+                    { 
+                        nextObj.y = 8; 
+                    }
                     break;
                 case ConsoleKey.LeftArrow:
                     tarPos.x--;
+                    nextObj.x -= 2;
+                    if(nextObj.x < 1)
+                    {
+                        nextObj.x = 1;
+                    }
                     break;
                 case ConsoleKey.RightArrow:
                     tarPos.x++;
+                    nextObj.x += 2;
+                    if(nextObj.x > 49 )
+                    {
+                        nextObj.x = 49;
+                    }
                     break;
             }
             if (map[tarPos.y, tarPos.x] == true)

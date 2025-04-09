@@ -5,11 +5,11 @@
         protected ConsoleKey input;
         protected string[] mapData;
         protected bool[,] map;
-        protected BattleScene battleScene;
         protected List<GameObject> gameObjects;
         protected Vector2 monsterPosition;
         public FieldScene()
         {
+
         }
         public override void Render()
         {
@@ -23,6 +23,7 @@
         public override void Input()
         {
             input = Console.ReadKey(true).Key;
+
         }
 
 
@@ -37,21 +38,17 @@
             {
                 if (GameManager.Player.position == go.position)
                 {
-                    if(go.isDead==false)
-                    {
-                        battleScene = new BattleScene(GameManager.Player,(Monster)go);
-                        battleScene.Battle();
-                        
-                    }
-                    else
-                    {
-                        go.Interact(GameManager.Player);
-                    }
+                    go.Interact(GameManager.Player);
+
                     if (go.isOnce == true && go.isDead == true)
                     {
                         gameObjects.Remove(go);
                     }
                     break;
+                }
+                else if (GameManager.Player.nextObj == go.position && input == ConsoleKey.A)
+                {
+                    go.Interact(GameManager.Player);
                 }
             }
         }
@@ -78,7 +75,8 @@
         public override void Enter()
         {
             GameManager.Player.map = map;
-            SetByPrevScene();            
+            SetByPrevScene();
         }
+
     }
 }

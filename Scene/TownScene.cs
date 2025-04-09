@@ -1,6 +1,6 @@
 ﻿namespace KGA_OOPConsoleProject.Scene
 {
-    internal class TownScene : BaseScene
+    internal class TownScene : FieldScene
     {
         public TownScene()
         {
@@ -9,14 +9,31 @@
         private ConsoleKey input;
         public override void Render()
         {
-            string[] text = { "활기찬 마을이다", "어디로 갈까?" };
+            mapData = new string[]
+               {
+            "###################################################",
+            "#                                                 #",
+            "#                                                 #",
+            "#                                                 #",
+            "#                                                 #",
+            "#                                                 #",
+            "#                                                 #",
+            "#                                                 #",
+            "#                                                 #",
+            "###################################################"
+               };
             Console.Clear();
-            Util.PrintText("장소 :      초보자의 마을");
-            Util.PrintText(text);
-            Console.WriteLine("┌---------------------┐");
-            Console.WriteLine("| 1. 마을을 나갑니다  |");
-            Console.WriteLine("|                     |");
-            Console.WriteLine("└---------------------┘");
+            // TODO : 게임 스크린 크기 결정 후, 픽스 작업
+            Console.WriteLine("┌-------------------------------------------------┐");
+            Console.WriteLine("|                                                 |");
+            Console.WriteLine("|                                                 |");
+            Console.WriteLine("|                                                 |");
+            Console.WriteLine("|                                                 |");
+            Console.WriteLine("|                                                 |");
+            Console.WriteLine("|                                                 |");
+            Console.WriteLine("|                                                 |");
+            Console.WriteLine("|                                                 |");
+            Console.WriteLine("└-------------------------------------------------┘");
         }
         public override void Input()
         {
