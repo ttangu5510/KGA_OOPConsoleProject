@@ -7,6 +7,7 @@
         public Vector2 position;
         public bool isOnce;
         public bool isDead;
+        public bool isRun;
         public GameObject(ConsoleColor color, char symbol, Vector2 position, bool isOnce, bool isDead)
         {
             this.color = color;

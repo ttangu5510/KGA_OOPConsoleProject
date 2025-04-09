@@ -4,10 +4,13 @@
     {
         // 일반 창
         // 매개변수 초기화를 진행해, 간편하게 사용
-        public static void PrintText(string text, ConsoleColor color = ConsoleColor.White, int delay = 25, int delay2 = 150, bool inputOn = true, bool Clear = true)
+        public static void PrintText(string text, ConsoleColor color = ConsoleColor.White, int delay = 25, int delay2 = 150, bool inputOn = true, bool Clear = false)
         {
             // TODO : 추후에 화면 포지션 고정작업이 되면, 위치 고정 작업
-            (int x, int y) = Console.GetCursorPosition();
+
+            //(int x, int y) = Console.GetCursorPosition();
+            int x = 0;
+            int y = 7;
             int LineNum = text.Length / 20;
             Console.SetCursorPosition(x, y);
             Console.WriteLine("┌-------------------------------------------------┐");

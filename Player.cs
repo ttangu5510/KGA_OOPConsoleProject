@@ -126,28 +126,28 @@ namespace KGA_OOPConsoleProject
         // 플레이어 공격
         public int PlayerAttack()
         {
-            Console.SetCursorPosition(0, 7);
-            Util.PrintText("플레이어의 공격!", ConsoleColor.White, 25, 150, false);
+            Util.PrintText("플레이어의 공격!!");
             return power;
         }
         // 플레이어 스킬 사용 TODO
         public int PlayerSkill()
         {
-            Console.SetCursorPosition(0, 7);
-            Util.PrintText("플레이어의 공격!", ConsoleColor.White, 25, 150, false);
+            Util.PrintText("플레이어의 스킬!");
             return power;
         }
         // 플레이어 가드
         public void PlayerGuard()
         {
-            Console.SetCursorPosition(0, 7);
-            Util.PrintText("방어 자세를 했다!", ConsoleColor.Blue, 25, 150, false);
+            defence += defence;
+        }
+        //플레이어 가드 해제
+        public void PlayerUnGuard()
+        {
+            defence -= defence;
         }
         // 플레이어 피격
         public void PlayerHit(int damage)
         {
-            Console.SetCursorPosition(0, 7);
-            Util.PrintText($"{damage}만큼 피해를 입었다!", ConsoleColor.Blue, 25, 150, false);
             curHP -= damage;
         }
         // 플레이어가 도망칠 경우
@@ -160,7 +160,7 @@ namespace KGA_OOPConsoleProject
         {
             if (curHP<=0)
             {
-                GameManager.IsGameOver();
+                isDead = true;
             }
         }
         // 전투 씬에서 플레이어 그리기

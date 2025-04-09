@@ -58,7 +58,7 @@ namespace KGA_OOPConsoleProject
         private static void End()
         {
             Console.Clear();
-            Console.WriteLine("게임 오버...");
+            Util.PrintText("게임 오버...");
         }
         // 씬 전환
         public static void ChangeScene(string scene)

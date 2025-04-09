@@ -40,9 +40,13 @@
                     if(go.isDead==false)
                     {
                         battleScene = new BattleScene(GameManager.Player,(Monster)go);
-                        battleScene.Battle();                 
+                        battleScene.Battle();
+                        
                     }
-                    go.Interact(GameManager.Player);
+                    else
+                    {
+                        go.Interact(GameManager.Player);
+                    }
                     if (go.isOnce == true && go.isDead == true)
                     {
                         gameObjects.Remove(go);
