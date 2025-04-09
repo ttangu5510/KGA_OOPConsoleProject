@@ -40,7 +40,21 @@
             Console.SetCursorPosition(x, y);
             if (inputOn)
             {
-                Console.ReadKey(true);
+                // 대화창 입력 키 제한함
+                bool isInput = false;
+                while(isInput==false)
+                {
+                    ConsoleKey input = Console.ReadKey(true).Key;
+                    switch (input)
+                    {
+                        case ConsoleKey.A:
+                            isInput = true;
+                            break;
+                        case ConsoleKey.S:
+                            isInput = true;
+                            break;
+                    }
+                }
             }
             if (Clear)
             {

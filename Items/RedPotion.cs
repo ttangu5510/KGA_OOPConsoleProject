@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace KGA_OOPConsoleProject.Items
 {
-    public class Potion : Item
+    public class RedPotion : Item
     {
-        public Potion(Vector2 position): base(ConsoleColor.Yellow,'I',position,true)
+        public RedPotion(Vector2 position): base(ConsoleColor.Yellow,'I',position,true)
         {
-            name = "포션";
+            name = "빨간 포션";
             description = "소량의 체력을 회복 시키는 아이템";
             useDescription = "체력을 30 회복했다";
         }
-        public Potion()
+        public RedPotion()
         {
-            name = "포션";
+            name = "빨간 포션";
             description = "소량의 체력을 회복 시키는 아이템";
             useDescription = "체력을 30 회복했다";
         }

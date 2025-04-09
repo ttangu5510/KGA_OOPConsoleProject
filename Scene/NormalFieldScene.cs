@@ -33,9 +33,9 @@ namespace KGA_OOPConsoleProject.Scene
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Place("Town", 'T', new Vector2(1, 2)));
             gameObjects.Add(new Place("Forest", 'F', new Vector2(11, 1)));
-            gameObjects.Add(new Potion(new Vector2(1, 4)));
-            gameObjects.Add(new Potion(new Vector2(2, 4)));
-            gameObjects.Add(new Potion(new Vector2(3, 4)));
+            gameObjects.Add(new RedPotion(new Vector2(1, 4)));
+            gameObjects.Add(new RedPotion(new Vector2(2, 4)));
+            gameObjects.Add(new RedPotion(new Vector2(3, 4)));
             //몬스터 생성
             MonsterFactory slimeFactory = new MonsterFactory();
             Monster slime0 = slimeFactory.MonsterCreate("슬라임", new Vector2(4, 2));

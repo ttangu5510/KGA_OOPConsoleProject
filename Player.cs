@@ -52,11 +52,10 @@ namespace KGA_OOPConsoleProject
             menu = new Menu();
             isRun = false;
             isDead = false;
-            isBattle = false;
 
             maxHP = 100;
             curHP = maxHP;
-            maxMP = 100;
+            maxMP = 15;
             mp = maxMP;
             power = 1;
             defence = 0;
@@ -149,6 +148,10 @@ namespace KGA_OOPConsoleProject
         public void PlayerHit(int damage)
         {
             curHP -= damage;
+            if (curHP <= 0)
+            {
+                isDead = true;
+            }
         }
         // 플레이어가 도망칠 경우
         public void PlayerRun()

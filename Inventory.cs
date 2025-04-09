@@ -5,11 +5,15 @@
         private List<Item> items;
         private int selectIndex;
         private int choiceIndex;
+
+        // 전투에서 아이템 사용 시 행동 패턴 소모
+        public bool isUse;
         public Inventory()
         {
             items = new List<Item>();
             stack = new Stack<string>();
             choiceIndex = 0;
+            isUse = false;
         }
         private Stack<string> stack;
 
@@ -149,6 +153,8 @@
                         Util.PrintText(selectItem.useDescription);
                         Remove(selectItem);
                         choiceIndex = 0;
+                        // 전투 시 행동 패턴 소모
+                        isUse = true;
                         stack.Pop();
                     }
                     else if (choiceIndex == 1)
@@ -161,6 +167,7 @@
                     }
                     break;
                 case ConsoleKey.S:
+                    choiceIndex = 0;
                     stack.Pop();
                     break;
             }

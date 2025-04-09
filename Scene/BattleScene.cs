@@ -69,16 +69,16 @@
             Console.WriteLine("|                                                 |");
             Console.WriteLine("└-------------------------------------------------┘");
 
-            // HP바 출력
-            if(ChangeHP != null)
+            // HP바, MP 출력
+            if (ChangeHP != null)
             {
                 ChangeHP.Invoke();
                 ChangeHP = null;
             }
             Console.SetCursorPosition(1, 1);
-            Console.Write($"HP: {player.CurHP} {playerHPBar}    {monster.name}| HP: {monster.curHP} {monsterHPBar}");
+            Console.Write($"HP: {player.CurHP} {playerHPBar} | MP: {player.MP}   ");
             Console.SetCursorPosition(1, 2);
-            Console.Write($"               ");
+            Console.Write($"                      {monster.name}| HP: {monster.curHP} {monsterHPBar} ");
             Console.SetCursorPosition(1, 11);
             Console.Write("  공격      방어      아이템    도망간다 ");
             // 선택 커서 출력
@@ -106,6 +106,7 @@
                     if (MonsterDisGuard != null)
                     {
                         MonsterDisGuard.Invoke();
+                        MonsterDisGuard -= monster.MonsterUnGuard;
                     }
                     MonsterMove();
                     que.Dequeue();
@@ -115,6 +116,7 @@
                     if (PlayerDisGuard != null)
                     {
                         PlayerDisGuard.Invoke();
+                        PlayerDisGuard -= player.PlayerUnGuard;
                     }
                     PlayerMove();
                     que.Dequeue();
@@ -137,8 +139,7 @@
                 Util.PrintText("눈앞이 캄캄해졌다...");
                 GameManager.IsGameOver();
             }
-            Console.WriteLine("베틀씬 결과");
-            Console.ReadKey(true);
+            Console.Clear();
         }
 
         public void Battle()
@@ -173,7 +174,6 @@
         public void PlayerMove()
         {
             int randNum = rand.Next(0, 100);
-            Console.SetCursorPosition(0, 7);
             stack.Push("전투 선택");
             while (stack.Count > 0)
             {
@@ -193,6 +193,9 @@
                         break;
                     case "도망 선택":
                         ChoiceRun();
+                        break;
+                    case "스킬 선택":
+                        ChoiceSkill();
                         break;
                 }
 
@@ -249,7 +252,7 @@
         // 플레이어 공격 선택
         public void ChoiceAttack()
         {
-
+            Render();
             Console.SetCursorPosition(0, 7);
             Console.WriteLine("┌--------┐");
             Console.SetCursorPosition(0, 8);
@@ -259,6 +262,53 @@
             Console.SetCursorPosition(0, 10);
             Console.WriteLine("└--------┘");
             Util.PrintChoice(choiceAttackY);
+            ConsoleKey input = Console.ReadKey(true).Key;
+            switch (input)
+            {
+                case ConsoleKey.UpArrow:
+                    if (choiceAttackY > 7)
+                    {
+                        choiceAttackY--;
+                    }
+                    break;
+                case ConsoleKey.DownArrow:
+                    if (choiceAttackY < 8)
+                    {
+                        choiceAttackY++;
+                    }
+                    break;
+                case ConsoleKey.A:
+                    switch (choiceAttackY)
+                    {
+                        case 7:
+                            player.PlayerAttack();
+                            stack.Pop();
+                            stack.Pop();
+                            break;
+
+                        case 8:
+                            stack.Push("스킬 선택");
+                            break;
+                    }
+                    break;
+                case ConsoleKey.S:
+                    choiceAttackY = 7;
+                    stack.Pop();
+                    break;
+            }
+        }
+        // 플레이어 스킬 선택
+        public void ChoiceSkill()
+        {
+            Console.SetCursorPosition(11, 7);
+            Console.WriteLine("┌-----------┐");
+            Console.SetCursorPosition(11, 8);
+            Console.WriteLine("|  스킬1 소비MP|");
+            Console.SetCursorPosition(11, 9);
+            Console.WriteLine("|  스킬2 소비MP|");
+            Console.SetCursorPosition(11, 10);
+            Console.WriteLine("└-----------┘");
+            Util.PrintChoice(choiceAttackY, 12);
             ConsoleKey input = Console.ReadKey(true).Key;
             switch (input)
             {
@@ -287,7 +337,6 @@
                     stack.Pop();
                     break;
             }
-
         }
         // 플레이어 방어 선택
         public void ChoiceGuard()
@@ -295,32 +344,40 @@
             if (PlayerDisGuard == null)
             {
                 player.PlayerGuard();
+                PlayerDisGuard += player.PlayerUnGuard;
             }
-            Console.SetCursorPosition(0, 7);
-            Util.PrintText("방어 자세를 했다!", ConsoleColor.Blue, 25, 150, false);
-            PlayerDisGuard += () => player.PlayerUnGuard();
+            Util.PrintText("방어 자세를 했다!");
+            stack.Pop();
+            stack.Pop();
         }
+        // TODO : 전투 중 아이템의 기능 제한필요
         // 플레이어 아이템 선택
         public void ChoiceItem()
         {
-            Console.WriteLine("아이템");
-            Console.ReadKey(true);
+            player.Inventory.OpenInven();
+            if (player.Inventory.isUse == true)
+            {
+                player.Inventory.isUse = false;
+                stack.Pop();
+            }
+            stack.Pop();
         }
         // 플레이어 도망 선택
         public void ChoiceRun()
         {
-            Console.WriteLine("도망");
-            Console.ReadKey(true);
+            player.PlayerRun();
+            stack.Pop();
+            stack.Pop();
         }
         // HP바 조절
-        public void ChangeHPBar(int curHP,int maxHP)
+        public void ChangeHPBar(int curHP, int maxHP)
         {
             int hpPercent = curHP * 100 / maxHP;
-            if(hpPercent>90&&hpPercent<100)
+            if (hpPercent > 90 && hpPercent < 100)
             {
                 playerHPBar = "■■■■■■■■■□";
             }
-            else if(hpPercent>80)
+            else if (hpPercent > 80)
             {
                 playerHPBar = "■■■■■■■■□□";
             }
@@ -366,7 +423,7 @@
                 if (MonsterDisGuard == null)
                 {
                     monster.MonsterGuard();
-                    MonsterDisGuard += () => monster.MonsterUnguard();
+                    MonsterDisGuard += monster.MonsterUnGuard;
                 }
             }
             else
@@ -382,7 +439,6 @@
                     Util.PrintText("크리티컬 !!!", ConsoleColor.Red);
                     Util.PrintText($"{totalDamage}의 데미지를 입었다!", ConsoleColor.Red);
                     ChangeHP += () => player.PlayerHit(totalDamage);
-                    ChangeHP += () => player.PlayerDead();
                     ChangeHP += () => ChangeHPBar(player.CurHP, player.MaxHP);
                 }
                 else if (dex < 10)
@@ -393,7 +449,6 @@
                 {
                     Util.PrintText($"{totalDamage}의 데미지를 입었다!");
                     ChangeHP += () => player.PlayerHit(totalDamage);
-                    ChangeHP += () => player.PlayerDead();
                     ChangeHP += () => ChangeHPBar(player.CurHP, player.MaxHP);
                 }
             }

@@ -57,7 +57,7 @@ namespace KGA_OOPConsoleProject
             }
 
         }
-        public void MonsterUnguard()
+        public void MonsterUnGuard()
         {
             defence -= defence;
         }
@@ -77,7 +77,7 @@ namespace KGA_OOPConsoleProject
     public class MonsterFactory
     {
         public float powerRate = 1;
-        public Potion potion = new Potion();
+        public RedPotion potion = new RedPotion();
 
         public Monster MonsterCreate(string name, Vector2 position)
         {
