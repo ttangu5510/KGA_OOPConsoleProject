@@ -57,14 +57,7 @@
             }
             items.Remove(item);
         }
-        public void RemoveAt(int index)
-        {
-            items.RemoveAt(index);
-        }
-        public void UseAt(int index)
-        {
-            items[index].Use();
-        }
+
         public void OpenInven()
         {
             stack.Push("InvenList");

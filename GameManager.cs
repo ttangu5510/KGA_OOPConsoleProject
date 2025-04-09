@@ -61,7 +61,14 @@ namespace KGA_OOPConsoleProject
         private static void End()
         {
             Console.Clear();
-            Util.PrintText("게임 오버...");
+            if(GameManager.Player.IsDead==true)
+            {
+                Util.PrintText("게임 오버...");
+            }
+            else
+            {
+                // TODO 엔딩
+            }
         }
         // 씬 전환
         public static void ChangeScene(string scene)

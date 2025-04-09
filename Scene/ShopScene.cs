@@ -1,4 +1,5 @@
 ﻿using KGA_OOPConsoleProject.GameObjects;
+using KGA_OOPConsoleProject.Items;
 using KGA_OOPConsoleProject.NPCs;
 
 namespace KGA_OOPConsoleProject.Scene
@@ -31,8 +32,10 @@ namespace KGA_OOPConsoleProject.Scene
             }
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Place("Town", '▼', new Vector2(27, 8)));
-            gameObjects.Add(new ShopNPC(new Vector2(27, 3)));
+            gameObjects.Add(new ShopNPC(new Vector2(27, 3),1));
             gameObjects.Add(new TownNPC(new Vector2(22, 6), 2));
+            gameObjects.Add(new LetherJacket(new Vector2(25, 5)));
+            gameObjects.Add(new ShortKnife(new Vector2(26, 5)));
         }
         protected override void PrintMap()
         {

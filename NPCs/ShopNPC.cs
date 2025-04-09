@@ -5,20 +5,22 @@ namespace KGA_OOPConsoleProject.NPCs
     public class ShopNPC : NPC
     {
         private List<Item> items;
-        private List<Item> sellItem;
+        private Stack<string> stack;
         private int ShopNPCNum;
         private int choiceIndex;
-        public ShopNPC(Vector2 position,int NPCNum) : base(position)
+        public ShopNPC(Vector2 position, int NPCNum) : base(position)
         {
             items = new List<Item>();
-            sellItem = new List<Item>();
+            stack = new Stack<string>();
             choiceIndex = 0;
             BluePotion bluePotion = new BluePotion();
             RedPotion redPotion = new RedPotion();
+            ShortKnife shortKnife = new ShortKnife();
+            LetherJacket letherJacket = new LetherJacket();
             switch (NPCNum)
             {
                 case 1:
-                    items = [redPotion,bluePotion];
+                    items = [redPotion, bluePotion,shortKnife,letherJacket];
                     break;
                 case 2:
                     //items = [];
@@ -30,7 +32,7 @@ namespace KGA_OOPConsoleProject.NPCs
         }
         public void Buy()
         {
-
+            PrintItems();
         }
         public void Sell(Player player)
         {
@@ -39,12 +41,21 @@ namespace KGA_OOPConsoleProject.NPCs
         }
         public void PrintItems()
         {
+            //상인 아이템 출력
+            Console.Clear();
+            Console.SetCursorPosition(0, 0);
+            Console.WriteLine("┌------ 인벤토리 ------┐");
+            Console.WriteLine("|                      |");
+            Console.WriteLine("|                      |");
+            Console.WriteLine("|                      |");
+            Console.WriteLine("└----------------------┘");
 
         }
         public override void Interact(Player player)
         {
             Util.PrintText("어서오시게! 뭔가 살텐가?");
-
+            // TODO 상인 UI 출력
+            
         }
     }
 }

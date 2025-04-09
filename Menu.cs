@@ -27,11 +27,15 @@
                         GameManager.Player.Inventory.OpenInven();
                         stack.Pop();
                         break;
-                        // TODO : 구현필요 case "Status":
-                        //Status();
-                        //break;
-                        // TODO: 구현필요 case "EquipStatus":
-                        //EquipStatus();
+                    case "StatusWindow":
+                        Status.PrintStatus();
+                        stack.Pop();
+                        break;
+                    case "OpenEquip":
+                        GameManager.Player.EquipStatus.OpenEquip();
+                        stack.Pop();
+                        break;
+
                         //break;
                 }
             }
@@ -57,12 +61,18 @@
             switch (input)
             {
                 case ConsoleKey.A:
-                    if (choiceIndex == 2)
+                    if (choiceIndex == 1)
+                    {
+                        stack.Push("StatusWindow");
+                    }
+                    else if (choiceIndex == 2)
                     {
                         stack.Push("Inventory");
                     }
-                    // TODO : else if(choice Index == 1) status
-                    // TODO : else if (choice Index == 3) equip
+                    else if (choiceIndex == 3)
+                    {
+                        stack.Push("OpenEquip");
+                    }
                     break;
                 case ConsoleKey.S:
                 case ConsoleKey.Enter:

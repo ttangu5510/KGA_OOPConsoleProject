@@ -1,4 +1,6 @@
-﻿namespace KGA_OOPConsoleProject
+﻿using KGA_OOPConsoleProject.Items;
+
+namespace KGA_OOPConsoleProject
 {
     public class Player
     {
@@ -12,8 +14,14 @@
         public Menu Menu { get { return menu; } }
         public Inventory Inventory { get { return inventory; } }
         private Skill[] skills;
+        private EquipStatus equipStatus;
+        public EquipStatus EquipStatus { get { return equipStatus; } }
 
         // 플레이어 스탯
+        private int level;
+        public int Level { get { return level; } }
+        private int exp;
+        public int Exp { get { return exp; } }
         private int power;
         public int Power { get { return power; } }
         private int defence;
@@ -28,6 +36,14 @@
         public int MP { get { return mp; } }
         private int maxMP;
         public int MaxMP { get { return maxMP; } }
+        private int maxExp;
+        public int MaxExp { get { return maxExp; } }
+
+        // 플레이어 장비
+        private Armor armor;
+        private Weapon weapon;
+        public Armor Armor { get { return armor; } }
+        public Weapon Weapon { get { return weapon; } }
 
         // 필드 상호작용
         public Vector2 nextObj;
@@ -57,9 +73,13 @@
         {
             inventory = new Inventory();
             menu = new Menu();
+            equipStatus = new EquipStatus();
             isRun = false;
             isDead = false;
 
+            level = 1;
+            exp = 0;
+            maxExp = 30;
             maxHP = 100;
             curHP = maxHP;
             maxMP = 15;
@@ -70,6 +90,10 @@
             gold = 0;
             nextObj.x = 0;
             nextObj.y = 0;
+
+
+            //armor = new Armor();
+            ///weapon = new Weapon();
         }
 
         //체력회복
@@ -108,6 +132,43 @@
             }
         }
 
+        // 장비 입기
+        public void Equip(Equipment equipment)
+        {
+            switch (equipment.Type)
+            {
+                case Equipment.EquipType.Weapon:
+                    if (weapon != null)
+                    {
+                        inventory.Add(weapon);
+                    }
+                    weapon = (Weapon)equipment;
+                    break;
+                case Equipment.EquipType.Armor:
+                    if (armor != null)
+                    {
+                        inventory.Add(armor);
+                    }
+                    armor = (Armor)equipment;
+                    break;
+            }
+
+        }
+        // 장비 벗기(어쩌면 강제로) TODO 이벤트로 연결하기
+        public void UnEquip(Equipment equipment)
+        {
+            switch (equipment.Type)
+            {
+                case Equipment.EquipType.Weapon:
+                    inventory.Add(weapon);
+                    weapon = null;
+                    break;
+                case Equipment.EquipType.Armor:
+                    inventory.Add(armor);
+                    armor = null;
+                    break;
+            }
+        }
         //상점에 파는 전용 인벤토리 들어가기
         public void ShopIn()
         {
@@ -245,7 +306,28 @@
                 isDead = true;
             }
         }
-
+        // 플레이어 경험치 획득
+        public void PlayerGetExp(int exp)
+        {
+            this.exp += exp;
+            RecursionExp();
+        }
+        // 플레이어 경험치 처리 재귀
+        public void RecursionExp()
+        {
+            if (exp >= MaxExp)
+            {
+                level++;
+                exp -= MaxExp;
+                maxExp *= 2;
+                RecursionExp();
+            }
+        }
+        // 플레이어 레벨업
+        public void PlayerLevelUp()
+        {
+            level++;
+        }
         // 전투 씬에서 플레이어 그리기
         public void PlayerSprite(int pX, int pY)
         {
