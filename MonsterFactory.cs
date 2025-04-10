@@ -19,7 +19,7 @@ namespace KGA_OOPConsoleProject
         public int curHP;
         protected BattleScene battleScene;
 
-        //플레이스로 설치 할 몬스터
+        // 플레이스로 설치 할 몬스터
         public Monster(string name, int level, int exp, int damage, int maxHP, List<Item> mItems, int gold, char symbol, Vector2 position, string attack, string[] sprite,int speed,int defence) : base(ConsoleColor.Red, symbol, position, true, false)
         {
             this.name = name;
@@ -36,7 +36,7 @@ namespace KGA_OOPConsoleProject
             this.defence = defence;
         }
 
-
+        // 몬스터 공격
         public int MonsterAttack()
         {
             Console.SetCursorPosition(0,7);
@@ -44,31 +44,41 @@ namespace KGA_OOPConsoleProject
             Util.PrintText($"{attack} 공격!!!");
             return damage;
         }
+
+        // 몬스터 가드
         public void MonsterGuard()
         {
            defence += defence;
         }
+
+        // 몬스터 피격
         public void MonsterHit(int damage)
         {
             Util.PrintText($"{name}은/는 {damage}의 피해를 입었다!", ConsoleColor.White, 25, 150, true,false);
-            maxHP -= damage;
-            if (maxHP < 0)
+            curHP -= damage;
+            if (curHP < 0)
             {
-                maxHP = 0;
+                curHP = 0;
+                Util.PrintText($"{name}은/는 쓰러졌다!");
                 isDead = true;
             }
 
         }
+
+        // 몬스터 가드풀기(몬스터 행동패턴시)
         public void MonsterUnGuard()
         {
             defence -= defence;
         }
 
+        // 몬스터 상호작용 = 배틀씬 진입
         public override void Interact(Player player)
         {
             battleScene = new BattleScene(player, this);
             battleScene.Battle();
         }
+
+        // 몬스터 스프라이트 그리기
         public void MonsterSprite(int mX,int mY)
         {
             for(int i = 0;i<sprite.Length;i++)
@@ -80,9 +90,11 @@ namespace KGA_OOPConsoleProject
     }
     public class MonsterFactory
     {
+        // 강한 정도, 아이템 선언
         public float powerRate = 1;
         public RedPotion potion = new RedPotion();
 
+        // 몬스터 팩토리 생산라인
         public Monster MonsterCreate(string name, Vector2 position)
         {
             Monster monster;
@@ -90,7 +102,7 @@ namespace KGA_OOPConsoleProject
             {
                 case "슬라임":
                     List<Item> sItems = [potion];
-                    monster = new Monster("슬라임", 3, 3, 5, 15, sItems, 10, 'S', position, "튀어오르기", slimeSprite,2,1);
+                    monster = new Monster("슬라임", 3, 3, 3, 15, sItems, 10, 'S', position, "튀어오르기", slimeSprite,2,1);
                     break;
                 default:
                     Console.WriteLine("몬스터 이름이 없습니다");
@@ -98,6 +110,8 @@ namespace KGA_OOPConsoleProject
             }
             return monster;
         }
+
+        //슬라임 스프라이트
         public string[] slimeSprite =
             { "    ___    ",
               "  /Ο Ο  \\ ",

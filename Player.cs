@@ -13,7 +13,8 @@ namespace KGA_OOPConsoleProject
         private Menu menu;
         public Menu Menu { get { return menu; } }
         public Inventory Inventory { get { return inventory; } }
-        private Skill[] skills;
+        private List<Skill> skills;
+        public List<Skill> Skills { get { return skills; } }
         private EquipStatus equipStatus;
         public EquipStatus EquipStatus { get { return equipStatus; } }
 
@@ -57,7 +58,6 @@ namespace KGA_OOPConsoleProject
         private bool isShop;
         public bool IsShop { get { return isShop; } }
 
-
         //스프라이트
         public string[] playerSprite =
 {
@@ -74,6 +74,8 @@ namespace KGA_OOPConsoleProject
             inventory = new Inventory();
             menu = new Menu();
             equipStatus = new EquipStatus();
+            //TODO 스킬 테스트
+            skills = new List<Skill> { new UpperSlash(),  new LightningCut() };
             isRun = false;
             isDead = false;
 
@@ -87,7 +89,9 @@ namespace KGA_OOPConsoleProject
             power = 1;
             defence = 0;
             speed = 5;
-            gold = 0;
+            //TODO 상점테스트 케이스
+            gold = 10000;
+
             nextObj.x = 0;
             nextObj.y = 0;
 
@@ -154,17 +158,23 @@ namespace KGA_OOPConsoleProject
             }
 
         }
-        // 장비 벗기(어쩌면 강제로) TODO 이벤트로 연결하기
+        // 장비 벗기
         public void UnEquip(Equipment equipment)
         {
             switch (equipment.Type)
             {
                 case Equipment.EquipType.Weapon:
-                    inventory.Add(weapon);
+                    if(weapon.Durability>0)
+                    {
+                        inventory.Add(weapon);
+                    }
                     weapon = null;
                     break;
                 case Equipment.EquipType.Armor:
-                    inventory.Add(armor);
+                    if(armor.Durability>0)
+                    {
+                        inventory.Add(armor);
+                    }
                     armor = null;
                     break;
             }
@@ -261,15 +271,23 @@ namespace KGA_OOPConsoleProject
         // 플레이어 공격
         public int PlayerAttack()
         {
-            Util.PrintText("플레이어의 공격!!");
-            return power;
+            int totalPower;
+            Util.PrintText("일반 공격!!");
+            if(weapon!=null)
+            {
+                totalPower = power + weapon.Power;
+            }
+            else
+            {
+                totalPower = power;
+            }
+                return totalPower;
         }
 
-        // 플레이어 스킬 사용 TODO
-        public int PlayerSkill()
+        // 플레이어 마나사용
+        public void UseMP(int amount)
         {
-            Util.PrintText("플레이어의 스킬!");
-            return power;
+            mp -= amount;
         }
 
         // 플레이어 가드
@@ -312,21 +330,51 @@ namespace KGA_OOPConsoleProject
             this.exp += exp;
             RecursionExp();
         }
-        // 플레이어 경험치 처리 재귀
+        // 플레이어 경험치 처리 재귀 함수
         public void RecursionExp()
         {
             if (exp >= MaxExp)
             {
-                level++;
+                PlayerLevelUp();
                 exp -= MaxExp;
                 maxExp *= 2;
                 RecursionExp();
             }
         }
+
+
         // 플레이어 레벨업
         public void PlayerLevelUp()
         {
             level++;
+            Util.PrintText("레벨업!!!");
+            Util.PrintText("능력치가 상승했다!");
+
+            if (level==5)
+            {
+                Util.PrintText("새로운 스킬을 배웠다!");
+                Skills.Add(new FireBall());
+            }
+            else if(level == 10)
+            {
+                Util.PrintText("새로운 스킬을 배웠다!");
+                Skills.Add(new LightningCut());
+            }
+            else if (level == 20)
+            {
+                Util.PrintText("새로운 스킬을 배웠다!");
+                Skills.Add(new AtomicSlash());
+            }
+
+            Util.PrintText("풀 회복!");
+
+            power += 5;
+            defence += 10;
+            speed += 10;
+            maxHP += (maxHP * 30 / 100);
+            maxMP += (maxMP * 30 / 100);
+            MPHeal(9999);
+            HPHeal(9999);
         }
         // 전투 씬에서 플레이어 그리기
         public void PlayerSprite(int pX, int pY)

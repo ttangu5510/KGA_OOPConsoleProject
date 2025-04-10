@@ -61,13 +61,15 @@ namespace KGA_OOPConsoleProject
         private static void End()
         {
             Console.Clear();
-            if(GameManager.Player.IsDead==true)
+            if(player.IsDead==true)
             {
                 Util.PrintText("게임 오버...");
             }
             else
             {
                 // TODO 엔딩
+                Console.Clear();
+                Util.PrintText("축하합니다! 게임을 클리어 했습니다!");
             }
         }
         // 씬 전환

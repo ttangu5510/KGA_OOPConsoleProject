@@ -29,7 +29,7 @@
         {
             for (int i = 0; i < items.Count; i++)
             {
-                if (items[i].name == item.name)
+                if (items[i].name == item.name && !(items[i] is Equipment))
                 {
                     if (items[i].itemNum >= 99)
                     {
@@ -239,6 +239,7 @@
                             else if (choiceIndex == 2)
                             {
                                 stack.Pop();
+                                choiceIndex = 0;
                             }
                             break;
                         case ConsoleKey.S:

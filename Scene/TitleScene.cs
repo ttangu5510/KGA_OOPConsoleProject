@@ -39,12 +39,10 @@
 
         public override void Result()
         {   // TODO 테스트를 위해 생략
-            GameManager.ChangeScene("Shop");
+            GameManager.ChangeScene("Town");
             
             // TODO 테스트를 위해 추가
             Console.Clear();
-            // TODO 테스트 끝나고 삭제
-            //GameManager.ChangeScene("NormalField");
         }
 
     }

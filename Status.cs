@@ -44,5 +44,18 @@
             Console.Write($"현재 / 최대 MP: {GameManager.Player.MP}/{GameManager.Player.MaxMP}");
             Console.ReadKey(true);
         }
+        public static void PrintSkills()
+        {
+            Console.SetCursorPosition(0, 0);
+            Console.WriteLine("┌------ 스테이터스 ---------------------┐");
+            Console.WriteLine("|                                       |");
+            Console.WriteLine("|                                       |");
+            Console.WriteLine("|                                       |");
+            Console.WriteLine("|                                       |");
+            Console.WriteLine("|                                       |");
+            Console.WriteLine("|                                       |");
+            Console.WriteLine("|                                       |");
+            Console.WriteLine("└---------------------------------------┘");
+        }
     }
 }

@@ -53,6 +53,7 @@
                     {
                         gameObjects.Remove(go);
                     }
+                    break;
                 }
             }
         }

@@ -1,32 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KGA_OOPConsoleProject
+﻿namespace KGA_OOPConsoleProject
 {
     public class Skill
     {
         protected string name;
+        public string Name { get { return name; } }
         protected string description;
+        public string Description { get { return description; } }
         protected int useMP;
+        public int UseMP { get { return useMP; } }
         protected int damage;
+        public int Damage { get { return damage; } }
         public Skill()
         {
 
         }
+        public int UseSkill()
+        {
+            Util.PrintText($"{name} 공격!");
+            GameManager.Player.UseMP(useMP);
+            return damage;
+        }
     }
     public class UpperSlash : Skill
     {
-        public UpperSlash() 
+        public UpperSlash()
         {
             name = "어퍼슬래시";
             description = "아래에서 위로 올려쳐 적의 빈틈을 노린다";
             useMP = 4;
             damage = 7;
         }
-        
+
     }
     public class FireBall : Skill
     {

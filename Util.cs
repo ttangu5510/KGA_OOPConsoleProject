@@ -17,7 +17,7 @@
             for (int i = 0; i < LineNum; i++)
             {
                 Console.SetCursorPosition(x, y + i + 1);
-                Console.WriteLine("|                                             |");
+                Console.WriteLine("|                                                 |");
             }
             Console.SetCursorPosition(x, y + 1 + LineNum);
             Console.WriteLine("|                                               ▼ |");
@@ -42,7 +42,7 @@
             {
                 // 대화창 입력 키 제한함
                 bool isInput = false;
-                while(isInput==false)
+                while (isInput == false)
                 {
                     ConsoleKey input = Console.ReadKey(true).Key;
                     switch (input)

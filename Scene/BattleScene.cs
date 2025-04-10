@@ -27,6 +27,7 @@
         public Queue<string> que;
         private string playerHPBar;
         private string monsterHPBar;
+        private int playerDamage;
         Random rand = new Random();
 
         public bool isBattle;
@@ -44,6 +45,7 @@
             isBattle = true;
             playerHPBar = "■■■■■■■■■■";
             monsterHPBar = "■■■■■■■■■■";
+            playerDamage = 0;
         }
 
         public override void Render()
@@ -129,6 +131,16 @@
             if (monster.isDead)
             {
                 Util.PrintText("전투에서 승리했다!");
+                Util.PrintText($"{monster.gold}G 획득!");
+                player.GetGold(monster.gold);
+                Util.PrintText($"경험치 {monster.exp}획득!");
+                player.PlayerGetExp(monster.exp);
+                for (int i = 0; i < monster.mItems.Count; i++)
+                {
+                    Util.PrintText($"{monster.mItems[i].name}을 획득했다!");
+                    player.Inventory.Add(monster.mItems[i]);
+                }
+
             }
             else if (player.IsRun)
             {
@@ -199,7 +211,6 @@
                         ChoiceSkill();
                         break;
                 }
-
             }
         }
         // 플레이어 전투 선택
@@ -282,7 +293,8 @@
                     switch (choiceAttackY)
                     {
                         case 7:
-                            player.PlayerAttack();
+                            playerDamage = player.PlayerAttack();
+                            PlayerAttackResult();
                             stack.Pop();
                             stack.Pop();
                             break;
@@ -304,32 +316,40 @@
         {
             //레이아웃 출력
             Console.SetCursorPosition(11, 7);
-            Console.Write("┌---------------------┐");
+            Console.Write("┌----------------------------------┐");
             Console.SetCursorPosition(11, 8);
-            Console.Write("|                     |");
+            Console.Write("|                                  |");
             Console.SetCursorPosition(11, 9);
-            Console.Write("|                     |");
+            Console.Write("|                                  |");
             Console.SetCursorPosition(11, 10);
-            Console.Write("|                     |");
+            Console.Write("|                                  |");
             Console.SetCursorPosition(11, 11);
-            Console.Write("|                     |");
+            Console.Write("|                                  |");
             Console.SetCursorPosition(11, 12);
-            Console.Write("└---------------------┘");
+            Console.Write("└----------------------------------┘");
 
             // 스킬목록 출력
+            for (int i = 0; i < player.Skills.Count; i++)
+            {
+                Console.SetCursorPosition(13, 8 + i);
+                Console.Write($"{player.Skills[i].Name} 데미지: {player.Skills[i].Damage}    마나: {player.Skills[i].UseMP}");
+
+            }
+
 
             Util.PrintChoice(choiceAttackY, 12);
+
             ConsoleKey input = Console.ReadKey(true).Key;
             switch (input)
             {
                 case ConsoleKey.UpArrow:
-                    if (choiceAttackY > 7)
+                    if (choiceAttackY - 7 > 0)
                     {
                         choiceAttackY--;
                     }
                     break;
                 case ConsoleKey.DownArrow:
-                    if (choiceAttackY < 10)
+                    if (choiceAttackY - 7 < player.Skills.Count() - 1)
                     {
                         choiceAttackY++;
                     }
@@ -338,24 +358,72 @@
                     switch (choiceAttackY)
                     {
                         case 7:
-                            //player.PlayerAttack1();
-                            stack.Pop();
-                            stack.Pop();
+                            if (player.Skills[0].UseMP < player.MP)
+                            {
+                                playerDamage = player.Skills[0].UseSkill();
+                                PlayerAttackResult();
+                                stack.Pop();
+                                stack.Pop();
+                                stack.Pop();
+                            }
+                            else
+                            {
+                                Util.PrintText("마나가 부족합니다");
+                                stack.Pop();
+                                stack.Pop();
+                            }
+                            choiceAttackY = 7;
                             break;
                         case 8:
-                            //player.PlayerSkill2();
-                            stack.Pop();
-                            stack.Pop();
+                            if (player.Skills[1].UseMP < player.MP)
+                            {
+                                playerDamage = player.Skills[1].UseSkill();
+                                PlayerAttackResult();
+                                stack.Pop();
+                                stack.Pop();
+                                stack.Pop();
+                            }
+                            else
+                            {
+                                Util.PrintText("마나가 부족합니다");
+                                stack.Pop();
+                                stack.Pop();
+                            }
+                            choiceAttackY = 7;
                             break;
                         case 9:
-                            //player.PlayerSkill3();
-                            stack.Pop();
-                            stack.Pop();
+                            if (player.Skills[2].UseMP < player.MP)
+                            {
+                                playerDamage = player.Skills[2].UseSkill();
+                                PlayerAttackResult();
+                                stack.Pop();
+                                stack.Pop();
+                                stack.Pop();
+                            }
+                            else
+                            {
+                                Util.PrintText("마나가 부족합니다");
+                                stack.Pop();
+                                stack.Pop();
+                            }
+                            choiceAttackY = 7;
                             break;
                         case 10:
-                            //player.PlayerSkill4();
-                            stack.Pop();
-                            stack.Pop();
+                            if (player.Skills[3].UseMP < player.MP)
+                            {
+                                playerDamage = player.Skills[3].UseSkill();
+                                PlayerAttackResult();
+                                stack.Pop();
+                                stack.Pop();
+                                stack.Pop();
+                            }
+                            else
+                            {
+                                Util.PrintText("마나가 부족합니다");
+                                stack.Pop();
+                                stack.Pop();
+                            }
+                            choiceAttackY = 7;
                             break;
                     }
                     break;
@@ -364,6 +432,30 @@
                     stack.Pop();
                     break;
             }
+        }
+
+        // 플레이어 공격 정산
+        public void PlayerAttackResult()
+        {
+            int dex = rand.Next(0, 110);
+            int totalDamage = playerDamage * (100 * monster.level - monster.defence) / (100 * monster.level);
+            if (dex > 100)
+            {
+                player.Weapon.LoseDurability();
+                totalDamage = totalDamage * 120 / 100;
+                Util.PrintText("크리티컬!!!", ConsoleColor.Red);
+                monster.MonsterHit(totalDamage);
+            }
+            else if (dex < 10)
+            {
+                Util.PrintText("플레이어 공격이 빗나갔다...");
+            }
+            else
+            {
+                player.Weapon.LoseDurability();
+                monster.MonsterHit(totalDamage);
+            }
+            ChangeHP += () => MonsterChangeHPBar(monster.curHP, monster.maxHP);
         }
         // 플레이어 방어 선택
         public void ChoiceGuard()
@@ -442,6 +534,50 @@
                 playerHPBar = "■□□□□□□□□□";
             }
         }
+        public void MonsterChangeHPBar(int curHP, int maxHP)
+        {
+            int hpPercent = curHP * 100 / maxHP;
+            if (hpPercent > 99)
+            {
+                monsterHPBar = "■■■■■■■■■■";
+            }
+            else if (hpPercent > 90 && hpPercent < 100)
+            {
+                monsterHPBar = "■■■■■■■■■□";
+            }
+            else if (hpPercent > 80)
+            {
+                monsterHPBar = "■■■■■■■■□□";
+            }
+            else if (hpPercent > 70)
+            {
+                monsterHPBar = "■■■■■■■□□□";
+            }
+            else if (hpPercent > 60)
+            {
+                monsterHPBar = "■■■■■■□□□□";
+            }
+            else if (hpPercent > 50)
+            {
+                monsterHPBar = "■■■■■□□□□□";
+            }
+            else if (hpPercent > 40)
+            {
+                monsterHPBar = "■■■■□□□□□□";
+            }
+            else if (hpPercent > 30)
+            {
+                monsterHPBar = "■■■□□□□□□□";
+            }
+            else if (hpPercent > 20)
+            {
+                monsterHPBar = "■■□□□□□□□□";
+            }
+            else if (hpPercent > 10)
+            {
+                monsterHPBar = "■□□□□□□□□□";
+            }
+        }
 
         // 몬스터 행동 - 랜덤으로 행동한다
         public void MonsterMove()
@@ -463,13 +599,14 @@
                 int dex = rand.Next(0, 110);
                 int monsterDamage = monster.MonsterAttack();
                 int monsterPower = monster.level * 100;
-                int totalDamage = monsterDamage * (monsterPower - player.Defence) / monsterPower;
+                int totalDamage = monsterDamage * (100 * player.Level - player.Defence) / 100 * player.Level;
                 Console.SetCursorPosition(0, 7);
                 if (dex > 100)
                 {
                     totalDamage = totalDamage * 120 / 100;
                     Util.PrintText("크리티컬 !!!", ConsoleColor.Red);
                     Util.PrintText($"{totalDamage}의 데미지를 입었다!", ConsoleColor.Red);
+                    player.Armor.LoseDurability();
                     ChangeHP += () => player.PlayerHit(totalDamage);
                     ChangeHP += () => ChangeHPBar(player.CurHP, player.MaxHP);
                 }
@@ -480,6 +617,7 @@
                 else
                 {
                     Util.PrintText($"{totalDamage}의 데미지를 입었다!");
+                    player.Armor.LoseDurability();
                     ChangeHP += () => player.PlayerHit(totalDamage);
                     ChangeHP += () => ChangeHPBar(player.CurHP, player.MaxHP);
                 }

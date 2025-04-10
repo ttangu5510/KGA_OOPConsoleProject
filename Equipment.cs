@@ -18,8 +18,16 @@
             isUsable = false;
             durability = 100;
         }
-
-
+        public void LoseDurability()
+        {
+            durability -= 100;
+            if(durability <= 0)
+            {
+                Util.PrintText($"{name}이 파괴되었다!");
+                UnEquip();
+            }
+        }
+        //장비착용
         public void Equip()
         {
             if (durability > 0)
@@ -31,6 +39,7 @@
                 Util.PrintText("심하게 마모되어 장비할 수 없다...");
             }
         }
+        //장비해제
         public void UnEquip()
         {
             GameManager.Player.UnEquip(this);
