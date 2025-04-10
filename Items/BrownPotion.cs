@@ -12,6 +12,7 @@ namespace KGA_OOPConsoleProject.Items
         {
             name = "주황 포션";
             description = "적당히 체력을 회복시키는 아이템";
+            useDescription = "체력을 100 회복했다";
             buyGold = 150;
             sellGold = 75;
         }
@@ -19,6 +20,7 @@ namespace KGA_OOPConsoleProject.Items
         {
             name = "주황 포션";
             description = "적당히 체력을 회복시키는 아이템";
+            useDescription = "체력을 100 회복했다";
             buyGold = 150;
             sellGold = 75;
         }

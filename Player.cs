@@ -89,7 +89,7 @@ namespace KGA_OOPConsoleProject
             power = 3;
             defence = 0;
             speed = 5;
-            gold = 0;
+            gold = 10000;
 
             nextObj.x = 0;
             nextObj.y = 0;
