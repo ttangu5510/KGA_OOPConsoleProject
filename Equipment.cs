@@ -20,7 +20,7 @@
         }
         public void LoseDurability()
         {
-            durability -= 100;
+            durability -= 1;
             if(durability <= 0)
             {
                 Util.PrintText($"{name}이 파괴되었다!");

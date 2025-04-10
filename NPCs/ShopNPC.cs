@@ -40,7 +40,6 @@ namespace KGA_OOPConsoleProject.NPCs
         {
             stack.Push("상점 선택");
             Util.PrintText("어서오시게! 뭔가 살텐가?");
-            // TODO 상인 UI 출력
             while (stack.Count > 0)
             {
                 switch (stack.Peek())

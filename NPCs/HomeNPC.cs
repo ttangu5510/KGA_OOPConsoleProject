@@ -31,6 +31,7 @@ namespace KGA_OOPConsoleProject
                     Util.PrintText("엄마: 나갈 때는 조심해야된다?");
                     break;
                 case ChatLog.첫던전후:
+                    // TODO 조건 완료 조건문을 넣음 if(첫던전 후)
                     Util.PrintText("엄마: 여행하느라 많이 힘들지? 푹 쉬다 가렴");
                     break;
 

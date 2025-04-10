@@ -26,7 +26,7 @@
         public UpperSlash()
         {
             name = "어퍼슬래시";
-            description = "아래에서 위로 올려쳐 적의 빈틈을 노린다";
+            description = "아래에서 위로 올려친다";
             useMP = 4;
             damage = 7;
         }
@@ -38,8 +38,8 @@
         {
             name = "화염구";
             description = "화염구를 날려 적을 불태운다";
-            useMP = 7;
-            damage = 10;
+            useMP = 10;
+            damage = 30;
         }
     }
     public class LightningCut : Skill
@@ -48,7 +48,7 @@
         {
             name = "섬광발도참";
             description = "빛과 같은 속도로 적을 벤다";
-            useMP = 20;
+            useMP = 30;
             damage = 100;
         }
     }

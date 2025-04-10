@@ -1,7 +1,5 @@
 ﻿namespace KGA_OOPConsoleProject
 {
-    //TODO: 구현
-    // 스테이터스, 장비창, 인벤토리, 조작키 가이드
     public class Menu
     {
         Stack<string> stack;

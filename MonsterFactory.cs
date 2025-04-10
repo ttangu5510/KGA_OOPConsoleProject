@@ -19,7 +19,7 @@ namespace KGA_OOPConsoleProject
         public int curHP;
         protected BattleScene battleScene;
 
-        // 플레이스로 설치 할 몬스터
+        // 특정 위치로 설치 할 몬스터
         public Monster(string name, int level, int exp, int damage, int maxHP, List<Item> mItems, int gold, char symbol, Vector2 position, string attack, string[] sprite,int speed,int defence) : base(ConsoleColor.Red, symbol, position, true, false)
         {
             this.name = name;
@@ -92,8 +92,8 @@ namespace KGA_OOPConsoleProject
     {
         // 강한 정도, 아이템 선언
         public float powerRate = 1;
-        public RedPotion potion = new RedPotion();
-
+        public RedPotion redPotion = new RedPotion();
+        public BluePotion bluePotion = new BluePotion();
         // 몬스터 팩토리 생산라인
         public Monster MonsterCreate(string name, Vector2 position)
         {
@@ -101,8 +101,12 @@ namespace KGA_OOPConsoleProject
             switch (name)
             {
                 case "슬라임":
-                    List<Item> sItems = [potion];
-                    monster = new Monster("슬라임", 3, 3, 3, 15, sItems, 10, 'S', position, "튀어오르기", slimeSprite,2,1);
+                    List<Item> sItems = [redPotion];
+                    monster = new Monster("슬라임", 3, 3, 3, 15, sItems, 10, '●', position, "튀어오르기", slimeSprite,2,1);
+                    break;
+                case "고블린":
+                    List<Item> gItems = [bluePotion];
+                    monster = new Monster("고블린", 5, 10, 10, 30, gItems, 30, '￥', position, "몽둥이 휘두르기", goblinSprite, 10, 10);
                     break;
                 default:
                     Console.WriteLine("몬스터 이름이 없습니다");
@@ -117,5 +121,10 @@ namespace KGA_OOPConsoleProject
               "  /Ο Ο  \\ ",
               " (w ∇ w  ) ",
               "           "};
+        public string[] goblinSprite =
+            { "   ↖ ㅁ    ",
+              "    \\|/   ",
+              "      |    ",
+              "     / \\  "};
     }
 }

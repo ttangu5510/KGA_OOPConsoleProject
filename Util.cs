@@ -6,9 +6,7 @@
         // 매개변수 초기화를 진행해, 간편하게 사용
         public static void PrintText(string text, ConsoleColor color = ConsoleColor.White, int delay = 25, int delay2 = 150, bool inputOn = true, bool Clear = false)
         {
-            // TODO : 추후에 화면 포지션 고정작업이 되면, 위치 고정 작업
 
-            //(int x, int y) = Console.GetCursorPosition();
             int x = 0;
             int y = 6;
             int LineNum = text.Length / 20;
@@ -65,7 +63,6 @@
         // 대화창
         public static void PrintText(string[] text, ConsoleColor color = ConsoleColor.White, int delay = 25, int delay2 = 150)
         {
-            // TODO : 추후에 화면 포지션 고정작업이 되면, 위치 고정 작업
             (int x, int y) = Console.GetCursorPosition();
             foreach (string s in text)
             {

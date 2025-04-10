@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace KGA_OOPConsoleProject
 {
-    // TODO 구현 : 샵 NPC, 집에서 엄마, 마을 사람들
     public class NPC : GameObject
     {
         public NPC()

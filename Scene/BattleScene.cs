@@ -1,17 +1,5 @@
 ﻿namespace KGA_OOPConsoleProject.Scene
 {
-    // TODO : 전투씬 구현
-    // 1. 전투화면 렌더
-    //    1.1 플레이어
-    //    1.2. 몬스터
-    // 2. 인터페이스 렌더
-    //    2.1 공격한다 - 일반공격, 스킬
-    //    2.2 방어한다
-    //    2.3 아이템 - 인벤토리 연결
-    //    2.4 도망친다 - isRun = true
-    // 3. 선택 커서 렌더
-    // 4. 전투 승리 시 골드 아이템 경험치 획득
-    // 5. 도망친다의 경우 몬스터를 삭제하지 않고 배틀종료, 플레이어의 isRun도 다시 되돌림
     public class BattleScene : BaseScene
     {
         public Action MonsterDisGuard;
@@ -50,10 +38,8 @@
 
         public override void Render()
         {
-            // TODO : 게임 스크린 크기 결정 후, 픽스 작업
-            // TODO : 도전과제) JRPG처럼 전투화면 구성
+            // 배틀 씬 스크린 레이아웃
             Console.Clear();
-            // TODO : 게임 스크린 크기 결정 후, 픽스 작업
             Console.WriteLine("┌-------------------------------------------------┐");
             Console.WriteLine("|                                                 |");
             Console.WriteLine("|                                                 |");
@@ -441,7 +427,10 @@
             int totalDamage = playerDamage * (100 * monster.level - monster.defence) / (100 * monster.level);
             if (dex > 100)
             {
-                player.Weapon.LoseDurability();
+                if(player.Weapon!=null)
+                {
+                    player.Weapon.LoseDurability();
+                }
                 totalDamage = totalDamage * 120 / 100;
                 Util.PrintText("크리티컬!!!", ConsoleColor.Red);
                 monster.MonsterHit(totalDamage);
@@ -452,7 +441,10 @@
             }
             else
             {
-                player.Weapon.LoseDurability();
+                if(player.Weapon !=null)
+                {
+                    player.Weapon.LoseDurability();
+                }
                 monster.MonsterHit(totalDamage);
             }
             ChangeHP += () => MonsterChangeHPBar(monster.curHP, monster.maxHP);
@@ -606,7 +598,10 @@
                     totalDamage = totalDamage * 120 / 100;
                     Util.PrintText("크리티컬 !!!", ConsoleColor.Red);
                     Util.PrintText($"{totalDamage}의 데미지를 입었다!", ConsoleColor.Red);
-                    player.Armor.LoseDurability();
+                    if(player.Armor != null)
+                    {
+                        player.Armor.LoseDurability();
+                    }
                     ChangeHP += () => player.PlayerHit(totalDamage);
                     ChangeHP += () => ChangeHPBar(player.CurHP, player.MaxHP);
                 }
@@ -617,7 +612,10 @@
                 else
                 {
                     Util.PrintText($"{totalDamage}의 데미지를 입었다!");
-                    player.Armor.LoseDurability();
+                    if(player.Armor != null)
+                    {
+                        player.Armor.LoseDurability();
+                    }
                     ChangeHP += () => player.PlayerHit(totalDamage);
                     ChangeHP += () => ChangeHPBar(player.CurHP, player.MaxHP);
                 }

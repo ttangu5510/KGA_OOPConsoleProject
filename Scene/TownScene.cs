@@ -12,12 +12,12 @@ namespace KGA_OOPConsoleProject.Scene
                {
             "┌-------------------------------------------------┐",
             "|▧▧▧▧▧▧▧▧            ▤▤▤▤SHOP▤▤▤       ▤▤DOC▤▤▧▧▧▧|",
-            "|▤▤HOME▤▤            ▤▤▤▤▤ ▤▤▤▤▤  #    ▤□▤▤▤□▤▧□□▧|",
+            "|▤▤HOME▤▤            ▤▤▤▤▤ ▤▤▤▤▤  §    ▤□▤▤▤□▤▧□□▧|",
             "|▤▨□▤▤▨□▤                              ▤▤▤ ▤▤▤▧▧▧▧|",
             "|▤▤▤ ▤▤▤▤               ●●●                       |",
-            "|                     ●●●●●●●          #           ",
-            "|               #       ●●●                       |",
-            "|▧▧▧▧▧▧▧                      #           ▧▧▧▧▧▧▧ |",
+            "|                     ●●●●●●●          §           ",
+            "|               §       ●●●                       |",
+            "|▧▧▧▧▧▧▧                      §           ▧▧▧▧▧▧▧ |",
             "|▤▤▤▤▨□▤                                  ▤▤▤▤□□▤ |",
             "└-------------------------------------------------┘"
                };
@@ -33,10 +33,12 @@ namespace KGA_OOPConsoleProject.Scene
             gameObjects.Add(new Place("NormalField", '▶', new Vector2(49, 5)));
             gameObjects.Add(new Place("Home", '▲', new Vector2(4, 4)));
             gameObjects.Add(new Place("Doctor", '▲', new Vector2(42, 3)));
+            gameObjects.Add(new Place("Shop", '▲', new Vector2(26, 2)));
             gameObjects.Add(new TownNPC(new Vector2(16, 6), 1));
             gameObjects.Add(new TownNPC(new Vector2(34, 2), 2));
             gameObjects.Add(new TownNPC(new Vector2(30, 7), 3));
             gameObjects.Add(new TownNPC(new Vector2(39, 5), 4));
+            gameObjects.Add(new ShortKnife(new Vector2(49, 8)));
         }
         protected override void PrintMap()
         {
@@ -108,7 +110,10 @@ namespace KGA_OOPConsoleProject.Scene
             else if(GameManager.prevSceneName == "Doctor")
             {
                 GameManager.Player.position = new Vector2(42, 4);
-
+            }
+            else if (GameManager.prevSceneName == "Shop")
+            {
+                GameManager.Player.position = new Vector2(26, 3);
             }
             else
             {

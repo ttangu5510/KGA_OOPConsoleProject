@@ -74,8 +74,7 @@ namespace KGA_OOPConsoleProject
             inventory = new Inventory();
             menu = new Menu();
             equipStatus = new EquipStatus();
-            //TODO 스킬 테스트
-            skills = new List<Skill> { new UpperSlash(),  new LightningCut() };
+            skills = new List<Skill>();
             isRun = false;
             isDead = false;
 
@@ -89,15 +88,11 @@ namespace KGA_OOPConsoleProject
             power = 1;
             defence = 0;
             speed = 5;
-            //TODO 상점테스트 케이스
-            gold = 10000;
+            gold = 0;
 
             nextObj.x = 0;
             nextObj.y = 0;
 
-
-            //armor = new Armor();
-            ///weapon = new Weapon();
         }
 
         //체력회복

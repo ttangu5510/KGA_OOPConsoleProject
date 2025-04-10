@@ -29,6 +29,7 @@ namespace KGA_OOPConsoleProject
         }
         public override void Interact(Player player)
         {
+            Util.PrintText($"{name}을 획득했다!");
             player.Inventory.Add(this);
         }
         public abstract void Use();
