@@ -126,6 +126,11 @@
                     Util.PrintText($"{monster.mItems[i].name}을 획득했다!");
                     player.Inventory.Add(monster.mItems[i]);
                 }
+                //TODO 현재까지 가장 강한 몬스터
+                if(monster.name == "오크")
+                {
+                    GameManager.IsGameOver();
+                }
 
             }
             else if (player.IsRun)

@@ -108,6 +108,14 @@ namespace KGA_OOPConsoleProject
                     List<Item> gItems = [bluePotion];
                     monster = new Monster("고블린", 5, 10, 10, 30, gItems, 30, '￥', position, "몽둥이 휘두르기", goblinSprite, 10, 10);
                     break;
+                case "도적":
+                    List<Item> tItems = [];
+                    monster = new Monster("도적", 10, 30, 20, 80, tItems, 100, '¶', position, "기습", thiefSprite, 20, 20);
+                    break;
+                case "오크":
+                    List<Item> orcItems = [];
+                    monster = new Monster("오크", 15, 50, 35, 120, orcItems, 200, '＆', position, "마구 휘두르기", orcSprite, 15, 35);
+                    break;
                 default:
                     Console.WriteLine("몬스터 이름이 없습니다");
                     return null;
@@ -122,9 +130,19 @@ namespace KGA_OOPConsoleProject
               " (w ∇ w  ) ",
               "           "};
         public string[] goblinSprite =
-            { "   ↖ ㅁ    ",
+            { "   ↖ ㅁ\\  ",
               "    \\|/   ",
               "      |    ",
               "     / \\  "};
+        public string[] thiefSprite =
+            { "      ▲    ",
+              "    /\\|\\ ",
+              "    \\ | \\",
+              "     / \\  "};
+        public string[] orcSprite =
+            { "\\  ＠      ",
+              " \\■■■■ =   ",
+              "  ■■□□■■ \\ ",
+              " 〓    〓   " };
     }
 }

@@ -80,12 +80,13 @@ namespace KGA_OOPConsoleProject
 
             level = 1;
             exp = 0;
-            maxExp = 30;
-            maxHP = 100;
+            maxExp = 15;
+            maxHP = 60;
             curHP = maxHP;
-            maxMP = 15;
+            maxMP = 50;
             mp = maxMP;
-            power = 1;
+            
+            power = 3;
             defence = 0;
             speed = 5;
             gold = 0;
@@ -355,7 +356,7 @@ namespace KGA_OOPConsoleProject
                 Util.PrintText("새로운 스킬을 배웠다!");
                 Skills.Add(new LightningCut());
             }
-            else if (level == 20)
+            else if (level == 15)
             {
                 Util.PrintText("새로운 스킬을 배웠다!");
                 Skills.Add(new AtomicSlash());
@@ -363,11 +364,11 @@ namespace KGA_OOPConsoleProject
 
             Util.PrintText("풀 회복!");
 
-            power += 5;
-            defence += 10;
+            power += 10;
+            defence += 20;
             speed += 10;
-            maxHP += (maxHP * 30 / 100);
-            maxMP += (maxMP * 30 / 100);
+            maxHP += (maxHP * 80 / 100);
+            maxMP += (maxMP * 80 / 100);
             MPHeal(9999);
             HPHeal(9999);
         }

@@ -19,7 +19,7 @@ namespace KGA_OOPConsoleProject.Scene
                     "        ※          ※        ※             ※       |",
                     "|▧      ※          ※                      ※       |",
                     "|▤※※※※※※※※※※※※※※※※※※※※※※※ ※※※※※※※※※※※※※※※※※※※※※※※ |",
-                    "|▤※※※※※※※※※※※※※※※※※※※※※※※   ♥※※※※※※※※※※※※※※※※※※※※※|",
+                    "|▤※※※※※※※※※※※※※※※※※※※※※※※    ※※※※※※※※※※※※※※※※※※※※※|",
                     "└-------------------------------------------------┘"
                };
             map = new bool[mapData.Length, mapData[0].Length];
@@ -33,18 +33,18 @@ namespace KGA_OOPConsoleProject.Scene
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Place("Town", '◀', new Vector2(1, 5)));
             gameObjects.Add(new Place("Forest", '▼', new Vector2(49, 7)));
-            gameObjects.Add(new RedPotion(new Vector2(27, 8)));
+            gameObjects.Add(new RedPotion(new Vector2(28, 8)));
             gameObjects.Add(new SkillNPC(new Vector2(13, 2)));
 
             //몬스터 생성
-            MonsterFactory slimeFactory = new MonsterFactory();
-            Monster slime0 = slimeFactory.MonsterCreate("슬라임", new Vector2(12, 4));
-            Monster slime1 = slimeFactory.MonsterCreate("슬라임", new Vector2(13, 6));
-            Monster slime2 = slimeFactory.MonsterCreate("슬라임", new Vector2(24, 6));
-            Monster slime3 = slimeFactory.MonsterCreate("슬라임", new Vector2(25, 7));
-            Monster slime4 = slimeFactory.MonsterCreate("슬라임", new Vector2(35, 4));
-            Monster slime5 = slimeFactory.MonsterCreate("슬라임", new Vector2(42, 2));
-            Monster slime6 = slimeFactory.MonsterCreate("슬라임", new Vector2(45, 5));
+            MonsterFactory monsterFactory = new MonsterFactory();
+            Monster slime0 = monsterFactory.MonsterCreate("슬라임", new Vector2(12, 4));
+            Monster slime1 = monsterFactory.MonsterCreate("슬라임", new Vector2(13, 6));
+            Monster slime2 = monsterFactory.MonsterCreate("슬라임", new Vector2(24, 6));
+            Monster slime3 = monsterFactory.MonsterCreate("슬라임", new Vector2(25, 7));
+            Monster slime4 = monsterFactory.MonsterCreate("슬라임", new Vector2(35, 4));
+            Monster slime5 = monsterFactory.MonsterCreate("슬라임", new Vector2(42, 2));
+            Monster slime6 = monsterFactory.MonsterCreate("슬라임", new Vector2(45, 5));
             gameObjects.Add(slime0);
             gameObjects.Add(slime1);
             gameObjects.Add(slime2);

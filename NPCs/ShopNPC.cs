@@ -16,18 +16,24 @@ namespace KGA_OOPConsoleProject.NPCs
             stack = new Stack<string>();
             choiceIndex = 0;
             choiceAction = 5;
+            ShopNPCNum = NPCNum;
+
+            BluePotion bluePotion = new BluePotion();
+            RedPotion redPotion = new RedPotion();
+            ShortKnife shortKnife = new ShortKnife();
+            LetherJacket letherJacket = new LetherJacket();
+            BrownPotion brownPotion = new BrownPotion();
+            ChainMail chainMail = new ChainMail();
+            LongSword longSword = new LongSword();
+
 
             switch (NPCNum)
             {
                 case 1:
-                    BluePotion bluePotion = new BluePotion();
-                    RedPotion redPotion = new RedPotion();
-                    ShortKnife shortKnife = new ShortKnife();
-                    LetherJacket letherJacket = new LetherJacket();
                     items = [redPotion, bluePotion, shortKnife, letherJacket];
                     break;
                 case 2:
-                    //items = [];
+                    items = [redPotion,bluePotion,brownPotion,chainMail,longSword];
                     break;
                 case 3:
                     //items = [];
@@ -160,21 +166,29 @@ namespace KGA_OOPConsoleProject.NPCs
             //상인 아이템 출력
             Console.SetCursorPosition(0, 0);
             Console.WriteLine("┌------ 인벤토리 ------┐");
-            Console.WriteLine("|                      |");
-            Console.WriteLine("|                      |");
-            Console.WriteLine("|                      |");
-            Console.WriteLine("└----------------------┘");
             for (int i = 0; i < items.Count; i++)
             {
-                Console.SetCursorPosition(1, 1 + i);
-                Console.Write(items[i]);
+                Console.SetCursorPosition(0, 1 + i);
+                Console.Write("|                      |");
+                Console.SetCursorPosition(2, 1 + i);
+                Console.Write(items[i].name);
             }
+            Console.SetCursorPosition(0, items.Count+1);
+            Console.WriteLine("└----------------------┘");
             Util.PrintChoice(choiceIndex);
         }
         // 상인 대화
         public void ShopConversation()
         {
-            Util.PrintText("슬라임들이 포션을 왜 들고 다닐까?");
+            switch(ShopNPCNum)
+            {
+                case 1:
+                    Util.PrintText("슬라임들이 포션을 왜 들고 다닐까?");
+                    break;
+                case 2:
+                    Util.PrintText("던전에 들어가기 전에 단단히 대비해야 하네");
+                    break;
+            }   
         }
     }
 }

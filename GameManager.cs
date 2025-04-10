@@ -56,6 +56,8 @@ namespace KGA_OOPConsoleProject
             sceneDic.Add("Home", new HomeScene());
             sceneDic.Add("Doctor", new DoctorScene());
             sceneDic.Add("Shop", new ShopScene());
+            sceneDic.Add("DungeonEnt",new DungeonEntranceScene());
+            sceneDic.Add("Shop2", new ShopScene2());
         }
         // 게임 끝
         private static void End()
@@ -68,6 +70,7 @@ namespace KGA_OOPConsoleProject
             else
             {
                 // TODO 엔딩
+                // TODO 오크처치시 엔딩
                 Console.Clear();
                 Util.PrintText("축하합니다! 게임을 클리어 했습니다!");
             }

@@ -1,30 +1,25 @@
 ﻿using KGA_OOPConsoleProject.GameObjects;
 using KGA_OOPConsoleProject.Items;
 using KGA_OOPConsoleProject.NPCs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KGA_OOPConsoleProject.Scene
 {
-    public class ForestScene : FieldScene
+    public class DungeonEntranceScene : FieldScene
     {
-        public ForestScene()
+        public DungeonEntranceScene()
         {
-            name = "Forest";
+            name = "DungeonEnt";
             mapData = new string[]
                {
-                    "┌-- ----------------------------------------------┐",
-                    "|※※ ※※※※※※※※※※※※※※※※※   ※※※※※※※ ※※※※※■■■■■■■■■■■▥▥|",
-                    "|※※          ▥   ▥      ※▥      ※ ▥    ※■■§■■■※ ▥▥|",
-                    "|※※                  ※   ▥※             ※  ※   ※▥▥|",
-                    "|▥▥           ※     ※          ※     ※          ▥ |",
-                    "|▥▥       ※   ※    ※   ※       ▥※             ※   |",
-                    "|※§      ※          ▥   ▥                   ※     |",
-                    "|※※※※ ※※※ ※※※※ ※※※ ※※※ ※※※※※ ※※※※※※ ※※※※※  ※※※ ※※※|",
-                    "|▥※▥※※ ▥※※※ ▥※※ ※▥※※▥※※▥▥▥ ※※※※※※※ ※※▥※※▥  ▥ ※※※※※|",
+                    "┌- -----------------------------------------------┐",
+                    "|※   ※※※  ※※※※   ※※※※   ※  ※※▒※ ▒ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒|",
+                    "|※※          ▥           ▥                    ▒▒▒▒|",
+                    "|※ ※    ※        ※   ※                  ※  ※ ▒▒▒▒▒|",
+                    "|※                  ※                ※           ▒|",
+                    "|▥        ※   ※    ※                         ▒▒▒▒▒|",
+                    "|※       ※                                 §▒▒▒▒▒▒|",
+                    "|※  ※ ※※  ※※※※ ※※※       ※※※     ※※      ▒  ▒▒▒▒▒▒|",
+                    "|▥  ※※ ▥※※※ ▥※※ ※▥※※▥※※▥▥               ▒▒▒ ▒▒▒▒▒▒|",
                     "└-------------------------------------------------┘"
                };
             map = new bool[mapData.Length, mapData[0].Length];
@@ -36,28 +31,29 @@ namespace KGA_OOPConsoleProject.Scene
                 }
             }
             gameObjects = new List<GameObject>();
-            gameObjects.Add(new Place("NormalField", '▲', new Vector2(3, 1)));
-            gameObjects.Add(new Place("DungeonEnt", '▼', new Vector2(41, 8)));
-            gameObjects.Add(new FieldNPC(new Vector2(42, 2), 1));
-            gameObjects.Add(new FieldNPC(new Vector2(2, 6), 2));
-            gameObjects.Add(new BrownPotion(new Vector2(46, 3)));
+            gameObjects.Add(new Place("Forest", '▲', new Vector2(2, 0)));
+            gameObjects.Add(new Place("Dungeon", '▶', new Vector2(48, 4)));
+            gameObjects.Add(new Place("Shop2", '▼', new Vector2(43, 8)));
+            gameObjects.Add(new FieldNPC(new Vector2(43, 6), 3));
+            gameObjects.Add(new BrownPotion(new Vector2(2, 8)));
+            gameObjects.Add(new Elixer(new Vector2(2, 7)));
 
             //몬스터 생성
             MonsterFactory monsterFactory = new MonsterFactory();
-            Monster slime0 = monsterFactory.MonsterCreate("슬라임", new Vector2(24, 6));
-            Monster slime1 = monsterFactory.MonsterCreate("슬라임", new Vector2(25, 7));
-            Monster slime2 = monsterFactory.MonsterCreate("슬라임", new Vector2(35, 4));
-            Monster goblin0 = monsterFactory.MonsterCreate("고블린", new Vector2(27, 5));
-            Monster goblin1 = monsterFactory.MonsterCreate("고블린", new Vector2(28, 2));
-            Monster thief0 = monsterFactory.MonsterCreate("도적", new Vector2(22, 1));
-            Monster thief1 = monsterFactory.MonsterCreate("도적", new Vector2(45, 4));
+            Monster slime0 = monsterFactory.MonsterCreate("슬라임", new Vector2(13, 4));
+            Monster goblin0 = monsterFactory.MonsterCreate("고블린", new Vector2(30, 3));
+            Monster goblin1 = monsterFactory.MonsterCreate("고블린", new Vector2(21, 7));
+            Monster goblin2 = monsterFactory.MonsterCreate("고블린", new Vector2(5, 5));
+            Monster thief0 = monsterFactory.MonsterCreate("도적", new Vector2(39, 2));
+            Monster thief1 = monsterFactory.MonsterCreate("도적", new Vector2(3, 8));
+            Monster orc0 = monsterFactory.MonsterCreate("오크", new Vector2(45, 4));
             gameObjects.Add(slime0);
-            gameObjects.Add(slime1);
-            gameObjects.Add(slime2);
             gameObjects.Add(goblin0);
             gameObjects.Add(goblin1);
+            gameObjects.Add(goblin2);
             gameObjects.Add(thief0);
             gameObjects.Add(thief1);
+            gameObjects.Add(orc0);
         }
         protected override void PrintMap()
         {
@@ -104,20 +100,19 @@ namespace KGA_OOPConsoleProject.Scene
 
         public override void SetByPrevScene()
         {
-            if (GameManager.prevSceneName == "NormalField")
+            if (GameManager.prevSceneName == "Forest")
             {
-                GameManager.Player.position = new Vector2(3, 2);
+                GameManager.Player.position = new Vector2(2, 1);
 
             }
-            else if (GameManager.prevSceneName == "DungeonEnt")
+            else if (GameManager.prevSceneName == "Shop2")
             {
-                GameManager.Player.position = new Vector2(41, 7);
+                GameManager.Player.position = new Vector2(43, 7);
             }
             else
             {
                 GameManager.Player.position = new Vector2(3, 5);
             }
         }
-
     }
 }

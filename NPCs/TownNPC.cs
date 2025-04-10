@@ -18,7 +18,7 @@ namespace KGA_OOPConsoleProject
             switch(NPCNum)
             {
                 case 1:
-                    Util.PrintText("마을 밖에 몬스터가 있어!");
+                    Util.PrintText("누군가 우리집 뒤에 칼을 버렸어...");
                     break;
                 case 2:
                     Util.PrintText("상점에 새로운 물건이 들어왔대!");

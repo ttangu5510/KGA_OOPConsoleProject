@@ -31,9 +31,9 @@
                     Console.SetCursorPosition(x + 2, y + 1 + (i / 20));
                 }
                 Console.Write(text[i]);
-                // TODO : 완성 시 활성화 Thread.Sleep(delay);
+                Thread.Sleep(delay);
             }
-            // TODO : 완성시 활성화 Thread.Sleep(delay2);
+            Thread.Sleep(delay2);
             Console.ResetColor();
             Console.SetCursorPosition(x, y);
             if (inputOn)
@@ -88,10 +88,10 @@
                         Console.SetCursorPosition(x + 2, y + 1 + (i / 20));
                     }
                     Console.Write(s[i]);
-                    //TODO  : 완성시 해제 Thread.Sleep(delay);
+                    Thread.Sleep(delay);
                 }
                 Console.ReadKey(true);
-                //TODO  : 완성시 해제  Thread.Sleep(delay2);
+                Thread.Sleep(delay2);
                 Console.Clear();
             }
             Console.ResetColor();

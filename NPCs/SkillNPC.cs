@@ -37,7 +37,7 @@ namespace KGA_OOPConsoleProject.NPCs
                     Util.PrintText("내가 알려준 스킬 잘 쓰고있어?");
                     if(player.Weapon == null)
                     {
-                        Util.PrintText("너 그런데, 무기도 없이 싸우게?");
+                        Util.PrintText("너 그런데 무기도 없이 싸우게?");
                     }
                     break;
             }
