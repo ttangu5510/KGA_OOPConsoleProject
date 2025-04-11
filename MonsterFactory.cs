@@ -106,7 +106,7 @@ namespace KGA_OOPConsoleProject
                     break;
                 case "고블린":
                     List<Item> gItems = [bluePotion];
-                    monster = new Monster("고블린", 5, 10, 10, 30, gItems, 30, '￥', position, "몽둥이 휘두르기", goblinSprite, 10, 10);
+                    monster = new Monster("고블린", 5, 10, 10, 30, gItems, 30, '‡', position, "몽둥이 휘두르기", goblinSprite, 10, 10);
                     break;
                 case "도적":
                     List<Item> tItems = [];

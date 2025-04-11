@@ -12,14 +12,14 @@ namespace KGA_OOPConsoleProject.Scene
             mapData = new string[]
                {
                     "┌-------------------------------------------------┐",
-                    "|1111111111111111111111111111111111111111111111111|",
-                    "|  ※         §          ※      ※      ※      ※ ※ ※|",
-                    "|  ※                   ※             ※  ※   ※ ※  ※|",
-                    "|                           ※                     |",
-                    "        ※          ※        ※             ※       |",
-                    "|▧      ※          ※                      ※       |",
-                    "|▤※※※※※※※※※※※※※※※※※※※※※※※ ※※※※※※※※※※※※※※※※※※※※※※※ |",
-                    "|▤※※※※※※※※※※※※※※※※※※※※※※※    ※※※※※※※※※※※※※※※※※※※※※|",
+                    "|4444444444444444444444444444444444444444444444444|",
+                    "|44          §                44               444|",
+                    "|4                             4         ※        |",
+                    "|                           ※               ※     |",
+                    "                            ※         ※   ※※※※    |",
+                    "|▨▨      ※          ※              ※ ※※    ※※※※   |",
+                    "|□▦▨  ※※※※※※       ※※※※※※ ※※※ ※※※※※※※※※※※※※※※※※※※ |",
+                    "|▦▦    ▤※  ※※※※  ※※※※ ※     ▤※※※※※  ※※※ ※※※※※※※※※※|",
                     "└-------------------------------------------------┘"
                };
             map = new bool[mapData.Length, mapData[0].Length];
@@ -35,6 +35,7 @@ namespace KGA_OOPConsoleProject.Scene
             gameObjects.Add(new Place("Forest", '▼', new Vector2(49, 7)));
             gameObjects.Add(new RedPotion(new Vector2(28, 8)));
             gameObjects.Add(new SkillNPC(new Vector2(13, 2)));
+            gameObjects.Add(new RedPotion(new Vector2(7, 8)));
 
             //몬스터 생성
             MonsterFactory monsterFactory = new MonsterFactory();

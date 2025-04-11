@@ -63,7 +63,7 @@
             Console.WriteLine("└-------------------------------------┘");
             Console.ReadKey();
             Console.Clear();
-            GameManager.ChangeScene("Home");
+            GameManager.ChangeScene("DungeonEnt");
 
         }
 

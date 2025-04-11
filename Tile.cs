@@ -23,8 +23,10 @@
                     tilePalette = 8;
                     break;
                 case TileType.NormalField:
+                    tilePalette = 8;
                     break;
                 case TileType.Forest:
+                    tilePalette = 8;
                     break;
                 case TileType.Shop:
                     break;
@@ -33,6 +35,7 @@
                 case TileType.Doctor:
                     break;
                 case TileType.DungeonEnt:
+                    tilePalette = 7;
                     break;
                 case TileType.Dungeon:
                     break;

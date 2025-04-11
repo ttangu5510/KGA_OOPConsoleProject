@@ -45,7 +45,7 @@
             {
                 // 메뉴창 들어갔다 나오니 전체출력
                 case ConsoleKey.Enter:
-                    PrintObject +=()=> Tile.PrintMap(mapData, name);
+                    PrintObject += () => Tile.PrintMap(mapData, name);
                     PrintObject += ObjectPrints;
                     PrintObject += GameManager.Player.PrintPlayer;
                     break;
@@ -65,8 +65,17 @@
             afterPlayerMove = GameManager.Player.position;
             if (beforePlayerMove != afterPlayerMove)
             {
+                bool meetMonster = false;
                 PrintObject += GameManager.Player.PrintPlayer;
-                PrintObject += () => Tile.TilePrint(mapData,beforePlayerMove.x, beforePlayerMove.y,name);
+                foreach (GameObject go in gameObjects)
+                {
+                    if (go.position == beforePlayerMove)
+                    {
+                        meetMonster = true;
+                        break;
+                    }
+                }
+                    PrintObject += () => Tile.TilePrint(mapData, beforePlayerMove.x, beforePlayerMove.y, name);
             }
             else if (beforePlayerMove == afterPlayerMove)
             {
@@ -83,8 +92,8 @@
                 {
                     //TODO: 맵프린트 테스트
                     // 옵젝트와 상호작용을 하니 전체 프린트
-                    PrintObject += ()=>Tile.PrintMap(mapData, name);
-                    PrintObject += GameManager.Player.PrintPlayer;
+                    PrintObject -= () => Tile.TilePrint(mapData, beforePlayerMove.x, beforePlayerMove.y, name);
+                    PrintObject += () => Tile.PrintMap(mapData, name);
                     PrintObject += ObjectPrints;
                     go.Interact(GameManager.Player);
 
@@ -98,7 +107,7 @@
                 {
                     //TODO : 맵프린트 테스트
                     //옵젝트와 상호작용 하니 대화창이든 뭐든 일단 전체 프린트가 필요한 상황
-                    PrintObject +=()=> Tile.PrintMap(mapData, name);
+                    PrintObject += () => Tile.PrintMap(mapData, name);
                     PrintObject += GameManager.Player.PrintPlayer;
                     PrintObject += ObjectPrints;
                     go.Interact(GameManager.Player);
