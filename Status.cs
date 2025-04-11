@@ -43,28 +43,40 @@
             Console.SetCursorPosition(2, 6);
             Console.Write($"현재 / 최대 MP: {GameManager.Player.MP}/{GameManager.Player.MaxMP}");
             PrintSkills();
-            Console.ReadKey(true);
+            while (true)
+            {
+                ConsoleKey input = InputHelp.InputKey();
+                switch (input)
+                {
+                    case ConsoleKey.Enter:
+                    case ConsoleKey.A:
+                    case ConsoleKey.S:
+                        return;
+                }
+            }
         }
         public static void PrintSkills()
         {
             Console.SetCursorPosition(0, 9);
-            Console.WriteLine("┌------ 스 킬 --------------------------┐");
-            Console.WriteLine("|                                       |");
-            Console.WriteLine("|                                       |");
-            Console.WriteLine("|                                       |");
-            Console.WriteLine("|                                       |");
-            Console.WriteLine("|                                       |");
-            Console.WriteLine("|                                       |");
-            Console.WriteLine("|                                       |");
-            Console.WriteLine("|                                       |");
-            Console.WriteLine("└---------------------------------------┘");
-            for (int i = 0; i < GameManager.Player.Skills.Count; i++)
+            Console.WriteLine("┌--------------- 스 킬 -----------------┐");
+            if (GameManager.Player.Skills.Count == 0)
             {
-                Console.SetCursorPosition(2, 10 + i * 2);
-                Console.Write($"{GameManager.Player.Skills[i].Name}: {GameManager.Player.Skills[i].Description}");
-                Console.SetCursorPosition(2, 10 + i * 2 + 1);
-                Console.Write($"공격력: {GameManager.Player.Skills[i].Damage}  | 마나 소모량:{GameManager.Player.Skills[i].UseMP}");
+                Console.WriteLine("|                 없음                  |");
             }
+            else
+            {
+                for (int i = 0; i < GameManager.Player.Skills.Count; i++)
+                {
+                    Console.SetCursorPosition(0, 10 + i * 2);
+                    Console.WriteLine("|                                       |");
+                    Console.WriteLine("|                                       |");
+                    Console.SetCursorPosition(2, 10 + i * 2);
+                    Console.Write($"{GameManager.Player.Skills[i].Name}: {GameManager.Player.Skills[i].Description}");
+                    Console.SetCursorPosition(2, 10 + i * 2 + 1);
+                    Console.WriteLine($"공격력: {GameManager.Player.Skills[i].Damage}  | 마나 소모량:{GameManager.Player.Skills[i].UseMP}");
+                }
+            }
+            Console.WriteLine("└---------------------------------------┘");
 
 
         }

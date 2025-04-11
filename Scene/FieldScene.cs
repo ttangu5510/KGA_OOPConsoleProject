@@ -22,7 +22,7 @@
         }
         public override void Input()
         {
-            input = Console.ReadKey(true).Key;
+            input = InputHelp.InputKey();
 
         }
 

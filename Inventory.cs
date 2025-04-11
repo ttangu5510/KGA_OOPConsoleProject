@@ -86,7 +86,7 @@
             Console.Clear();
             PrintAll();
             Util.PrintChoice(choiceIndex);
-            ConsoleKey input = Console.ReadKey(true).Key;
+            ConsoleKey input = InputHelp.InputKey();
             switch (input)
             {
                 case ConsoleKey.UpArrow:
@@ -151,7 +151,7 @@
                 Console.SetCursorPosition(15, 3);
                 Console.WriteLine("└------------┘");
                 Util.PrintChoice(choiceIndex, 16);
-                ConsoleKey input = Console.ReadKey(true).Key;
+                ConsoleKey input = InputHelp.InputKey();
                 switch (input)
                 {
                     case ConsoleKey.UpArrow:
@@ -208,7 +208,7 @@
                     Console.SetCursorPosition(15, 4);
                     Console.WriteLine("└------------┘");
                     Util.PrintChoice(choiceIndex, 16);
-                    ConsoleKey input = Console.ReadKey(true).Key;
+                    ConsoleKey input = InputHelp.InputKey();
                     switch (input)
                     {
                         case ConsoleKey.UpArrow:
@@ -263,7 +263,7 @@
                     Console.SetCursorPosition(15, 4);
                     Console.WriteLine("└------------┘");
                     Util.PrintChoice(choiceIndex, 16);
-                    ConsoleKey input = Console.ReadKey(true).Key;
+                    ConsoleKey input = InputHelp.InputKey();
                     switch (input)
                     {
                         case ConsoleKey.UpArrow:
@@ -311,7 +311,7 @@
         {
             Item selectItem = items[selectIndex];
             Util.PrintText($"{selectItem.name}을/를 버리시겠습니까?");
-            ConsoleKey input = Console.ReadKey(true).Key;
+            ConsoleKey input = InputHelp.InputKey();
             switch (input)
             {
                 case ConsoleKey.A:

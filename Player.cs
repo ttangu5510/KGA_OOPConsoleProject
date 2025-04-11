@@ -69,11 +69,15 @@ namespace KGA_OOPConsoleProject
                      " /  / \\  \\     ",
                      "/__ /  \\___\\   "
             };
+
+        // 초기화
         public Player()
         {
             inventory = new Inventory();
             menu = new Menu();
             equipStatus = new EquipStatus();
+
+            //테스트
             skills = new List<Skill>();
             isRun = false;
             isDead = false;
