@@ -36,6 +36,7 @@ namespace KGA_OOPConsoleProject
         {
             // 게임 타이틀 설정
             Console.Title = "용사가 너무 약하다";
+            
             // 게임 시작 초기세팅
             Console.CursorVisible = false;
             gameOver = false;

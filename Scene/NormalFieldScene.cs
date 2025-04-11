@@ -53,6 +53,8 @@ namespace KGA_OOPConsoleProject.Scene
             gameObjects.Add(slime5);
             gameObjects.Add(slime6);
         }
+
+        //프린트 맵
         protected override void PrintMap()
         {
             Console.SetCursorPosition(0, 0);

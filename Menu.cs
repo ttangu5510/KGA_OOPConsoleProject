@@ -55,7 +55,7 @@
             Console.WriteLine("|                   |  └-----------------┘                |");
             Console.WriteLine("└-------------------┴-------------------------------------┘");
             Util.PrintChoice(choiceIndex);
-            ConsoleKey input = Console.ReadKey(true).Key;
+            ConsoleKey input = InputHelp.InputKey();
             switch (input)
             {
                 case ConsoleKey.A:

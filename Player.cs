@@ -1,4 +1,5 @@
 ﻿using KGA_OOPConsoleProject.Items;
+using KGA_OOPConsoleProject.Scene;
 
 namespace KGA_OOPConsoleProject
 {

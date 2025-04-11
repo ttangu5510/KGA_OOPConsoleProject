@@ -208,7 +208,7 @@
         public void ChoiceMove()
         {
             Render();
-            ConsoleKey input = Console.ReadKey(true).Key;
+            ConsoleKey input = InputHelp.InputKey();
             switch (input)
             {
                 case ConsoleKey.LeftArrow:
@@ -265,7 +265,7 @@
             Console.SetCursorPosition(0, 10);
             Console.Write("└--------┘");
             Util.PrintChoice(choiceAttackY);
-            ConsoleKey input = Console.ReadKey(true).Key;
+            ConsoleKey input = InputHelp.InputKey();
             switch (input)
             {
                 case ConsoleKey.UpArrow:
@@ -330,7 +330,7 @@
 
             Util.PrintChoice(choiceAttackY, 12);
 
-            ConsoleKey input = Console.ReadKey(true).Key;
+            ConsoleKey input = InputHelp.InputKey();
             switch (input)
             {
                 case ConsoleKey.UpArrow:
