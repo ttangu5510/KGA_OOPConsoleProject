@@ -38,48 +38,48 @@ namespace KGA_OOPConsoleProject.Scene
             gameObjects.Add(new Place("DungeonEnt", '▼', new Vector2(27, 8)));
             gameObjects.Add(new ShopNPC(new Vector2(27, 3), 2));
         }
-        protected override void PrintMap()
-        {
-            Console.SetCursorPosition(0, 0);
-            for (int y = 0; y < mapData.Length; y++)
-            {
-                for (int x = 0; x < mapData[y].Length; x++)
-                {
-                    if (mapData[y][x] == ' ')
-                    {
-                        Console.BackgroundColor = ConsoleColor.DarkGray;
-                        Console.Write(mapData[y][x]);
-                        Console.ResetColor();
-                    }
-                    else if (mapData[y][x] == '1')
-                    {
-                        Console.BackgroundColor = ConsoleColor.Black;
-                        Console.ForegroundColor = ConsoleColor.Black;
-                        Console.Write(mapData[y][x]);
-                        Console.ResetColor();
-                    }
-                    else if (mapData[y][x] == '■')
-                    {
-                        Console.BackgroundColor = ConsoleColor.DarkGray;
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                        Console.Write(mapData[y][x]);
-                        Console.ResetColor();
-                    }
-                    else if (mapData[y][x] == '▤')
-                    {
-                        Console.BackgroundColor = ConsoleColor.DarkRed;
-                        Console.ForegroundColor = ConsoleColor.DarkGray;
-                        Console.Write(mapData[y][x]);
-                        Console.ResetColor();
-                    }
-                    else
-                    {
-                        Console.Write(mapData[y][x]);
-                    }
-                }
-                Console.WriteLine();
-            }
-        }
+        //protected override void PrintMap()
+        //{
+        //    Console.SetCursorPosition(0, 0);
+        //    for (int y = 0; y < mapData.Length; y++)
+        //    {
+        //        for (int x = 0; x < mapData[y].Length; x++)
+        //        {
+        //            if (mapData[y][x] == ' ')
+        //            {
+        //                Console.BackgroundColor = ConsoleColor.DarkGray;
+        //                Console.Write(mapData[y][x]);
+        //                Console.ResetColor();
+        //            }
+        //            else if (mapData[y][x] == '1')
+        //            {
+        //                Console.BackgroundColor = ConsoleColor.Black;
+        //                Console.ForegroundColor = ConsoleColor.Black;
+        //                Console.Write(mapData[y][x]);
+        //                Console.ResetColor();
+        //            }
+        //            else if (mapData[y][x] == '■')
+        //            {
+        //                Console.BackgroundColor = ConsoleColor.DarkGray;
+        //                Console.ForegroundColor = ConsoleColor.Gray;
+        //                Console.Write(mapData[y][x]);
+        //                Console.ResetColor();
+        //            }
+        //            else if (mapData[y][x] == '▤')
+        //            {
+        //                Console.BackgroundColor = ConsoleColor.DarkRed;
+        //                Console.ForegroundColor = ConsoleColor.DarkGray;
+        //                Console.Write(mapData[y][x]);
+        //                Console.ResetColor();
+        //            }
+        //            else
+        //            {
+        //                Console.Write(mapData[y][x]);
+        //            }
+        //        }
+        //        Console.WriteLine();
+        //    }
+        //}
         public override void SetByPrevScene()
         {
             GameManager.Player.position = new Vector2(27, 7);

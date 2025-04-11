@@ -55,55 +55,55 @@ namespace KGA_OOPConsoleProject.Scene
         }
 
         //프린트 맵
-        protected override void PrintMap()
-        {
-            Console.SetCursorPosition(0, 0);
-            for (int y = 0; y < mapData.Length; y++)
-            {
-                for (int x = 0; x < mapData[y].Length; x++)
-                {
-                    if (mapData[y][x] == ' ')
-                    {
-                        Console.BackgroundColor = ConsoleColor.DarkYellow;
-                        Console.Write(mapData[y][x]);
-                        Console.ResetColor();
-                    }
-                    else if (mapData[y][x] == '▧')
-                    {
-                        Console.BackgroundColor = ConsoleColor.DarkRed;
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(mapData[y][x]);
-                        Console.ResetColor();
-                    }
-                    else if (mapData[y][x] == '▤')
-                    {
-                        Console.BackgroundColor = ConsoleColor.DarkGray;
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                        Console.Write(mapData[y][x]);
-                        Console.ResetColor();
-                    }
-                    else if (mapData[y][x] == '※')
-                    {
-                        Console.BackgroundColor = ConsoleColor.DarkGreen;
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write(mapData[y][x]);
-                        Console.ResetColor();
-                    }
-                    else if (mapData[y][x] == '1')
-                    {
-                        Console.BackgroundColor = ConsoleColor.Blue;
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.Write(mapData[y][x]);
-                        Console.ResetColor();
-                    }
-                    else
-                    {
-                        Console.Write(mapData[y][x]);
-                    }
-                }
-                Console.WriteLine();
-            }
-        }
+        //protected override void PrintMap()
+        //{
+        //    Console.SetCursorPosition(0, 0);
+        //    for (int y = 0; y < mapData.Length; y++)
+        //    {
+        //        for (int x = 0; x < mapData[y].Length; x++)
+        //        {
+        //            if (mapData[y][x] == ' ')
+        //            {
+        //                Console.BackgroundColor = ConsoleColor.DarkYellow;
+        //                Console.Write(mapData[y][x]);
+        //                Console.ResetColor();
+        //            }
+        //            else if (mapData[y][x] == '▧')
+        //            {
+        //                Console.BackgroundColor = ConsoleColor.DarkRed;
+        //                Console.ForegroundColor = ConsoleColor.Red;
+        //                Console.Write(mapData[y][x]);
+        //                Console.ResetColor();
+        //            }
+        //            else if (mapData[y][x] == '▤')
+        //            {
+        //                Console.BackgroundColor = ConsoleColor.DarkGray;
+        //                Console.ForegroundColor = ConsoleColor.Gray;
+        //                Console.Write(mapData[y][x]);
+        //                Console.ResetColor();
+        //            }
+        //            else if (mapData[y][x] == '※')
+        //            {
+        //                Console.BackgroundColor = ConsoleColor.DarkGreen;
+        //                Console.ForegroundColor = ConsoleColor.Green;
+        //                Console.Write(mapData[y][x]);
+        //                Console.ResetColor();
+        //            }
+        //            else if (mapData[y][x] == '1')
+        //            {
+        //                Console.BackgroundColor = ConsoleColor.Blue;
+        //                Console.ForegroundColor = ConsoleColor.Blue;
+        //                Console.Write(mapData[y][x]);
+        //                Console.ResetColor();
+        //            }
+        //            else
+        //            {
+        //                Console.Write(mapData[y][x]);
+        //            }
+        //        }
+        //        Console.WriteLine();
+        //    }
+        //}
 
         public override void SetByPrevScene()
         {
