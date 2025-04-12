@@ -59,6 +59,7 @@ namespace KGA_OOPConsoleProject
             sceneDic.Add("Shop", new ShopScene());
             sceneDic.Add("DungeonEnt",new DungeonEntranceScene());
             sceneDic.Add("Shop2", new ShopScene2());
+            sceneDic.Add("Dungeon", new DungeonScene());
         }
         // 게임 끝
         private static void End()

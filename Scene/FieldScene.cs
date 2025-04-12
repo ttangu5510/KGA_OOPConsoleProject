@@ -66,7 +66,6 @@
             if (beforePlayerMove != afterPlayerMove)
             {
                 bool meetMonster = false;
-                PrintObject += GameManager.Player.PrintPlayer;
                 foreach (GameObject go in gameObjects)
                 {
                     if (go.position == beforePlayerMove)
@@ -75,7 +74,15 @@
                         break;
                     }
                 }
+                if (!meetMonster)
+                {
                     PrintObject += () => Tile.TilePrint(mapData, beforePlayerMove.x, beforePlayerMove.y, name);
+                }
+                else
+                {
+                    meetMonster = false;
+                }
+                PrintObject += GameManager.Player.PrintPlayer;
             }
             else if (beforePlayerMove == afterPlayerMove)
             {
@@ -92,7 +99,6 @@
                 {
                     //TODO: 맵프린트 테스트
                     // 옵젝트와 상호작용을 하니 전체 프린트
-                    PrintObject -= () => Tile.TilePrint(mapData, beforePlayerMove.x, beforePlayerMove.y, name);
                     PrintObject += () => Tile.PrintMap(mapData, name);
                     PrintObject += ObjectPrints;
                     go.Interact(GameManager.Player);

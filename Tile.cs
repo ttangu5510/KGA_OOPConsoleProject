@@ -29,15 +29,19 @@
                     tilePalette = 8;
                     break;
                 case TileType.Shop:
+                    tilePalette = 8;
                     break;
                 case TileType.Shop2:
+                    tilePalette = 8;
                     break;
                 case TileType.Doctor:
+                    tilePalette = 8;
                     break;
                 case TileType.DungeonEnt:
                     tilePalette = 7;
                     break;
                 case TileType.Dungeon:
+                    tilePalette = 6;
                     break;
                 default:
                     break;
@@ -54,11 +58,6 @@
                             Console.ForegroundColor = (ConsoleColor)tilePalette - 2;
                             Console.Write(map[y][x]);
                             break;
-                        //case '▧': // 창문
-                        //    Console.BackgroundColor = (ConsoleColor)tilePalette - 4; // 4
-                        //    Console.ForegroundColor = (ConsoleColor)tilePalette + 4;
-                        //    Console.Write(map[y][x]);
-                        //    break;
                         case '※': // 나무
                             Console.BackgroundColor = (ConsoleColor)tilePalette - 6;
                             Console.ForegroundColor = (ConsoleColor)tilePalette + 2; //10
@@ -132,11 +131,6 @@
                     Console.ForegroundColor = (ConsoleColor)tilePalette - 2;
                     Console.Write(map[y][x]);
                     break;
-                //case '▧': // 창문
-                //    Console.BackgroundColor = (ConsoleColor)tilePalette - 1; // 4
-                //    Console.ForegroundColor = (ConsoleColor)tilePalette + 1;
-                //    Console.Write(map[y][x]);
-                //    break;
                 case '▤': // 상자
                     Console.BackgroundColor = (ConsoleColor)tilePalette; // 8
                     Console.ForegroundColor = (ConsoleColor)tilePalette - 1;
