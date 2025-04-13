@@ -4,7 +4,7 @@
     public static class Tile
     {
         //TODO Tile Print
-        private enum TileType { Home, Town, NormalField, Forest, Shop, Shop2, Doctor, DungeonEnt, Dungeon }
+        private enum TileType { Home, Town, NormalField, Forest, Shop, Shop2, Doctor, DungeonEnt, Dungeon, Secret  }
         private static TileType tile;
         private static int tilePalette;
 
@@ -43,7 +43,11 @@
                 case TileType.Dungeon:
                     tilePalette = 6;
                     break;
+                case TileType.Secret:
+                    tilePalette = 9;
+                    break;
                 default:
+                    tilePalette = 8;
                     break;
             }
             for (int y = 0; y < map.GetLength(0); y++)

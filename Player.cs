@@ -104,6 +104,7 @@ namespace KGA_OOPConsoleProject
         //체력회복
         public void HPHeal(int amount)
         {
+            Util.PrintText("체력을 회복했다!");
             curHP += amount;
             if (curHP > maxHP)
             {

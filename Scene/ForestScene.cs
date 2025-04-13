@@ -118,6 +118,5 @@ namespace KGA_OOPConsoleProject.Scene
                 GameManager.Player.position = new Vector2(3, 5);
             }
         }
-
     }
 }

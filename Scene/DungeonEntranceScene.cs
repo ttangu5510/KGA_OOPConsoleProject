@@ -109,6 +109,10 @@ namespace KGA_OOPConsoleProject.Scene
             {
                 GameManager.Player.position = new Vector2(43, 7);
             }
+            else if (GameManager.prevSceneName == "Dungeon")
+            {
+                GameManager.Player.position = new Vector2(47, 4);
+            }
             else
             {
                 GameManager.Player.position = new Vector2(3, 5);
