@@ -1,5 +1,6 @@
 ﻿using KGA_OOPConsoleProject.GameObjects;
 using KGA_OOPConsoleProject.Items;
+using KGA_OOPConsoleProject.NPCs;
 
 namespace KGA_OOPConsoleProject.Scene
 {
@@ -12,7 +13,7 @@ namespace KGA_OOPConsoleProject.Scene
                {
             "┌-------------------------------------------------┐",
             "|▨▨▨▨▨▨▨▨  ※    ※    ▨▦▦▦SHOP▦▦▨     ※ ▨▨DOC▨▨▨▨▨▨|",
-            "|▨▦HOME▦▨  ▤    ▤    ▦※▦▦▦ ▦▦▦▦▦  §  ▤ ▦□▦※▦□▦▨□4▨|",
+            "|▨▦HOME▦▨  ▤ §  ▤    ▦※▦▦▦ ▦▦▦▦▦  §  ▤ ▦□▦※▦□▦▨□4▨|",
             "|▦※4□▦4□▦                              ▦▦▦ ▦▦▦▨▨▨▨|",
             "|▦▦▦ ▦▦▦▦               444                       |",
             "|                     444□444          §           ",
@@ -39,6 +40,9 @@ namespace KGA_OOPConsoleProject.Scene
             gameObjects.Add(new TownNPC(new Vector2(30, 7), 3));
             gameObjects.Add(new TownNPC(new Vector2(39, 5), 4));
             gameObjects.Add(new ShortKnife(new Vector2(49, 8)));
+
+            // 퀘스트 테스트중
+            gameObjects.Add(new QuestNPC(new Vector2(13,2)));
         }
         //protected override void PrintMap()
         //{

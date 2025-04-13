@@ -63,7 +63,9 @@
             Console.WriteLine("└-------------------------------------┘");
             Console.ReadKey();
             Console.Clear();
-            GameManager.ChangeScene("Secret");
+
+            //TODO 퀘스트 테스트중
+            GameManager.ChangeScene("Town");
 
         }
 

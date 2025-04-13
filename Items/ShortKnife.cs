@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KGA_OOPConsoleProject.Items
+﻿namespace KGA_OOPConsoleProject.Items
 {
     public class ShortKnife : Weapon
     {
 
-        public ShortKnife(Vector2 position) :base(position)
+        public ShortKnife(Vector2 position) : base(position)
         {
             name = "단검";
             description = "짧고 뭉툭한 단검";

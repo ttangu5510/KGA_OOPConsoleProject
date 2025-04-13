@@ -1,5 +1,4 @@
 ﻿using KGA_OOPConsoleProject.GameObjects;
-using KGA_OOPConsoleProject.Items;
 using KGA_OOPConsoleProject.NPCs;
 
 namespace KGA_OOPConsoleProject.Scene
@@ -32,7 +31,7 @@ namespace KGA_OOPConsoleProject.Scene
             }
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Place("DungeonEnt", '◀', new Vector2(0, 4)));
-            gameObjects.Add(new DocNPC(new Vector2(3, 1)));
+            gameObjects.Add(new DocNPC(new Vector2(3, 1), 2));
             // 비밀방
             //gameObjects.Add(new Place("Secret", '▶', new Vector2(50, 8)));
 
@@ -47,7 +46,7 @@ namespace KGA_OOPConsoleProject.Scene
                 GameManager.Player.position = new Vector2(1, 4);
 
             }
-            else if(GameManager.prevSceneName == "Secret")
+            else if (GameManager.prevSceneName == "Secret")
             {
                 GameManager.Player.position = new Vector2(49, 8);
             }

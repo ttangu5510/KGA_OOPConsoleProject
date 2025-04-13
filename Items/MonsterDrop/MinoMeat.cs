@@ -10,15 +10,16 @@ namespace KGA_OOPConsoleProject.Items.MonsterDrop
     {
         public MinoMeat()
         {
-            name = "미노타우르스의 고기";
-            description = "미노타우루스의 고기다. 마블링이 대단하다";
-            isUsable = false;
+            name = "미노 고기";
+            description = "미노타우루스의 고기. 마블링이 대단하다";
+            useDescription = "사용할 수 없다...";
             sellGold = 200;
+            isConsumable = false;
         }
 
         public override void Use()
         {
-            GameManager.Player.HPHeal(100);
+            return;
         }
     }
 }

@@ -36,7 +36,6 @@ namespace KGA_OOPConsoleProject.Scene
             }
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Place("DungeonEnt", '◀', new Vector2(0, 4)));
-            gameObjects.Add(new DocNPC(new Vector2(3, 1)));
             // 비밀방
             //gameObjects.Add(new Place("Secret", '▶', new Vector2(50, 8)));
 

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KGA_OOPConsoleProject.Items
+﻿namespace KGA_OOPConsoleProject.Items
 {
     public class RedPotion : Item
     {
-        public RedPotion(Vector2 position): base(ConsoleColor.Red,'♥',position,true)
+        public RedPotion(Vector2 position) : base(ConsoleColor.Red, '♥', position, true)
         {
             name = "빨간 포션";
             description = "소량의 체력을 회복 시키는 아이템";
@@ -26,7 +20,7 @@ namespace KGA_OOPConsoleProject.Items
         }
         public override void Use()
         {
-            GameManager.Player.HPHeal(30);            
+            GameManager.Player.HPHeal(30);
         }
     }
 }

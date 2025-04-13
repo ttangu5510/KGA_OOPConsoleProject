@@ -31,7 +31,7 @@ namespace KGA_OOPConsoleProject.Scene
             }
             gameObjects = new List<GameObject>();
             gameObjects.Add(new Place("Town", '▼', new Vector2(27, 8)));
-            gameObjects.Add(new DocNPC(new Vector2(32, 3)));
+            gameObjects.Add(new DocNPC(new Vector2(32, 3), 1));
         }
         //protected override void PrintMap()
         //{

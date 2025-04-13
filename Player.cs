@@ -1,5 +1,5 @@
 ﻿using KGA_OOPConsoleProject.Items;
-using KGA_OOPConsoleProject.Scene;
+using KGA_OOPConsoleProject.Items.MonsterDrop;
 
 namespace KGA_OOPConsoleProject
 {
@@ -77,23 +77,30 @@ namespace KGA_OOPConsoleProject
             inventory = new Inventory();
             menu = new Menu();
             equipStatus = new EquipStatus();
+            // TODO : 퀘스트NPC 테스트중
+            inventory.Add(new MinoMeat());
+            inventory.Add(new MinoMeat());
+            inventory.Add(new MinoMeat());
 
-            //테스트
             skills = new List<Skill>();
             isRun = false;
             isDead = false;
 
-            level = 1;
+            // TODO : 퀘스트NPC 테스트중
+            level = 10;
+
             exp = 0;
             maxExp = 15;
             maxHP = 60;
             curHP = maxHP;
             maxMP = 50;
             mp = maxMP;
-            
+
             power = 3;
             defence = 0;
             speed = 5;
+
+            // TODO : 퀘스트NPC 테스트중
             gold = 10000;
 
             nextObj.x = 0;
@@ -104,7 +111,6 @@ namespace KGA_OOPConsoleProject
         //체력회복
         public void HPHeal(int amount)
         {
-            Util.PrintText("체력을 회복했다!");
             curHP += amount;
             if (curHP > maxHP)
             {
@@ -166,14 +172,14 @@ namespace KGA_OOPConsoleProject
             switch (equipment.Type)
             {
                 case Equipment.EquipType.Weapon:
-                    if(weapon.Durability>0)
+                    if (weapon.Durability > 0)
                     {
                         inventory.Add(weapon);
                     }
                     weapon = null;
                     break;
                 case Equipment.EquipType.Armor:
-                    if(armor.Durability>0)
+                    if (armor.Durability > 0)
                     {
                         inventory.Add(armor);
                     }
@@ -275,7 +281,7 @@ namespace KGA_OOPConsoleProject
         {
             int totalPower;
             Util.PrintText("일반 공격!!");
-            if(weapon!=null)
+            if (weapon != null)
             {
                 totalPower = power + weapon.Power;
             }
@@ -283,7 +289,7 @@ namespace KGA_OOPConsoleProject
             {
                 totalPower = power;
             }
-                return totalPower;
+            return totalPower;
         }
 
         // 플레이어 마나사용
@@ -352,12 +358,12 @@ namespace KGA_OOPConsoleProject
             Util.PrintText("레벨업!!!");
             Util.PrintText("능력치가 상승했다!");
 
-            if (level==5)
+            if (level == 5)
             {
                 Util.PrintText("새로운 스킬을 배웠다!");
                 Skills.Add(new FireBall());
             }
-            else if(level == 10)
+            else if (level == 10)
             {
                 Util.PrintText("새로운 스킬을 배웠다!");
                 Skills.Add(new LightningCut());

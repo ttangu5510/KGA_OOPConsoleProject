@@ -12,6 +12,8 @@
         public int maxPage;
         public int curPage;
         public int choiceCount;
+
+        // 생성자
         public Inventory()
         {
             items = new List<Item>();
@@ -25,6 +27,7 @@
         }
         private Stack<string> stack;
 
+        //아이템 추가
         public void Add(Item item)
         {
             for (int i = 0; i < items.Count; i++)
@@ -45,19 +48,31 @@
 
             items.Add(item);
         }
-        public void Remove(Item item)
+
+        // 아이템 삭제 - 넣는 객체의 이름과 비교해서 같으면 삭제
+        public void Remove(Item item,int num = 1)
         {
+            // 아이템 리스트를 전체 탐색
             for (int i = 0; i < items.Count; i++)
             {
-                if (items[i].name == item.name && items[i].itemNum != 1)
+                // 입력된 num 만큼 갯수 삭제
+                for (int j = 0;j<num;j++)
                 {
-                    items[i].itemNum--;
-                    return;
+                    // 입력 아이템과 이름이 같고, 갯수가 2개 이상인 경우
+                    if (items[i].name == item.name && items[i].itemNum != 1)
+                    {
+                        items[i].itemNum--;
+                    }
+                    // 갯수가 1개인 경우
+                    else if (items[i].name == item.name && items[i].itemNum == 1)
+                    {
+                        items.RemoveAt(i);
+                    }
                 }
             }
-            items.Remove(item);
         }
 
+        // 인벤토리 열기, 오픈
         public void OpenInven()
         {
             stack.Push("InvenList");
@@ -249,59 +264,107 @@
                     }
                 }
 
-                // 비상점
+                // 비상점(필드에서 인벤열기)
                 else
                 {
-                    Console.SetCursorPosition(15, 0);
-                    Console.WriteLine("┌------------┐");
-                    Console.SetCursorPosition(15, 1);
-                    Console.WriteLine("|  사용하기  |");
-                    Console.SetCursorPosition(15, 2);
-                    Console.WriteLine("|  설명      |");
-                    Console.SetCursorPosition(15, 3);
-                    Console.WriteLine("|  버리기    |");
-                    Console.SetCursorPosition(15, 4);
-                    Console.WriteLine("└------------┘");
-                    Util.PrintChoice(choiceIndex, 16);
-                    ConsoleKey input = InputHelp.InputKey();
-                    switch (input)
+                    // 선택한 아이템이 사용 가능 아이템일 경우
+                    if(selectItem.isConsumable==true)
                     {
-                        case ConsoleKey.UpArrow:
-                            if (choiceIndex > 0)
-                            {
-                                choiceIndex--;
-                            }
-                            break;
-                        case ConsoleKey.DownArrow:
-                            if (choiceIndex < 2)
-                            {
-                                choiceIndex++;
-                            }
-                            break;
-                        case ConsoleKey.A:
-                            if (choiceIndex == 0)
-                            {
-                                selectItem.Use();
-                                Util.PrintText(selectItem.useDescription);
-                                Remove(selectItem);
+                        Console.SetCursorPosition(15, 0);
+                        Console.WriteLine("┌------------┐");
+                        Console.SetCursorPosition(15, 1);
+                        Console.WriteLine("|  사용하기  |");
+                        Console.SetCursorPosition(15, 2);
+                        Console.WriteLine("|  설명      |");
+                        Console.SetCursorPosition(15, 3);
+                        Console.WriteLine("|  버리기    |");
+                        Console.SetCursorPosition(15, 4);
+                        Console.WriteLine("└------------┘");
+                        Util.PrintChoice(choiceIndex, 16);
+                        ConsoleKey input = InputHelp.InputKey();
+                        switch (input)
+                        {
+                            case ConsoleKey.UpArrow:
+                                if (choiceIndex > 0)
+                                {
+                                    choiceIndex--;
+                                }
+                                break;
+                            case ConsoleKey.DownArrow:
+                                if (choiceIndex < 2)
+                                {
+                                    choiceIndex++;
+                                }
+                                break;
+                            case ConsoleKey.A:
+                                if (choiceIndex == 0)
+                                {
+                                    selectItem.Use();
+                                    Util.PrintText(selectItem.useDescription);
+                                    Remove(selectItem);
+                                    choiceIndex = 0;
+                                    stack.Pop();
+                                    stack.Pop();
+                                }
+                                else if (choiceIndex == 1)
+                                {
+                                    stack.Push("ItemInfo");
+                                }
+                                else if (choiceIndex == 2)
+                                {
+                                    stack.Push("DropConfirm");
+                                }
+                                break;
+                            case ConsoleKey.S:
                                 choiceIndex = 0;
                                 stack.Pop();
-                                stack.Pop();
-                            }
-                            else if (choiceIndex == 1)
-                            {
-                                stack.Push("ItemInfo");
-                            }
-                            else if (choiceIndex == 2)
-                            {
-                                stack.Push("DropConfirm");
-                            }
-                            break;
-                        case ConsoleKey.S:
-                            choiceIndex = 0;
-                            stack.Pop();
-                            break;
+                                break;
+                        }
                     }
+                    //선택한 아이템이 사용 불가능할 경우
+                    else
+                    {
+                        Console.SetCursorPosition(15, 0);
+                        Console.WriteLine("┌------------┐");
+                        Console.SetCursorPosition(15, 1);
+                        Console.WriteLine("|  설명      |");
+                        Console.SetCursorPosition(15, 2);
+                        Console.WriteLine("|  버리기    |");
+                        Console.SetCursorPosition(15, 3);
+                        Console.WriteLine("└------------┘");
+                        Util.PrintChoice(choiceIndex, 16);
+                        ConsoleKey input = InputHelp.InputKey();
+                        switch (input)
+                        {
+                            case ConsoleKey.UpArrow:
+                                if (choiceIndex > 0)
+                                {
+                                    choiceIndex--;
+                                }
+                                break;
+                            case ConsoleKey.DownArrow:
+                                if (choiceIndex < 1)
+                                {
+                                    choiceIndex++;
+                                }
+                                break;
+                            case ConsoleKey.A:
+                                if (choiceIndex == 0)
+                                {
+                                    stack.Push("ItemInfo");
+                                }
+                                else if (choiceIndex == 1)
+                                {
+                                    stack.Push("DropConfirm");
+                                }
+                                break;
+                            case ConsoleKey.S:
+                                choiceIndex = 0;
+                                stack.Pop();
+                                break;
+                        }
+                    }
+                    
                 }
 
             }
@@ -312,7 +375,7 @@
         {
             for (int i = 0; i < items.Count; i++)
             {
-                if (items[i].name == item.name && item.itemNum == num)
+                if (items[i].name == item.name && items[i].itemNum >= num)
                 {
                     return true;
                 }
@@ -323,22 +386,59 @@
         // 아이템 버리기 체크
         private void DropConfirm()
         {
+            int selecNum = 6;
+            bool isConfirmed= false;
             Item selectItem = items[selectIndex];
             Util.PrintText($"{selectItem.name}을/를 버리시겠습니까?");
-            ConsoleKey input = InputHelp.InputKey();
-            switch (input)
+            while(isConfirmed ==false)
             {
-                case ConsoleKey.A:
-                    Util.PrintText($"{selectItem.name}을/를 버렸습니다");
-                    Remove(selectItem);
-                    stack.Pop();
-                    stack.Pop();
-                    choiceIndex = 0;
-                    break;
-                case ConsoleKey.S:
-                    choiceIndex = 0;
-                    stack.Pop();
-                    break;
+                Console.SetCursorPosition(16, 6);
+                Console.Write("┌----------┐");
+                Console.SetCursorPosition(16, 7);
+                Console.Write("|  예      |");
+                Console.SetCursorPosition(16, 8);
+                Console.Write("|  아니오  |");
+                Console.SetCursorPosition(16, 9);
+                Console.Write("└----------┘");
+                Util.PrintChoice(selecNum, 17);
+                ConsoleKey input = InputHelp.InputKey();
+                switch (input)
+                {
+                    case ConsoleKey.UpArrow:
+                        if (selecNum > 6)
+                        {
+                            selecNum--;
+                        }
+                        break;
+                    case ConsoleKey.DownArrow:
+                        if (selecNum < 7)
+                        {
+                            selecNum++;
+                        }
+                        break;
+                    case ConsoleKey.A:
+                        switch (selecNum)
+                        {
+                            case 6:
+                                Util.PrintText($"{selectItem.name}을/를 버렸습니다");
+                                Remove(selectItem);
+                                stack.Pop();
+                                stack.Pop();
+                                choiceIndex = 0;
+                                break;
+                            case 7:
+                                stack.Pop();
+                                choiceIndex = 0;
+                                break;
+                        }
+                        isConfirmed = true;
+                        break;
+                    case ConsoleKey.S:
+                        choiceIndex = 0;
+                        isConfirmed = true;
+                        stack.Pop();
+                        break;
+                }
             }
         }
 
@@ -368,7 +468,7 @@
             Console.WriteLine($" 소지금: {GameManager.Player.Gold}");
             Console.SetCursorPosition(0, 0);
 
-            // 전투 출력
+            // 전투씬에서 아이템 출력
             if (isBattle == true)
             {
                 // 전투 에서 쓸 아이템만 따로 골라오기
