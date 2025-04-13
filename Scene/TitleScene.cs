@@ -63,7 +63,7 @@
             Console.WriteLine("└-------------------------------------┘");
             Console.ReadKey();
             Console.Clear();
-            GameManager.ChangeScene("Dungeon");
+            GameManager.ChangeScene("Secret");
 
         }
 

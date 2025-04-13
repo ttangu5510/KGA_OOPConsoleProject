@@ -307,6 +307,19 @@
             }
 
         }
+        // 퀘스트 아이템 체크
+        public void QuestItemCheck(Item item, int num)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].name == item.name && item.itemNum == num)
+                {
+
+                }
+            }
+        }
+
+        // 아이템 버리기 체크
         private void DropConfirm()
         {
             Item selectItem = items[selectIndex];
