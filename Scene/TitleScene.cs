@@ -65,7 +65,7 @@
             Console.Clear();
 
             //TODO 퀘스트 테스트중
-            GameManager.ChangeScene("Town");
+            GameManager.ChangeScene("Home");
 
         }
 
